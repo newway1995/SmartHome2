@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.1"
+
+    defaultConfig {
+        applicationId "vgod.smarthome"
+        minSdkVersion 14
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.2'
+    compile files('/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/KJFrameForAndroid_V1.21.jar')
+    compile files('/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/nineoldandroids-library-2.4.0.jar')
+    compile files('/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/faceppsdk_min.jar')
+    compile files('/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/androidsvg-1.2.0.jar')
+}

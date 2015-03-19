@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SmartHome</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <!-- 常用 -->
+    <string name="save">保存</string>
+    <string name="forget_password">忘记密码?</string>
+    <string name="done">完成</string>
+    <string name="back">返回</string>
+    <string name="setting_gesture_pwd">设置手势密码</string>
+
+    <!-- 解锁 -->
+    <string name="lockscreen_access_pattern_start">"开始绘制图案"</string>
+    <string name="lockscreen_access_pattern_cleared">"图案已清除"</string>
+    <string name="lockscreen_access_pattern_cell_added">"已添加单元格"</string>
+    <string name="lockscreen_access_pattern_detected">"图案绘制完成"</string>
+    <string name="lockpattern_retry_button_text">"重试"</string>
+    <string name="lockpattern_continue_button_text">"继续"</string>
+    <string name="lockpattern_confirm_button_text">"确认"</string>
+    <string name="lockpattern_recording_intro_header">"绘制解锁图案"</string>
+    <string name="lockpattern_settings_help_how_to_record">"如何绘制解锁图案"</string>
+    <string name="lockpattern_recording_incorrect_too_short">"至少连接4个点，请重试"</string>
+    <string name="lockpattern_pattern_entered_header">"图案已记录"</string>
+    <string name="lockpattern_need_to_confirm">"请再次绘制解锁图案"</string>
+    <string name="lockpattern_need_to_unlock_wrong">"与上次输入不一致，请重试"</string>
+    <string name="lockpattern_pattern_confirmed_header">"确认保存新解锁图案"</string>
+    <string name="lockpattern_recording_inprogress">"完成后松开手指"</string>
+    <string name="lockscreen_error">5次失败后，需要重新登录</string>
+    <string name="gesture_password_guide_text">你可以创建一个解锁图案，这样他人在借用你的手机时，将无法打开应用。</string>
+    <string name="gesture_password_guide_creat_btn">创建手势密码</string>
+    <string name="take_pic">拍照</string>
+    <string name="manage_pwd">管理手势密码</string>
+    <string name="guesture_pwd">手势密码</string>
+    <string name="show_gesture_track">显示手势轨迹</string>
+    <string name="change_guesture">修改手势密码</string>
+    <string name="forget_guesture">忘记手势密码</string>
+
+    <!-- user -->
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="login_hint">支持手机号/邮箱登录</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="password_setting">请设置密码</string>
+    <string name="set_nickname">请设置昵称</string>
+    <string name="nickname">昵称</string>
+    <string name="gender">性别</string>
+    <string name="portrait">头像</string>
+    <string name="email">请设置邮箱</string>
+    <string name="login_unsupport">不支持其他账号登录</string>
+    <string name="telephone">请输入手机号码</string>
+    <string name="forget_pwd">请输入手机号/邮箱</string>
+    <string name="verify">验证码</string>
+    <string name="next">下一步</string>
+    <string name="exit">退出</string>
+    <string name="back_home">返回首页</string>
+
+    <!--控制-->
+    <string name="controller">遥控</string>
+
+    <!-- 数字按键 -->
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="ten">10</string>
+    <string name="zero">0</string>
+    <string name="ok">OK</string>
+    <string name="no_voice">静音</string>
+    <string name="channel">频道</string>
+    <string name="mode">模式</string>
+    <string name="wind_size">风量</string>
+    <string name="timing_open">定时开</string>
+    <string name="timing_close">定时关</string>
+
+    <!--首页-->
+    <string name="device">设备</string>
+    <string name="scene">场景</string>
+    
+    <!-- 测试 -->
+    <string name="current_time">20:25</string>
+    <string name="title_activity_security_camera">人脸识别</string>
+    
+
+</resources>

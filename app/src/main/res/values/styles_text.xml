@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 白色 36sp -->
+    <style name="white_36">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+    <!-- 白色 24sp -->
+    <style name="white_24">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+    <!-- 白色 18sp -->
+    <style name="white_18">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 白色 14sp -->
+    <style name="white_14">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- 白色 12sp -->
+    <style name="white_12">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <!-- 黑色 18sp -->
+    <style name="black_18">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 黑色 14sp -->
+    <style name="black_14">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- 黑色 12sp -->
+    <style name="black_12">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <!-- 灰色 18sp -->
+    <style name="gray_18">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 灰色 14sp -->
+    <style name="gray_14">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="gray_13">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <!-- 灰色 12sp -->
+    <style name="gray_12">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <!-- 灰色 10sp -->
+    <style name="gray_10">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <!-- 灰色 8sp -->
+    <style name="gray_8">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+    <!-- 深灰色 18sp -->
+    <style name="gray_dark_18">
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 深灰色 14sp -->
+    <style name="gray_dark_14">
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- 深灰色 12sp -->
+    <style name="gray_dark_12">
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <!-- 深灰色 10sp -->
+    <style name="gray_dark_10">
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <!-- 深灰色 8sp -->
+    <style name="gray_dark_8">
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+    <!-- 浅黑色20 -->
+    <style name="black_light_20">
+        <item name="android:textColor">@color/black_light</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <!-- 浅黑色18 -->
+    <style name="black_light_18">
+        <item name="android:textColor">@color/black_light</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 浅黑色14 -->
+    <style name="black_light_14">
+        <item name="android:textColor">@color/black_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="black_light_13">
+        <item name="android:textColor">@color/black_light</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <!-- 蓝色18 -->
+    <style name="blue_18">
+        <item name="android:textColor">@color/actionbar_background</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 蓝色24 -->
+    <style name="blue_24">
+        <item name="android:textColor">@color/actionbar_background</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+    <!-- 蓝色14 -->
+    <style name="blue_14">
+        <item name="android:textColor">@color/actionbar_background</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- 绿色18 -->
+    <style name="green_18">
+        <item name="android:textColor">@color/green</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 绿色14 -->
+    <style name="green_14">
+        <item name="android:textColor">@color/green</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>

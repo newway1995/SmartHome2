@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/user_register_verify_verigy"
+        style="@style/width_fill_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:inputType="text"
+        android:hint="@string/verify"
+        android:padding="@dimen/edittext_padding"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:background="@drawable/edittext_shape_corners" />
+
+    <TextView
+        android:id="@+id/user_register_verify_login"
+        style="@style/width_fill_parent"
+        android:background="@drawable/btn_selector_login"
+        android:text="@string/next"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_margin="20dp" />
+</LinearLayout>

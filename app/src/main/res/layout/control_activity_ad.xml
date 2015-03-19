@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical">
+    <!-- top -->
+    <LinearLayout
+        style="@style/width_fill_parent"
+        android:background="@drawable/screen_corner_20"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_margin="8dp"
+            style="@style/width_fill_parent">
+
+            <ImageView
+                android:id="@+id/ad_mode_auto"
+                style="@style/width_zero_fix"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/mode_auto" />
+
+            <ImageView
+                android:id="@+id/ad_mode_cold"
+                style="@style/width_zero_fix"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/mode_cold" />
+
+            <ImageView
+                android:id="@+id/ad_mode_drying"
+                style="@style/width_zero_fix"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/mode_drying" />
+
+            <ImageView
+                android:id="@+id/ad_mode_warm"
+                style="@style/width_zero_fix"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/mode_warm" />
+
+            <ImageView
+                android:id="@+id/ad_mode_wind"
+                style="@style/width_zero_fix"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/mode_wind" />
+        </LinearLayout>
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/line_2px" />
+
+        <LinearLayout
+            style="@style/width_fill_parent"
+            android:background="@null"
+            android:layout_margin="10dp"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ad_temp_text"
+                style="@style/width_zero_fix"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/img_temp_16" />
+
+            <ImageView
+                android:id="@+id/ad_temp_image"
+                style="@style/width_zero_fix"
+                android:contentDescription="@string/app_name" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ad_clock_time"
+            style="@style/none_fill_parent"
+            android:drawableLeft="@drawable/img_clock_gray"
+            android:text="@string/current_time"
+            android:drawablePadding="10dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp" />
+    </LinearLayout>
+    <!-- mid -->
+    <LinearLayout style="@style/height_zero_fill">
+
+        <LinearLayout
+            style="@style/width_zero_fill"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ad_switch"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_round_white"
+                android:src="@drawable/img_power"
+                android:scaleType="center"
+                android:layout_gravity="top" />
+
+            <TextView
+                android:id="@+id/ad_wind_size"
+                style="@style/none_fill_parent"
+                android:background="@drawable/btn_key_rect_white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:text="@string/wind_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/width_zero_fix"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ad_temp_up"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_round_white"
+                android:src="@drawable/up_wifi"
+                android:scaleType="center"
+                android:layout_gravity="top" />
+
+            <ImageView
+                android:id="@+id/ad_temp_down"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_round_white"
+                android:src="@drawable/down_wifi"
+                android:scaleType="center"
+                android:layout_gravity="top" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/width_zero_fix"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ad_mode"
+                style="@style/none_fill_parent"
+                android:background="@drawable/btn_key_rect_white"
+                android:text="@string/mode"
+                android:layout_gravity="top"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/ad_wind_auto"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_rect_white"
+                android:src="@drawable/wind_horizontal_colourful"
+                android:scaleType="center"
+                android:layout_gravity="top" />
+
+            <ImageView
+                android:id="@+id/ad_wind_hand"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_rect_white"
+                android:src="@drawable/wind_vertical_colourful"
+                android:scaleType="center"
+                android:layout_gravity="top" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- bottom -->
+    <LinearLayout style="@style/width_fill_parent">
+
+        <LinearLayout style="@style/width_zero_fix">
+
+            <ImageView
+                android:id="@+id/ad_hot"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_round_white"
+                android:layout_gravity="center"
+                android:src="@drawable/img_air_time"
+                android:scaleType="center" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/width_zero_fix">
+
+            <ImageView
+                android:id="@+id/ad_cold"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_round_white"
+                android:layout_gravity="center"
+                android:src="@drawable/img_air_time"
+                android:scaleType="center" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/width_zero_fix">
+
+            <ImageView
+                android:id="@+id/ad_clock"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_round_white"
+                android:src="@drawable/img_air_time"
+                android:scaleType="center"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/width_zero_fix">
+
+            <ImageView
+                android:id="@+id/ad_more"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_round_white"
+                android:layout_gravity="center"
+                android:src="@drawable/img_air_time"
+                android:scaleType="center" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
