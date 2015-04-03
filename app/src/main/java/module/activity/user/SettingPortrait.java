@@ -27,7 +27,7 @@ import java.io.File;
 
 import constant.Constant;
 import core.detect.FaceCompare;
-import core.detect.NetResulrHandler;
+import core.detect.NetResultHandler;
 import module.core.BaseActivity;
 import utils.JsonUtils;
 import vgod.smarthome.R;
@@ -200,7 +200,7 @@ public class SettingPortrait extends BaseActivity{
     //上传图片
     private void upLoadImage(Bitmap image){
         FaceCompare faceCompare = new FaceCompare();
-        faceCompare.setResulrHandler(new NetResulrHandler() {
+        faceCompare.setResultHandler(new NetResultHandler() {
             @Override
             public void resultHandler(JSONObject rst) {
                 Log.d(TAG, "rst = " + rst.toString());

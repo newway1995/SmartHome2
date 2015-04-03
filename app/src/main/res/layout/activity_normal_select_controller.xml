@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_normal_select_controller_id"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/gray_light"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/select_controller_ad"
+        android:padding="15dp"
+        android:background="@drawable/clickd_gray"
+        android:layout_marginTop="8dp"
+        style="@style/width_fill_parent">
+        <TextView
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:text="空调"
+            />
+        <ImageView
+            style="@style/none_fill_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/right_arrow"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/app_name"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/select_controller_pj"
+        android:padding="15dp"
+        android:background="@drawable/clickd_gray"
+        android:layout_marginTop="10dp"
+        style="@style/width_fill_parent">
+        <TextView
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:text="投影仪"
+            />
+        <ImageView
+            style="@style/none_fill_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/right_arrow"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/app_name"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/select_controller_tv"
+        android:padding="15dp"
+        android:background="@drawable/clickd_gray"
+        android:layout_marginTop="10dp"
+        style="@style/width_fill_parent">
+        <TextView
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:text="电视机"
+            />
+        <ImageView
+            style="@style/none_fill_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/right_arrow"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/app_name"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/select_controller_bulb"
+        android:padding="15dp"
+        android:background="@drawable/clickd_gray"
+        android:layout_marginTop="10dp"
+        style="@style/width_fill_parent">
+        <TextView
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:text="电灯"
+            />
+        <ImageView
+            style="@style/none_fill_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/right_arrow"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/app_name"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/select_controller_fan"
+        android:padding="15dp"
+        android:background="@drawable/clickd_gray"
+        android:layout_marginTop="10dp"
+        style="@style/width_fill_parent">
+        <TextView
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:text="电风扇"
+            />
+        <ImageView
+            style="@style/none_fill_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/right_arrow"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/app_name"/>
+    </RelativeLayout>
+</LinearLayout>

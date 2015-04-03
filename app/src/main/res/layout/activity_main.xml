@@ -1,61 +1,50 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/view_actionbar_base"/>
+    <include
+        android:id="@+id/devicelist_bg"
+        layout="@layout/view_actionbar_base"/>
 
-    <Button
-        android:id="@+id/main_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="注册界面" />
+    <module.core.ui.RippleLayout
+        android:id="@+id/more2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.9"
+        ripple:rv_color="@color/rippelColor"
+        ripple:rv_inner_radius="@dimen/bookshelf_add_btn">
 
-    <Button
-        android:id="@+id/main_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="登录界面" />
+        <ImageButton
+            android:id="@+id/add"
+            android:layout_width="60.0dip"
+            android:layout_height="60.0dip"
+            android:layout_centerInParent="true"
+            android:background="@drawable/selector_green_ball"
+            android:contentDescription="@null"
+            android:scaleType="center"
+            android:src="@drawable/ic_add"/>
+    </module.core.ui.RippleLayout>
 
-    <Button
-        android:id="@+id/main_forget_pwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="忘记密码界面" />
+    <module.core.ui.ImportMenuView
+        android:layout_gravity="bottom|center"
+        android:id="@+id/main_activity_import_menu"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <Button
-        android:id="@+id/main_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="相机界面" />
+    </module.core.ui.ImportMenuView>
 
-    <Button
-        android:id="@+id/main_unlock"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/rasp_list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="解锁" />
-    <Button
-        android:id="@+id/main_setting_portrait"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="设置头像" />
-    <Button
-        android:id="@+id/main_ac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="控制空调" />
-    <Button
-        android:id="@+id/main_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="控制电视机" />
-</LinearLayout>
+        android:layout_margin="5dp"
+        android:layout_below="@id/devicelist_bg"
+        android:divider="@drawable/doct_list_item_divider"
+        android:scrollbars="none" />
+
+</RelativeLayout>

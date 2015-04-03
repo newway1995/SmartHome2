@@ -1,9 +1,11 @@
 package utils;
 
+import android.graphics.Bitmap;
 import android.os.Environment;
 
 import org.kymjs.aframe.core.KJException;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.Closeable;
 import java.io.File;
@@ -37,7 +39,7 @@ public class FileUtils {
     /**
      * 判断SD卡是否存在
      * */
-    private boolean isSDCardExist(){
+    public boolean hasSDCard(){
         return Environment.MEDIA_MOUNTED.equals(Environment
                 .getExternalStorageState());
     }
@@ -46,9 +48,9 @@ public class FileUtils {
      * 获取根文件夹的文件路径
      * @return String
      * */
-    private String getRootDir(){
+    public String getRootDir(){
         String root = null;
-        if (isSDCardExist()) {
+        if (hasSDCard()) {
             root = Environment.getExternalStorageDirectory().getAbsolutePath();
         }
         return root;
@@ -62,7 +64,7 @@ public class FileUtils {
      * 				第二个路径-String
      * @return path1 + "/" + path2
      * */
-    private String combinePath(String path1,String path2){
+    public String combinePath(String path1,String path2){
         return path1 + "/" + path2;
     }
 
@@ -151,6 +153,28 @@ public class FileUtils {
                 throw new KJException(FileUtils.class.getClass()
                         .getName(), e);
             }
+        }
+    }
+
+    /**
+     * 保存Bitmap到SD卡当中
+     * @param bitmap
+     * @param path
+     * @param name
+     */
+    public void saveBitmap(Bitmap bitmap, String path, String name){
+        if(name == null || name.equals(""))
+            name = System.currentTimeMillis() + "";
+        String jpegPath = getRootDir() + File.separator + path + File.separator + name;
+        try {
+            FileOutputStream out = new FileOutputStream(new File(jpegPath));
+            BufferedOutputStream bos = new BufferedOutputStream(out);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            L.e("SaveBitmap 失败");
         }
     }
 }

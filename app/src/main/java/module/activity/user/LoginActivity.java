@@ -1,11 +1,26 @@
 package module.activity.user;
 
+import org.json.JSONObject;
+import org.kymjs.aframe.http.KJHttp;
+import org.kymjs.aframe.http.KJStringParams;
+import org.kymjs.aframe.http.StringCallBack;
 import org.kymjs.aframe.ui.BindView;
 
+import constant.Command;
+import constant.Constant;
+import core.detect.FaceCompare;
+import core.detect.NetResultHandler;
+import module.activity.StartActivity;
+import module.activity.gesturepwd.SettingGesturePasswordActivity;
+import utils.CacheHandler;
+import utils.L;
 import vgod.smarthome.R;
+
+import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import module.core.BaseActivity;
@@ -20,6 +35,9 @@ import module.core.BaseActivity;
  * 
  */
 public class LoginActivity extends BaseActivity{
+    @BindView(id = R.id.user_activity_login_id)
+    private LinearLayout contentLayout;
+
 	@BindView(id=R.id.user_activity_login_username)
 	private EditText usernameText;//用户名
 	@BindView(id=R.id.user_activity_login_password)
@@ -30,20 +48,31 @@ public class LoginActivity extends BaseActivity{
 	private TextView registerText;//注册
 	@BindView(id=R.id.user_activity_login_forget_pwd , click=true)
 	private TextView forgetPwdText;//忘记密码
-			
 
-	@Override
+    private KJHttp kjHttp;
+    /* 人脸检测 */
+    private FaceCompare faceCompare;
+
+    @Override
+    protected void initData() {
+        super.initData();
+        contentLayout.setOnTouchListener(this);
+        kjHttp = new KJHttp();
+        faceCompare = new FaceCompare();
+    }
+
+    @Override
 	public void widgetClick(View v) {
 		super.widgetClick(v);
 		switch (v.getId()) {
 		case R.id.user_activity_login_login:
-			Toast.makeText(this, "login", Toast.LENGTH_SHORT).show();
+			login(usernameText.getText().toString().trim(), passwordText.getText().toString().trim());
 			break;
 		case R.id.user_activity_login_register:
-			Toast.makeText(this, "register", Toast.LENGTH_SHORT).show();
+			startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
 			break;
 		case R.id.user_activity_login_forget_pwd:
-			Toast.makeText(this, "change password", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this, ForgetPasswordActivity.class));
 			break;
 		default:
 			break;
@@ -70,5 +99,66 @@ public class LoginActivity extends BaseActivity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     */
+    private void login(final String username, final String password){
+        KJStringParams params = new KJStringParams();
+        params.put(Command.COMMAND_DEVICE, Command.PHONE);
+        params.put("action", "LOGIN");
+        params.put("user_name", username);
+        params.put("password", password);
+        kjHttp.post(Command.COMMAND_HTTP_URL, params, new StringCallBack() {
+            @Override
+            public void onSuccess(String s) {
+                try{
+                    JSONObject jsonObject = new JSONObject(s);
+                    L.d("Login", "JsonObject = " + jsonObject.toString());
+                    if (!jsonObject.getString("success").equals("1"))
+                        return ;
+                    //如果是首次使用软件
+                    if (CacheHandler.readCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME).equals("")){
+                        CacheHandler.writeCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, Constant.TRUE);
+                        skipActivity(LoginActivity.this, SettingGesturePasswordActivity.class);
+                        LoginActivity.this.finish();
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                //第一次登陆
+                if (Constant.getPersonName(LoginActivity.this) == null || !Constant.getPersonName(LoginActivity.this).equals(username)){
+                    Constant.setPersonName(LoginActivity.this, username);
+                    //在手机里面保存返回的数据
+                    faceCompare.createPerson(username,new NetResultHandler() {
+                        @Override
+                        public void resultHandler(JSONObject rst) {
+                            String person_id = null;
+                            try{
+                                person_id = rst.getString("person_id");
+                            }catch(Exception e){
+                                e.printStackTrace();
+                            }
+                            Constant.setPersonId(LoginActivity.this, person_id);
+                        }
+                    });
+                }
+                Constant.setPassword(LoginActivity.this, password);
+                Constant.setUsername(LoginActivity.this, username);
+            }
+
+            @Override
+            public void onFailure(Throwable t, int errorNo, String strMsg) {
+                super.onFailure(t, errorNo, strMsg);
+                L.d("Login Error = " + strMsg );
+                t.printStackTrace();
+                Toast.makeText(LoginActivity.this, "登录失败,请检查网络设置",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 	
 }

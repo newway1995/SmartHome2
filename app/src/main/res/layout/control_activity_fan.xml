@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/control_activity_fan_id">
+
+    <module.view.animation.GifView
+        android:id="@+id/gif_fan"
+        android:layout_width="600px"
+        android:layout_height="600px"
+        android:layout_centerInParent="true"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gif_fan">
+
+        <ImageView
+            android:id="@+id/fan_switch"
+            style="@style/none_fill_parent"
+            android:background="@drawable/img_power"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/fan_change"
+            style="@style/none_fill_parent"
+            android:background="@drawable/zerodang"
+            android:layout_toLeftOf="@id/fan_switch"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/fan_shake"
+            style="@style/none_fill_parent"
+            android:background="@drawable/shake"
+            android:layout_toRightOf="@id/fan_switch"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:contentDescription="@string/app_name" />
+    </RelativeLayout>
+</RelativeLayout>

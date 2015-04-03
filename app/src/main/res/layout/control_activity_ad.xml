@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
+    android:id="@+id/control_activity_ad"
     android:orientation="vertical">
     <!-- top -->
     <LinearLayout
@@ -63,7 +64,7 @@
                 android:id="@+id/ad_temp_text"
                 style="@style/width_zero_fix"
                 android:contentDescription="@string/app_name"
-                android:background="@drawable/img_temp_16" />
+                android:background="@drawable/img_temp_17" />
 
             <ImageView
                 android:id="@+id/ad_temp_image"
@@ -85,6 +86,7 @@
 
         <LinearLayout
             style="@style/width_zero_fill"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -94,19 +96,13 @@
                 android:background="@drawable/btn_key_round_white"
                 android:src="@drawable/img_power"
                 android:scaleType="center"
-                android:layout_gravity="top" />
+                 />
 
-            <TextView
-                android:id="@+id/ad_wind_size"
-                style="@style/none_fill_parent"
-                android:background="@drawable/btn_key_rect_white"
-                android:layout_gravity="bottom"
-                android:gravity="center"
-                android:text="@string/wind_size" />
         </LinearLayout>
 
         <LinearLayout
-            style="@style/width_zero_fix"
+            style="@style/width_zero_fill"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -116,7 +112,7 @@
                 android:background="@drawable/btn_key_round_white"
                 android:src="@drawable/up_wifi"
                 android:scaleType="center"
-                android:layout_gravity="top" />
+                android:layout_gravity="center" />
 
             <ImageView
                 android:id="@+id/ad_temp_down"
@@ -125,92 +121,41 @@
                 android:background="@drawable/btn_key_round_white"
                 android:src="@drawable/down_wifi"
                 android:scaleType="center"
-                android:layout_gravity="top" />
+                android:layout_gravity="center" />
         </LinearLayout>
 
         <LinearLayout
-            style="@style/width_zero_fix"
+            style="@style/width_zero_fill"
+            android:gravity="center"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/ad_mode"
-                style="@style/none_fill_parent"
-                android:background="@drawable/btn_key_rect_white"
-                android:text="@string/mode"
-                android:layout_gravity="top"
-                android:gravity="center" />
-
-            <ImageView
-                android:id="@+id/ad_wind_auto"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_rect_white"
-                android:src="@drawable/wind_horizontal_colourful"
-                android:scaleType="center"
-                android:layout_gravity="top" />
-
-            <ImageView
-                android:id="@+id/ad_wind_hand"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_rect_white"
-                android:src="@drawable/wind_vertical_colourful"
-                android:scaleType="center"
-                android:layout_gravity="top" />
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <!-- bottom -->
-    <LinearLayout style="@style/width_fill_parent">
-
-        <LinearLayout style="@style/width_zero_fix">
-
-            <ImageView
-                android:id="@+id/ad_hot"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_round_white"
-                android:layout_gravity="center"
-                android:src="@drawable/img_air_time"
-                android:scaleType="center" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/width_zero_fix">
 
             <ImageView
                 android:id="@+id/ad_cold"
                 style="@style/none_fill_parent"
                 android:contentDescription="@string/app_name"
                 android:background="@drawable/btn_key_round_white"
-                android:layout_gravity="center"
-                android:src="@drawable/img_air_time"
-                android:scaleType="center" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/width_zero_fix">
+                android:src="@drawable/mode_cold"
+                android:scaleType="center"
+                android:layout_gravity="center" />
 
             <ImageView
-                android:id="@+id/ad_clock"
+                android:id="@+id/ad_hot"
                 style="@style/none_fill_parent"
                 android:contentDescription="@string/app_name"
                 android:background="@drawable/btn_key_round_white"
-                android:src="@drawable/img_air_time"
+                android:src="@drawable/mode_warm"
+                android:scaleType="center"
+                android:layout_gravity="center" />
+            <ImageView
+                android:id="@+id/ad_wet"
+                style="@style/none_fill_parent"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/btn_key_round_white"
+                android:src="@drawable/mode_drying"
                 android:scaleType="center"
                 android:layout_gravity="center" />
         </LinearLayout>
-
-        <LinearLayout style="@style/width_zero_fix">
-
-            <ImageView
-                android:id="@+id/ad_more"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_round_white"
-                android:layout_gravity="center"
-                android:src="@drawable/img_air_time"
-                android:scaleType="center" />
-        </LinearLayout>
-
     </LinearLayout>
+
+
 </LinearLayout>

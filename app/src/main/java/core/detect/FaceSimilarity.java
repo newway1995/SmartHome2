@@ -29,7 +29,7 @@ public class FaceSimilarity implements Serializable {
     private String session_id;
     private float similarity;//一个0~100之间的实数，表示两个face的相似性
 
-    public static NetResulrHandler callBack = null;
+    public static NetResultHandler callBack = null;
 
 
 
@@ -65,7 +65,7 @@ public class FaceSimilarity implements Serializable {
      * @param face_id2
      * */
     public static void faceCompare(final String face_id1,final String face_id2){
-        final NetResulrHandler mCallBack = callBack;
+        final NetResultHandler mCallBack = callBack;
         new Thread(new Runnable() {
 
             @Override
@@ -95,7 +95,7 @@ public class FaceSimilarity implements Serializable {
      * @param person_id
      * */
     public static void faceVerify(final String face_id,final String person_id){
-        final NetResulrHandler mCallBack = callBack;
+        final NetResultHandler mCallBack = callBack;
         new Thread(new Runnable() {
 
             @Override
@@ -121,7 +121,7 @@ public class FaceSimilarity implements Serializable {
      * @param session_id
      * */
     public static void getSessionInfo(final String session_id){
-        final NetResulrHandler mCallBack = callBack;
+        final NetResultHandler mCallBack = callBack;
         new Thread(new Runnable() {
 
             @Override

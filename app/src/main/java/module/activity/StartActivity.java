@@ -7,10 +7,14 @@ import android.os.Handler;
 import constant.Constant;
 import module.activity.gesturepwd.SettingGesturePasswordActivity;
 import module.activity.gesturepwd.UnLockGesturePasswordActivity;
+import module.activity.security.SecurityCameraActivity;
+import module.activity.user.LoginActivity;
 import module.core.BaseActivity;
 import module.view.svg.SvgCompletedCallBack;
 import module.view.svg.SvgView;
 import utils.CacheHandler;
+import utils.FileUtils;
+import utils.L;
 import vgod.smarthome.R;
 
 /**
@@ -27,9 +31,17 @@ public class StartActivity extends BaseActivity{
         setContentView(R.layout.activity_startframe);
     }
 
+    private void initFileSystem(){
+        if (!FileUtils.getInstance().hasSDCard())
+            return;
+        FileUtils.getInstance().createFolder(Constant.DIR_ROOT);
+        L.d("初始化软件文件系统");
+    }
+
     @Override
     protected void initData() {
         super.initData();
+        initFileSystem();
     }
 
     @Override
@@ -53,11 +65,16 @@ public class StartActivity extends BaseActivity{
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (CacheHandler.readCache(StartActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME).equals("")){
-                            skipActivity(StartActivity.this, SettingGesturePasswordActivity.class);
-                            CacheHandler.writeCache(StartActivity.this, Constant.USER_INFO , Constant.IS_FIRST_OPEN_ME,Constant.TRUE);
+                        if (CacheHandler.readCache(StartActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME).equals("")
+                                || (!CacheHandler.readCache(StartActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME).equals("")
+                                && Constant.getUsername(StartActivity.this).equals(""))){
+                            skipActivity(StartActivity.this, LoginActivity.class);
                         }else{
-                            skipActivity(StartActivity.this, UnLockGesturePasswordActivity.class);
+                            L.d("StartActivity","UNLOCK BY = " + Constant.getUnlockByWhat(StartActivity.this));
+                            if (Constant.getUnlockByWhat(StartActivity.this).equals(Constant.UNLOCK_BY_GESTURE))
+                                skipActivity(StartActivity.this, UnLockGesturePasswordActivity.class);
+                            else if (Constant.getUnlockByWhat(StartActivity.this).equals(Constant.UNLOCK_BY_FACE))
+                                skipActivity(StartActivity.this, SecurityCameraActivity.class);
                         }
 
                     }

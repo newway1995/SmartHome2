@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/control_activity_pj"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        style="@style/both_fill_parent"
+        android:layout_marginLeft="20dp" android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/pj_channel_ok"
+            style="@style/none_fill_parent"
+            android:background="@drawable/img_power"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/pj_channel_up"
+            style="@style/none_fill_parent"
+            android:background="@drawable/menu_up"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/pj_channel_ok"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/pj_channel_down"
+            style="@style/none_fill_parent"
+            android:background="@drawable/menu_down"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/pj_channel_ok"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/pj_channel_left"
+            style="@style/none_fill_parent"
+            android:background="@drawable/menu_left"
+            android:layout_toLeftOf="@id/pj_channel_ok"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/pj_channel_right"
+            style="@style/none_fill_parent"
+            android:background="@drawable/menu_right"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/pj_channel_ok"
+            android:contentDescription="@string/app_name" />
+    </RelativeLayout>
+</LinearLayout>

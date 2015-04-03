@@ -1,33 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/user_activity_login_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/user_activity_login_username"
-        style="@style/width_fill_parent"
-        android:hint="@string/login_hint"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:inputType="phone|textEmailAddress"
-        android:padding="@dimen/edittext_padding"
-        android:drawableLeft="@drawable/icon_account"
-        android:background="@drawable/edittext_shape_top"
-        android:drawablePadding="@dimen/edittext_padding" />
+    <module.core.ui.FloatLabelLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:floatLabelTextAppearance="@style/TextAppearance.YourApp.FloatLabel">
 
-    <EditText
-        android:id="@+id/user_activity_login_password"
-        style="@style/width_fill_parent"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:padding="@dimen/edittext_padding"
-        android:drawableLeft="@drawable/icon_pwd"
-        android:background="@drawable/edittext_shape_bottom"
-        android:drawablePadding="@dimen/edittext_padding" />
+        <EditText
+            android:id="@+id/user_activity_login_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="用户名"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:singleLine="true"
+            android:inputType="textNoSuggestions"
+            android:imeOptions="actionNext"
+            android:nextFocusDown="@+id/user_activity_login_password" />
+    </module.core.ui.FloatLabelLayout>
+
+    <module.core.ui.FloatLabelLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:floatLabelTextAppearance="@style/TextAppearance.YourApp.FloatLabel">
+
+        <EditText
+            android:id="@+id/user_activity_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="密码"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:password="true"
+            android:imeOptions="actionDone" />
+
+    </module.core.ui.FloatLabelLayout>
+
+    <!--<EditText-->
+        <!--android:id="@+id/user_activity_login_username"-->
+        <!--style="@style/width_fill_parent"-->
+        <!--android:hint="@string/login_hint"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:inputType="textEmailAddress|phone"-->
+        <!--android:padding="@dimen/edittext_padding"-->
+        <!--android:drawableLeft="@drawable/icon_account"-->
+        <!--android:background="@drawable/edittext_shape_top"-->
+        <!--android:drawablePadding="@dimen/edittext_padding" />-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/user_activity_login_password"-->
+        <!--style="@style/width_fill_parent"-->
+        <!--android:hint="@string/password"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:padding="@dimen/edittext_padding"-->
+        <!--android:drawableLeft="@drawable/icon_pwd"-->
+        <!--android:background="@drawable/edittext_shape_bottom"-->
+        <!--android:drawablePadding="@dimen/edittext_padding" />-->
 
     <LinearLayout
         style="@style/width_fill_parent"

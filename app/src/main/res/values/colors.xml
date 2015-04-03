@@ -7,7 +7,7 @@
     <color name="tab_click_blue">#2668D1</color>
     <color name="black">#000000</color>
     <color name="black_light">#303030</color>
-    <color name="actionbar_background">@color/md_indigo_600</color>
+    <color name="actionbar_background">#5ab8fd</color>
     <color name="actionbar_text">#ffffff</color>
     <color name="red_dark">#CD3333</color>
     <color name="green">#32CD32</color>
@@ -18,5 +18,10 @@
     <color name="gesture_background">#ff303237</color>
     <color name="color_hei_8">#00000000</color>
     <drawable name="trans">@color/color_hei_8</drawable>
+
     <color name="rippelColor">#FFFFFF</color>
+    <color name="grey_normal">#ff8a837c</color>
+    <color name="rippelColor2">#ff2f9b34</color>
+    <color name="rippelColor3">#ff46b451</color>
+
 </resources>

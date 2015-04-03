@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_normal_weather_id"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/biz_plugin_weather_paddingTopAndBottom"
+    android:background="@drawable/biz_plugin_weather_shenzhen_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/weather_today"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/item_weather_top"
+        />
+
+    <ImageView
+        android:id="@+id/divider"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/base_list_divider_drawable"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/weather_rasp_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="30.0sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:text="当前室内温度:24 ℃"/>
+
+    <TextView
+        android:id="@+id/weather_rasp_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="30.0sp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:text="当前室内湿度: 33%"/>
+
+
+    <TextView
+        android:id="@+id/weather_rasp_publish_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="15.0sp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:drawablePadding="10dp"
+        android:layout_marginTop="50dp"
+        android:text="今天12:08发布"/>
+
+</LinearLayout>

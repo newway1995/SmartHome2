@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_raspberry_username"
+        android:hint="@string/rasp_username"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="14dp"
+        android:padding="@dimen/edittext_padding"
+        android:drawableLeft="@drawable/icon_account"
+        android:background="@drawable/edittext_shape_top"
+        android:drawablePadding="@dimen/edittext_padding"/>
+
+    <EditText
+        android:id="@+id/add_raspberry_nickname"
+        style="@style/width_fill_parent"
+        android:hint="@string/rasp_nickname"
+        android:inputType="text"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="@dimen/edittext_padding"
+        android:drawableLeft="@drawable/icon_pwd"
+        android:background="@drawable/edittext_shape_bottom"
+        android:drawablePadding="@dimen/edittext_padding" />
+    <EditText
+        android:id="@+id/add_raspberry_pwd"
+        style="@style/width_fill_parent"
+        android:hint="@string/rasp_password"
+        android:inputType="textPassword"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="14dp"
+        android:padding="@dimen/edittext_padding"
+        android:drawableLeft="@drawable/icon_pwd"
+        android:background="@drawable/edittext_shape_bottom"
+        android:drawablePadding="@dimen/edittext_padding" />
+
+    <EditText
+        android:id="@+id/add_raspberry_function"
+        style="@style/width_fill_parent"
+        android:hint="功能"
+        android:inputType="text"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="14dp"
+        android:padding="@dimen/edittext_padding"
+        android:drawableLeft="@drawable/icon_pwd"
+        android:background="@drawable/edittext_shape_bottom"
+        android:drawablePadding="@dimen/edittext_padding" />
+</LinearLayout>

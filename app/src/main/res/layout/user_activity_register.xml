@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/user_activity_register_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,7 +22,7 @@
     <EditText
         android:id="@+id/user_activity_register_nickname"
         style="@style/width_fill_parent"
-        android:hint="@string/set_nickname"
+        android:hint="@string/username"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:inputType="text"
@@ -36,6 +37,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:inputType="text"
+        android:text="nniuwei@163.com"
         android:padding="@dimen/edittext_padding"
         android:background="@drawable/edittext_shape_bottom"
         android:drawableRight="@drawable/email_hint" />

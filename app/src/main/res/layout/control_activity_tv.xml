@@ -3,6 +3,7 @@
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/control_activity_tv_id"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -22,7 +23,7 @@
             style="@style/none_fill_parent"
             android:layout_toLeftOf="@id/tv_channel_text"
             android:layout_marginRight="10dp"
-            android:textAppearance="@style/black_18"
+            android:textAppearance="@style/black_light_20"
             android:text="@string/channel"
             />
     </RelativeLayout>
@@ -30,7 +31,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="20dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp">
         <module.core.ui.RippleView
             style="@style/width_zero_fix"
             ripple:rv_zoomDuration="200"
@@ -230,7 +233,7 @@
             <TextView
                 android:id="@+id/tv_channel_no_voice"
                 style="@style/width_fill_parent"
-                android:text="@string/no_voice"
+                android:text="开/关"
                 android:gravity="center"
                 android:background="@drawable/shape_rect"
                 android:textAppearance="@style/white_24"
@@ -241,7 +244,8 @@
 
     <RelativeLayout
         style="@style/both_fill_parent"
-        android:layout_marginLeft="20dp" android:layout_marginRight="20dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <ImageView
             android:id="@+id/tv_channel_ok"

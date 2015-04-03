@@ -2,20 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Volumes/Macintosh HD/Users/niuwei/Downloads/Android/adt-bundle-mac-x86_64-20130917/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
-        <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-7597cefd506c7b9418fb78fad6e20747d665bcfb.jar" />
-    </item>
-    <item
-        jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/nineoldandroids-library-2.4.0.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/nineoldandroids-library-2.4.0-b1fad767529ab0486a3929c4f2b9b12daff1cd7a.jar" />
-    </item>
-    <item
         jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.1.1"
@@ -37,13 +23,6 @@
         <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/faceppsdk_min-07df3a16440f52d0f51bcab2c27d23b2eb3c3ee3.jar" />
     </item>
     <item
-        jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/KJFrameForAndroid_V1.21.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="78c61a2f6729ac4405c741cf8dcb5c6e38b1a8dd">
-        <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/KJFrameForAndroid_V1.21-fd4c643e3646b9629a4c000b7f05b23316d30bd4.jar" />
-    </item>
-    <item
         jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/androidsvg-1.2.0.jar"
         jumboMode="false"
         revision="21.1.1"
@@ -51,11 +30,67 @@
         <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/androidsvg-1.2.0-63daa4c0f52c4dde8fa3aa5d770c868ba8640bb0.jar" />
     </item>
     <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/classes-cd4a865bab23ba1dcab49addf87531de7e27e742.jar" />
+    </item>
+    <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/classes-d93612d1353da4341f6512ea73928f768656c5ac.jar" />
+    </item>
+    <item
         jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.1.1"
         sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
         <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/classes-ca8a77789cecfe3946f869d43cdaa9acc78b1b0e.jar" />
+    </item>
+    <item
+        jar="/Volumes/Macintosh HD/Users/niuwei/Downloads/Android/adt-bundle-mac-x86_64-20130917/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
+        <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-7597cefd506c7b9418fb78fad6e20747d665bcfb.jar" />
+    </item>
+    <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/androidsvg-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="0b8e2b5de0473fdac58cbfb4bc1ef751b09125c4">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/androidsvg-1.2.0-f8b54e7f4e67a027402b7e4982ba76bd018d027f.jar" />
+    </item>
+    <item
+        jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/nineoldandroids-library-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/nineoldandroids-library-2.4.0-b1fad767529ab0486a3929c4f2b9b12daff1cd7a.jar" />
+    </item>
+    <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/nineoldandroids-library-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/nineoldandroids-library-2.4.0-ce9d056174271a5b5cfc5dac87244f3133514f1e.jar" />
+    </item>
+    <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/KJFrameForAndroid_V1.21.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="78c61a2f6729ac4405c741cf8dcb5c6e38b1a8dd">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/KJFrameForAndroid_V1.21-f2636d85b38721c6023d71f48335ae57f2cbb132.jar" />
+    </item>
+    <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-3a5edc9e6a16cb799a255a4ad77b76dfd7349883.jar" />
     </item>
 
 </items>

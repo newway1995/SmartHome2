@@ -36,7 +36,9 @@
         </attr>
         <attr name="rv_ripplePadding" format="dimension" />
         <attr name="rv_zoom" format="boolean" />
-        <attr name="rv_zoomScale" format="float" />
+        <attr name="rv_zoomScale" format="float"/>
+        <attr name="rv_inner_radius" format="dimension"></attr>
+        <attr name="rv_inner_margin_radius" format="dimension"></attr>
     </declare-styleable>
 
     <!--SVG 视图的自定义属性-->
@@ -49,5 +51,25 @@
         <attr name="waitRadius" format="dimension" />
         <attr name="arrowLength" format="dimension" />
         <attr name="arrowHeight" format="dimension" />
+    </declare-styleable>
+
+    <!--GifView-->
+    <declare-styleable name="GifView">
+        <attr name="gif" format="reference" />
+        <attr name="paused" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CustomTheme">
+        <attr name="gifViewStyle" format="reference" />
+    </declare-styleable>
+
+    <!--FloatLabel-->
+    <declare-styleable name="FloatLabelLayout">
+        <attr name="floatLabelTextAppearance" format="reference" />
+        <attr name="floatLabelPaddingLeft" format="reference|dimension" />
+        <attr name="floatLabelPaddingRight" format="reference|dimension" />
+        <attr name="floatLabelPaddingTop" format="reference|dimension" />
+        <attr name="floatLabelPaddingBottom" format="reference|dimension" />
+        <!-- The hint to display in the floating label -->
+        <attr name="floatLabelHint" format="reference|string" />
     </declare-styleable>
 </resources>

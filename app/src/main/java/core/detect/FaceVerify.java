@@ -17,9 +17,9 @@ import utils.L;
  */
 public class FaceVerify {
     private final String TAG = "FaceVerify";
-    private NetResulrHandler resulrHandler;//回调接口
+    private NetResultHandler resulrHandler;//回调接口
 
-    public void setResulrHandler(NetResulrHandler resulrHandler) {
+    public void setResulrHandler(NetResultHandler resulrHandler) {
         this.resulrHandler = resulrHandler;
     }
 

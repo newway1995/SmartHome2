@@ -8,6 +8,7 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 在SDCard中创建与删除文件权限 -->
@@ -48,50 +49,72 @@
         <!-- 设置手势密码 -->
         <activity
             android:name="module.activity.gesturepwd.SettingGesturePasswordActivity"
-            android:icon="@drawable/abs__ic_ab_back_holo_light"
+            
             android:label="@string/setting_gesture_pwd"/>
         <!--设置用户的头像，统计详细信息-->
-        <activity android:name="module.activity.user.SettingPortrait"
-            android:icon="@drawable/abs__ic_ab_back_holo_light"
+        <activity android:name="module.activity.user.SettingPortrait"            
             android:label="填写信息"/>
         <!-- 解锁界面 -->
         <activity android:name="module.activity.gesturepwd.UnLockGesturePasswordActivity" />
         <!--管理手势密码-->
         <activity
             android:name="module.activity.gesturepwd.ManageGesturePasswordActivity"
-            android:icon="@drawable/abs__ic_ab_back_holo_light"
+            
             android:label="@string/back"/>
 
         <!-- 用户 -->
         <!-- 登录界面 -->
         <activity
             android:name="module.activity.user.LoginActivity"
-            android:icon="@drawable/abs__ic_ab_back_holo_light"
+            
             android:label="@string/login" />
         <!-- 注册界面 -->
         <activity
             android:name="module.activity.user.RegisterActivity"
-            android:icon="@drawable/abs__ic_ab_back_holo_light"
+            
             android:label="@string/register" />
         <!-- 忘记密码界面 -->
         <activity
             android:name="module.activity.user.ForgetPasswordActivity"
-            android:icon="@drawable/abs__ic_ab_back_holo_light"
+            
             android:label="@string/forget_password" />
 
         <!-- 控制模块 -->
         <activity
             android:name="module.activity.controler.ControlTVActivity"
-            android:icon="@drawable/abs__ic_ab_back_holo_light"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControlADActivity"
-            android:icon="@drawable/abs__ic_ab_back_holo_light"
+            android:label="@string/controller" />
+        <activity
+            android:name="module.activity.controler.ControlFanActivity"
+            android:label="@string/controller" />
+        <activity
+            android:name="module.activity.controler.ControllerBulbActivity"
+            android:label="@string/controller" />
+        <activity
+            android:name="module.activity.controler.ControlPJActivity"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.security.SecurityCameraActivity"
             android:label="@string/title_activity_security_camera" >
         </activity>
+
+        <!--common模块-->
+        <activity android:name="module.activity.common.AboutActivity"            
+            android:label="关于我们"/>
+        <activity android:name="module.activity.common.ContactUsActivity"
+            android:label="联系我们"
+            />
+        <activity android:name="module.activity.common.SettingActivity"
+            android:label="设置"
+            />
+        <activity android:name="module.activity.common.WeatherInfoActivity"
+            android:label="天气"/>
+
+        <activity android:name="module.activity.common.SelectControllerActivity"
+            android:label="选择遥控器"/>
+
     </application>
 
 </manifest>

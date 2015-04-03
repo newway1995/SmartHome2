@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="androidsvg-1.2.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/androidsvg-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/androidsvg-1.2.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
