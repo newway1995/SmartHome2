@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/Sunflower.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="9e488275be9a0173e07b981ebd971e50e7974749">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/Sunflower-0b350d14e829d17e25387ff5878218c33bd4c41d.jar" />
+    </item>
+    <item
         jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.1.1"
@@ -77,6 +84,13 @@
         revision="21.1.1"
         sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
         <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/nineoldandroids-library-2.4.0-ce9d056174271a5b5cfc5dac87244f3133514f1e.jar" />
+    </item>
+    <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/Msc.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="f8ef016c8697ebba92ddf06c812e4415bdc30ed8">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/Msc-5d6d30d084858a7593f730e9828a533571b8faa8.jar" />
     </item>
     <item
         jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/KJFrameForAndroid_V1.21.jar"

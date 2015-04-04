@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="KJFrameForAndroid_V1.21">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/KJFrameForAndroid_V1.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/KJFrameForAndroid_V1.21.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

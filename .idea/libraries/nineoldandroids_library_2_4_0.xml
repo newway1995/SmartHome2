@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="nineoldandroids-library-2.4.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/nineoldandroids-library-2.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/nineoldandroids-library-2.4.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

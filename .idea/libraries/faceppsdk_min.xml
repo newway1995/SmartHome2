@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="faceppsdk_min">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../Eclipse_WorkSpace/2014/Learning/SmartHome2/libs/faceppsdk_min.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/faceppsdk_min.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
