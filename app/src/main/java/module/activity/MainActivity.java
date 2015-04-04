@@ -17,6 +17,7 @@ import module.activity.common.SelectControllerActivity;
 import module.activity.common.SettingActivity;
 import module.activity.common.WeatherInfoActivity;
 import module.activity.security.SecurityCameraActivity;
+import module.activity.voicechat.VoiceControlActivity;
 import module.core.ui.ImportMenuView;
 import module.core.ui.ResideMenu;
 import module.core.ui.ResideMenuItem;
@@ -252,7 +253,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.nav_actionbar_segment_device:
                 break;
             case R.id.nav_actionbar_segment_scene:
-                //startActivity(new Intent(MainActivity.this,SecurityCameraActivity.class));
+                startActivity(new Intent(MainActivity.this,VoiceControlActivity.class));
                 break;
         }
     }
