@@ -1,15 +1,23 @@
 package module.activity.voicechat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.iflytek.cloud.ErrorCode;
@@ -39,6 +47,7 @@ import module.core.BaseActivity;
 import module.view.adapter.ChatMsgAdapter;
 import module.view.adapter.ChatMsgEntity;
 import utils.L;
+import utils.ViewUtils;
 import vgod.smarthome.R;
 
 /**
@@ -49,10 +58,26 @@ import vgod.smarthome.R;
  */
 public class VoiceControlActivity extends BaseActivity{
 
-    @BindView(id = R.id.voice_control_btn_record, click = true)
-    private Button mBtnSend;
+    @BindView(id = R.id.voice_control_relativelayout)
+    private RelativeLayout contentLayout;//右滑退出的作用
+
+    @BindView(id = R.id.voice_control_btn_msg_send, click = true)
+    private Button mBtnSend;//发送按钮
+
     @BindView(id = R.id.voice_control_listview)
-    private ListView chatListView;
+    private ListView chatListView;//listview
+
+    @BindView(id = R.id.ivPopUp, click = true)
+    private ImageView chatting_mode_btn;//模式切换按钮-- 语音和文字
+
+    @BindView(id = R.id.et_sendmessage)
+    private EditText mEditTextContent;//文字输入的内容
+
+    @BindView(id = R.id.voice_control_btn_record, click = true)
+    private TextView mBtnRcd;//按住说话,默认为隐藏
+
+    @BindView(id = R.id.btn_bottom)
+    private RelativeLayout mBottom;//底部显示的edittext和send按钮
 
     /* 语音控制部分 */
     //语音听写对象
@@ -73,29 +98,34 @@ public class VoiceControlActivity extends BaseActivity{
     private List<ChatMsgEntity> mDataArrays = new ArrayList<>();
 
     /* =======================================测试数据===================================== */
-    private String[] msgArray = new String[]{"  孩子们，要好好学习，天天向上！要好好听课，不要翘课！不要挂科，多拿奖学金！三等奖学金的争取拿二等，二等的争取拿一等，一等的争取拿励志！",
-            "姚妈妈还有什么吩咐...",
-            "还有，明天早上记得跑操啊，不来的就扣德育分！",
-            "德育分是什么？扣了会怎么样？",
-            "德育分会影响奖学金评比，严重的话，会影响毕业",
-            "哇！学院那么不人道？",
-            "你要是你不听话，我当场让你不能毕业！",
-            "姚妈妈，我知错了(- -我错在哪了...)"};
+    private String[] msgArray = new String[]{"欢迎您使用小X语音助手O(∩_∩)O哈哈~",
+            "五分钟之后回家,帮我把空调调到24度,电视调到CCTV5频道,天快黑了,再帮我把电灯打开",
+            "收到,空调已经调到制冷模式24度,电视已经调到14台CCTV5频道,电灯已经打开,不客气哈",
+            "我要看湖南卫视",
+            "收到,电视已经调到21台湖南卫视频道",
+            "帮我把窗帘打开吧",
+            "收到,窗帘已经打开",
+            "我要睡觉了",
+            "收到,电视已经为您关闭,电灯已经为您关闭,空调已经设置到睡眠模式"};
 
-    private String[]dataArray = new String[]{"2012-09-01 18:00", "2012-09-01 18:10",
-            "2012-09-01 18:11", "2012-09-01 18:20",
-            "2012-09-01 18:30", "2012-09-01 18:35",
-            "2012-09-01 18:40", "2012-09-01 18:50"};
-    private final static int COUNT = 8;
+    private String[]dataArray = new String[]{"2015-04-01 18:00", "2015-04-01 18:10",
+            "2015-04-01 18:16", "2015-04-01 19:10",
+            "2015-04-01 19:10", "2015-04-01 20:07",
+            "2015-04-01 20:08", "2015-04-01 21:50",
+            "2015-04-01 21:51"};
+    private final static int COUNT = 9;
 
 
     @Override
     protected void initData() {
         super.initData();
+        //右滑退出
+        contentLayout.setOnTouchListener(this);
         initListView();
         initVoice();
         switchProgressBar(false);
     }
+
 
     @Override
     protected void initWidget() {
@@ -107,7 +137,8 @@ public class VoiceControlActivity extends BaseActivity{
     public void widgetClick(View v) {
         super.widgetClick(v);
         switch (v.getId()){
-            case R.id.voice_control_btn_record:
+            case R.id.voice_control_btn_record://点击录音
+                mIatResults.clear();
                 setParam();
                 boolean isShowDialog = mSharedPreferences.getBoolean(
                         getString(R.string.pref_key_iat_show), true);
@@ -115,7 +146,6 @@ public class VoiceControlActivity extends BaseActivity{
                     // 显示听写对话框
                     mIatDialog.setListener(recognizerDialogListener);
                     mIatDialog.show();
-                    Toast.makeText(VoiceControlActivity.this,"请开始说话…", Toast.LENGTH_SHORT).show();
                 } else {
                     // 不显示听写对话框
                     ret = mIat.startListening(recognizerListener);
@@ -126,6 +156,30 @@ public class VoiceControlActivity extends BaseActivity{
                     }
                 }
                 break;
+            case R.id.ivPopUp://切换输入源
+                switchInputMode();
+                break;
+            case R.id.voice_control_btn_msg_send://发送文字按钮被点击
+                sendData(mEditTextContent.getText().toString().trim(), false);
+                mEditTextContent.setText(null);
+                break;
+        }
+    }
+
+    /**
+     * 切换输入的模式
+     */
+    private void switchInputMode(){
+        boolean btn_voice = mBtnRcd.getVisibility() == View.VISIBLE;
+        if (btn_voice){//当前模式为语音输入,所以需要切换至文字输入,显示底部输入
+            mBottom.setVisibility(View.VISIBLE);
+            mBtnRcd.setVisibility(View.GONE);
+            ViewUtils.getInstance().showSoftInputMethod(this, mEditTextContent);
+            chatting_mode_btn.setImageResource(R.drawable.chatting_setmode_msg_btn);
+        }else {//当前模式为文字输入,所以需要切换至语音,并且显示"按住说话"
+            mBottom.setVisibility(View.GONE);
+            mBtnRcd.setVisibility(View.VISIBLE);
+            chatting_mode_btn.setImageResource(R.drawable.chatting_setmode_voice_btn);
         }
     }
 
@@ -137,6 +191,9 @@ public class VoiceControlActivity extends BaseActivity{
         setContentView(R.layout.activity_voice_control);
         setActionBarView(true);
         switchProgressBar(true);
+        // 启动activity时不自动弹出软键盘
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     /**
@@ -148,10 +205,10 @@ public class VoiceControlActivity extends BaseActivity{
             entity.setDate(dataArray[i]);
             if (i % 2 == 0)
             {
-                entity.setName("姚妈妈");
+                entity.setName("小溪");
                 entity.setMsgType(true);
             }else{
-                entity.setName("Shamoo");
+                entity.setName("GodV");
                 entity.setMsgType(false);
             }
 
@@ -160,6 +217,7 @@ public class VoiceControlActivity extends BaseActivity{
         }
         mAdapter = new ChatMsgAdapter(this, mDataArrays);
         chatListView.setAdapter(mAdapter);
+        chatListView.setSelection(mAdapter.getCount());//滑到最底部
     }
 
     /**
@@ -194,14 +252,14 @@ public class VoiceControlActivity extends BaseActivity{
     /**
      * 发送一条数据
      */
-    private void sendData(String contString)
+    private void sendData(String contString, boolean isComMsg)
     {
         if (contString.length() > 0)
         {
             ChatMsgEntity entity = new ChatMsgEntity();
             entity.setDate(getDate());
             entity.setName("");
-            entity.setMsgType(false);
+            entity.setMsgType(isComMsg);
             entity.setText(contString);
             mDataArrays.add(entity);
             mAdapter.notifyDataSetChanged();
@@ -241,13 +299,13 @@ public class VoiceControlActivity extends BaseActivity{
     }
 
     /**
-     * 听写监听器。
+     * 听写监听器。不显示Dialog的时候才运行这个
      */
     private RecognizerListener recognizerListener = new RecognizerListener() {
 
         @Override
         public void onBeginOfSpeech() {
-            //Toast.makeText(VoiceControlActivity.this, "开始说话", Toast.LENGTH_SHORT).show();
+            Toast.makeText(VoiceControlActivity.this, "开始说话", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -286,7 +344,9 @@ public class VoiceControlActivity extends BaseActivity{
      */
     private RecognizerDialogListener recognizerDialogListener = new RecognizerDialogListener() {
         public void onResult(RecognizerResult results, boolean isLast) {
-            sendData(parseResult(results));
+            L.d(TAG, "isLast = " + isLast + ", Result = " + parseResult(results));
+            if (isLast)
+                sendData(parseResult(results), false);
         }
 
         /**
@@ -368,6 +428,7 @@ public class VoiceControlActivity extends BaseActivity{
         return resultBuffer.toString();
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -392,4 +453,50 @@ public class VoiceControlActivity extends BaseActivity{
         FlowerCollector.onPause(VoiceControlActivity.this);
         super.onPause();
     }
+
+    /**
+     * 点击EditText外部则隐藏SoftMethod
+     * @return
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        // 必不可少，否则所有的组件都不会有TouchEvent了
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+        return onTouchEvent(ev);
+    }
+
+    public  boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = { 0, 0 };
+            //获取输入框当前的location位置
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + v.getHeight();
+            int right = left + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击的是输入框区域，保留点击EditText的事件
+                return false;
+            }else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

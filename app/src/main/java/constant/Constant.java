@@ -61,6 +61,10 @@ public class Constant {
     /* 当前选择的rasp_ids */
     public static final String CURRENT_RASP_IDS = "CURRENT_RASP_IDS";
 
+    /* 电视节目表的接口 */
+    public static final String TV_CHANNEL_URL = "http://apis.haoservice.com/lifeservice/TVGuide/getProgram";
+    public static final String TV_CHANNEL_KEY = "2924818cd7ca44cfa7a04704308a5871";
+
     /**
      * 设置rasp_ids
      * @param context

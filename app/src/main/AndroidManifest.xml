@@ -123,7 +123,8 @@
 
         <activity android:name="module.activity.common.SelectControllerActivity"
             android:label="选择遥控器"/>
-        <activity android:name="module.activity.voicechat.VoiceControlActivity"
+        <activity
+            android:name="module.activity.voicechat.VoiceControlActivity"
             android:label="语音控制"/>
 
         <!-- 移动统计分析 -->

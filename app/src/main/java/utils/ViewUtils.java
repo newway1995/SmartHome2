@@ -1,14 +1,20 @@
 package utils;
 
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.view.ViewGroup.LayoutParams;
@@ -37,27 +43,6 @@ public class ViewUtils {
         return instance;
     }
 
-    /**
-     * 生成PopWindow
-     * */
-    public PopupWindow getPopWindow(Context context,String[]title,int w,int h){
-        PopupWindow popupWindow = new PopupWindow(w,h);
-        LinearLayout layout = new LinearLayout(context);
-        LayoutParams lParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        layout.setOrientation(LinearLayout.VERTICAL);//设置垂直
-        LinearLayout.LayoutParams lp_LinearLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lp_LinearLayout.gravity = Gravity.CENTER;
-        for (int i = 0; i < title.length; i++){
-            TextView textView = new TextView(context);
-            textView.setText(title[i]);
-            layout.addView(textView,lp_LinearLayout);
-        }
-        popupWindow.setContentView(layout);
-        popupWindow.setFocusable(true);// 取得焦点
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setAnimationStyle(R.style.PopMenu);
-        return popupWindow;
-    }
 
     /**
      * 得到自定义的progressDialog
@@ -115,5 +100,103 @@ public class ViewUtils {
             }
         });
         return popupWindow;
+    }
+
+    /**
+     * 显示通知栏的信息
+     * @param context
+     *              Context 上下文
+     * @param title
+     *              String 显示的标题
+     * @param content
+     *              String 显示的内容
+     * @param largeIcon
+     *              Bitmap 显示的大图
+     * @param notificationIntent
+     *              PendingIntent 点击之后传递的Intent
+     * @param id
+     *              int Notification的ID
+     */
+    public void showNotification(Context context, String title, String content, Bitmap largeIcon, Intent notificationIntent, int id){
+        // 创建一个NotificationManager的引用
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        // 定义Notification的各种属性
+        Notification notification = new Notification.Builder(context)
+                .setSmallIcon(R.drawable.login_default_avatar)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setLargeIcon(largeIcon)
+                .build();
+
+        //FLAG_AUTO_CANCEL   该通知能被状态栏的清除按钮给清除掉
+        //FLAG_NO_CLEAR      该通知不能被状态栏的清除按钮给清除掉
+        //FLAG_ONGOING_EVENT 通知放置在正在运行
+        //FLAG_INSISTENT     是否一直进行，比如音乐一直播放，知道用户响应
+        //notification.flags |= Notification.FLAG_ONGOING_EVENT; // 将此通知放到通知栏的"Ongoing"即"正在运行"组中
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        notification.flags |= Notification.FLAG_SHOW_LIGHTS;
+        //DEFAULT_ALL     使用所有默认值，比如声音，震动，闪屏等等
+        //DEFAULT_LIGHTS  使用默认闪光提示
+        //DEFAULT_SOUNDS  使用默认提示声音
+        //DEFAULT_VIBRATE 使用默认手机震动，需加上<uses-permission android:name="android.permission.VIBRATE" />权限
+        notification.defaults = Notification.DEFAULT_LIGHTS;
+        //叠加效果常量
+        //notification.defaults=Notification.DEFAULT_LIGHTS|Notification.DEFAULT_SOUND;
+        notification.ledARGB = Color.BLUE;
+        notification.ledOnMS =5000; //闪光时间，毫秒
+
+        // 设置通知的事件消息
+        PendingIntent contentItent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+        notification.contentIntent = contentItent;
+        // 把Notification传递给NotificationManager
+        notificationManager.notify(0, notification);
+    }
+
+    /**
+     * 取消Notification的显示
+     * @param context
+     *          Context 上下文
+     * @param id
+     *          int id
+     */
+    public void clearNotification(Context context, int id){
+        NotificationManager nm = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.cancel(id);
+    }
+
+
+    /**
+     * 强制显示/隐藏软键盘
+     * @param context
+     * @param view
+     * @param isShow
+     */
+    public void switchSoftInputMethod(Context context, View view, boolean isShow){
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (isShow){
+            imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);
+        }else{
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+        }
+    }
+
+    /**
+     * 显示软键盘
+     * @param context
+     * @param editView
+     */
+    public void showSoftInputMethod(Context context, EditText editView){
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInputFromInputMethod(editView.getWindowToken(), 0);
+    }
+
+    /**
+     * 隐藏软键盘
+     * @param context
+     * @param editView
+     */
+    public void hiddenSoftInputMethod(Context context, EditText editView){
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromInputMethod(editView.getWindowToken(), 0);
     }
 }

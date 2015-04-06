@@ -1,14 +1,20 @@
 package module.view.adapter;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
+import constant.Constant;
+import utils.FileUtils;
 import vgod.smarthome.R;
 
 /**
@@ -97,11 +103,20 @@ public class ChatMsgAdapter extends BaseAdapter{
             viewHolder.tvSendTime = (TextView) convertView.findViewById(R.id.tv_sendtime);
             viewHolder.tvUserName = (TextView) convertView.findViewById(R.id.tv_username);
             viewHolder.tvContent = (TextView) convertView.findViewById(R.id.tv_chatcontent);
+            viewHolder.avatorView = (ImageView) convertView.findViewById(R.id.iv_userhead);
             viewHolder.isComMsg = isComMsg;
 
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder)convertView.getTag();
+        }
+
+        if (!isComMsg){
+            try{
+                viewHolder.avatorView.setImageBitmap(BitmapFactory.decodeFile(FileUtils.getInstance().getRootDir() + File.separator + Constant.DIR_ROOT + File.separator + "faceImage.jpg"));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         viewHolder.tvContent.setText(chatMsgEntity.getText());
@@ -114,6 +129,7 @@ public class ChatMsgAdapter extends BaseAdapter{
      * 通过ViewHolder的方法来显示
      */
     class ViewHolder{
+        public ImageView avatorView;
         public TextView tvSendTime;
         public TextView tvUserName;
         public TextView tvContent;
