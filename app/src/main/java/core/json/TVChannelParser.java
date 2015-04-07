@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.kymjs.aframe.http.HttpCallBack;
 import org.kymjs.aframe.http.KJHttp;
 import org.kymjs.aframe.http.KJStringParams;
+import org.kymjs.aframe.http.StringCallBack;
 import org.kymjs.aframe.utils.SystemTool;
 
 import java.util.ArrayList;
@@ -35,8 +36,7 @@ public class TVChannelParser {
      */
     public static List<HashMap<String, String>> parseTVChannelTimeForm(JSONObject jObj) throws JSONException{
         List<HashMap<String, String>> resultArray = new ArrayList<>();
-        if (isSuccess(jObj))
-            return null;
+        L.d("VoiceControlActivity", "parseTVChannelTimeForm = " + jObj.toString());
         JSONArray jArray = jObj.getJSONArray("result");
         int length = jArray.length();
         for (int i = 0; i < length; i++){
@@ -124,24 +124,20 @@ public class TVChannelParser {
         KJHttp kjHttp = new KJHttp();
         KJStringParams params = new KJStringParams();
         params.put("key", Constant.TV_CHANNEL_KEY);
+        params.put("code", "cctv1");
         if (time == null || time.equals(""))
             params.put("date", SystemTool.getDataTime("yyyy-MM-dd"));
         else
             params.put("date", time);
-        kjHttp.get(context, Constant.TV_CHANNEL_URL, params, new HttpCallBack() {
+        kjHttp.get(context, Constant.TV_CHANNEL_URL, params, new StringCallBack() {
             @Override
-            public void onLoading(long l, long l1) {
-
-            }
-
-            @Override
-            public void onSuccess(Object o) {
-                jsonProcessor.jsonProcess((JSONObject) o);
-            }
-
-            @Override
-            public void onFailure(Throwable throwable, int i, String s) {
-
+            public void onSuccess(String s) {
+                L.d("VoiceControlActivity", "getTVChannelTimeForm = " + s);
+                try{
+                    jsonProcessor.jsonProcess(new JSONObject(s));
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
     }

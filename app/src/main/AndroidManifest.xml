@@ -43,7 +43,7 @@
         android:label="@string/app_name"
         android:theme="@style/CustomActionBarTheme" >
         <activity
-            android:name="module.activity.StartActivity"
+            android:name="module.activity.voicechat.VoiceControlActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -123,9 +123,9 @@
 
         <activity android:name="module.activity.common.SelectControllerActivity"
             android:label="选择遥控器"/>
-        <activity
-            android:name="module.activity.voicechat.VoiceControlActivity"
-            android:label="语音控制"/>
+        <!--<activity-->
+            <!--android:name="module.activity.voicechat.VoiceControlActivity"-->
+            <!--android:label="语音控制"/>-->
 
         <!-- 移动统计分析 -->
         <meta-data

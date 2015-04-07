@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/voice_control_relativelayout"
+    android:orientation="vertical"
     android:background="#f0f0e0" >
 
-
+    <ListView
+        android:id="@+id/voice_control_listview"
+        style="@style/height_zero_fill"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginTop="4.0dip"
+        android:layout_marginRight="10.0dip"
+        android:divider="@null"
+        android:dividerHeight="5dp"
+        android:scrollbars="none"
+        android:cacheColorHint="#00000000"/>
 
 
     <RelativeLayout
         android:id="@+id/rl_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/chat_footer_bg" >
 
         <ImageView
@@ -71,18 +80,6 @@
             android:visibility="gone" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/voice_control_listview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginLeft="10.0dip"
-        android:layout_marginTop="4.0dip"
-        android:layout_marginRight="10.0dip"
-        android:layout_above="@id/rl_bottom"
-        android:divider="@null"
-        android:dividerHeight="5dp"
-        android:scrollbars="none"
-        android:cacheColorHint="#00000000"/>
 
     <!--<ImageView-->
         <!--android:id="@+id/voice_control_btn_record"-->
@@ -92,4 +89,4 @@
         <!--android:layout_centerHorizontal="true"-->
         <!--android:layout_marginBottom="20dp"-->
         <!--android:layout_alignParentBottom="true"/>-->
-</RelativeLayout>
+</LinearLayout>

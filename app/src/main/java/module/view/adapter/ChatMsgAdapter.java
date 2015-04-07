@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import constant.Constant;
