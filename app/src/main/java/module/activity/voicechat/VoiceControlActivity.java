@@ -13,18 +13,28 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.iflytek.sunflower.FlowerCollector;
+
+import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.ui.BindView;
 import org.kymjs.aframe.utils.SystemTool;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import constant.Command;
+import constant.Constant;
+import constant.MyTimer;
+import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
+import core.voice.VoiceSpeakUtils;
 import module.core.BaseActivity;
+import module.database.TVChannelEntity;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
-import module.view.adapter.ChatMsgEntity;
+import module.database.ChatMsgEntity;
 import utils.StringUtils;
 import vgod.smarthome.R;
+import vgod.smarthome.TestClass;
 
 /**
  * User: niuwei(nniuwei@163.com)
@@ -61,6 +71,7 @@ public class VoiceControlActivity extends BaseActivity{
      * 语音识别帮助类
      */
     private VoiceRecognizeUtils voiceRecognizeUtils;
+    private VoiceSpeakUtils voiceSpeakUtils;
 
     private ChatMsgAdapter mAdapter ;
     /* 需要显示的数据 */
@@ -84,13 +95,23 @@ public class VoiceControlActivity extends BaseActivity{
             "2015-04-01 21:51"};
     private final static int COUNT = 9;
 
+    //定时器
+    private MyTimer myTimer;
 
     @Override
     protected void initData() {
         super.initData();
         contentLayout.setOnTouchListener(this);
         inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        initVoice();
         initListView();
+        myTimer = new MyTimer(context);
+    }
+
+    /**
+     * 初始化语音帮助类
+     */
+    private void initVoice(){
         voiceRecognizeUtils = new VoiceRecognizeUtils(this);
         //给voiceRecognize设置回调函数
         voiceRecognizeUtils.setVoiceProcessor(new StringProcessor(){
@@ -98,10 +119,23 @@ public class VoiceControlActivity extends BaseActivity{
             public void stringProcess(String str) {
                 super.stringProcess(str);
                 sendData(str, false);
-                if (StringUtils.getInstance().hasCCTV(str))
+                if (VoiceCommand.parseVoiceCommand(context, str) != null && VoiceCommand.parseVoiceCommand(context, str).equals(Command.LIGHT_OPEN)) {
+                    int time = StringUtils.getInstance().getNumberBeforePattern(str);
+                    sendData("您选择了开灯,并且在 " + time + " 秒钟之后执行。",true);
+                    myTimer.setTimer(true);
+                    myTimer.setTimerMilliscond(time * 1000);
+                    myTimer.sendCommand(Command.LIGHT_OPEN);
+                }
+                else if (StringUtils.getInstance().hasCCTV(str)){
                     sendData("小威帮您找到了CCTV节目表哦~", true);
+                    myTimer.setTimer(true);
+                    myTimer.setTimerMilliscond(5000);
+                    myTimer.sendCommand(Command.TELEVISION_UP_VOL);
+                }
             }
         });
+
+        voiceSpeakUtils = new VoiceSpeakUtils(this);
     }
 
     /**
@@ -181,7 +215,6 @@ public class VoiceControlActivity extends BaseActivity{
     }
 
 
-
     /**
      * 发送一条数据
      */
@@ -234,7 +267,7 @@ public class VoiceControlActivity extends BaseActivity{
     @Override
     protected void onResume() {
         // 移动数据统计分析
-        FlowerCollector.onResume(VoiceControlActivity.this);
+        FlowerCollector.onResume(context);
         FlowerCollector.onPageStart(TAG);
         super.onResume();
     }
@@ -243,7 +276,7 @@ public class VoiceControlActivity extends BaseActivity{
     protected void onPause() {
         // 移动数据统计分析
         FlowerCollector.onPageEnd(TAG);
-        FlowerCollector.onPause(VoiceControlActivity.this);
+        FlowerCollector.onPause(context);
         super.onPause();
     }
 

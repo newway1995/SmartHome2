@@ -13,6 +13,7 @@ import java.io.File;
 import java.util.List;
 
 import constant.Constant;
+import module.database.ChatMsgEntity;
 import utils.FileUtils;
 import vgod.smarthome.R;
 

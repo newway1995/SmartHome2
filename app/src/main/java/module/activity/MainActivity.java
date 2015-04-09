@@ -31,6 +31,7 @@ import utils.L;
 import vgod.smarthome.R;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -98,6 +99,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @BindView(id = R.id.rasp_list)
     private ListView listView;
 
+    private Context context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,19 +149,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         settingFrame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                startActivity(new Intent(context, SettingActivity.class));
             }
         });
         helpFrame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, ContactUsActivity.class));
+                startActivity(new Intent(context, ContactUsActivity.class));
             }
         });
         aboutFrame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                startActivity(new Intent(context, AboutActivity.class));
             }
         });
 
@@ -185,7 +188,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     menuView.setEnabled(true);
                     menuView.setFocusable(true);
                     menuView.rl_closeVisiableAnimation();
-                    menuView.animation(MainActivity.this);
+                    menuView.animation(context);
                     menuView.bringToFront();
                     ripple.setVisibility(View.GONE);
                 }
@@ -205,7 +208,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
                 break;
             case R.id.nav_actionbar_more:
-                startActivity(new Intent(MainActivity.this, WeatherInfoActivity.class));
+                startActivity(new Intent(context, WeatherInfoActivity.class));
                 overridePendingTransition(R.anim.activity_open_in, R.anim.activity_open_exist);
                 break;
         }
@@ -225,8 +228,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String rasp_ids = raspList.get(position).get("rasp_ids");
-                Constant.setCurrentRaspIds(MainActivity.this, rasp_ids);
-                startActivity(new Intent(MainActivity.this,SelectControllerActivity.class));
+                Constant.setCurrentRaspIds(context, rasp_ids);
+                startActivity(new Intent(context,SelectControllerActivity.class));
             }
         });
     }
@@ -253,7 +256,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.nav_actionbar_segment_device:
                 break;
             case R.id.nav_actionbar_segment_scene:
-                startActivity(new Intent(MainActivity.this,VoiceControlActivity.class));
+                startActivity(new Intent(context,VoiceControlActivity.class));
                 break;
         }
     }
@@ -300,7 +303,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         KJStringParams params = new KJStringParams();
                         params.put(Command.COMMAND_DEVICE, Command.PHONE);
                         params.put("action", "ADD_RASP");
-                        params.put("user_name", Constant.getUsername(MainActivity.this));
+                        params.put("user_name", Constant.getUsername(context));
                         params.put("rasp_pwd", password);
                         params.put("rasp_ids", username);
                         params.put("nick_name", nickname);
@@ -315,20 +318,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                                     e.printStackTrace();
                                 }
                                 try {
-                                    KJDB kjdb = KJDB.create(MainActivity.this);
+                                    KJDB kjdb = KJDB.create(context);
                                     kjdb.save(new RaspberryEntity(username, password, nickname, function));
                                 } catch (Exception e) {
                                     e.printStackTrace();
-                                    Toast.makeText(MainActivity.this, "不能重复添加树莓派", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "不能重复添加树莓派", Toast.LENGTH_SHORT).show();
                                 }
-                                Toast.makeText(MainActivity.this, "树莓派添加成功...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "树莓派添加成功...", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onFailure(Throwable t, int errorNo, String strMsg) {
                                 super.onFailure(t, errorNo, strMsg);
                                 L.d("树莓派添加失败,ErrorMsg = " + strMsg);
-                                Toast.makeText(MainActivity.this, "树莓派添加失败,请检查网络设置", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "树莓派添加失败,请检查网络设置", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -336,7 +339,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "取消操作", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "取消操作", Toast.LENGTH_SHORT).show();
                     }
                 }).show();
     }
@@ -349,7 +352,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         params.put(Command.COMMAND_DEVICE, Command.PHONE);
         params.put("action", "GET_RASP");
         params.put("user_name", Constant.getUsername(this));
-        L.d("USERNAME = " + Constant.getUsername(MainActivity.this));
+        L.d("USERNAME = " + Constant.getUsername(context));
         kjHttp.post(this, Constant.HTTP_SINA_API, params,new StringCallBack() {
             @Override
             public void onSuccess(final String s) {
@@ -387,14 +390,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 String[] nicknames = nicknamesList.toArray(new String[nicknamesList.size()]);
 
                 //显示对话框选择按钮
-                new AlertDialog.Builder(MainActivity.this)
+                new AlertDialog.Builder(context)
                         .setTitle("选择树莓派")
                         .setItems(nicknames, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String rasp_ids = raspList.get(which).get("rasp_ids");
-                                Constant.setCurrentRaspIds(MainActivity.this, rasp_ids);
-                                startActivity(new Intent(MainActivity.this,SelectControllerActivity.class));
+                                Constant.setCurrentRaspIds(context, rasp_ids);
+                                startActivity(new Intent(context, SelectControllerActivity.class));
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -409,7 +412,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
-                Toast.makeText(MainActivity.this, "添加遥控器失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "添加遥控器失败", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -4,6 +4,7 @@ package module.core;
 import org.kymjs.aframe.ui.AnnotateUtil;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,12 +13,15 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Toast;
 
 import utils.L;
 import vgod.smarthome.R;
 
 public abstract class BaseActivity extends Activity implements OnClickListener, View.OnTouchListener{
 	public final String TAG = this.getClass().getSimpleName();
+    protected Context context = this;
+
 	private boolean mActionBarBack = false;
 	public boolean mShowActionBar = true;
 
@@ -162,6 +166,30 @@ public abstract class BaseActivity extends Activity implements OnClickListener, 
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+    /**
+     * 用来调试输出
+     * @param d
+     */
+    protected void Debug(String d){
+        L.d(TAG, d);
+    }
+
+    /**
+     * Toast内容,默认为Short Time
+     * @param t
+     */
+    protected void Toast(String t){
+        Toast.makeText(context,t, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Toast内容,默认为Length Time
+     * @param t
+     */
+    protected void ToastLong(String t){
+        Toast.makeText(context,t, Toast.LENGTH_LONG).show();
+    }
 
     //右滑返回
     @Override

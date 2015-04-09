@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 import org.kymjs.aframe.http.KJHttp;
@@ -62,7 +63,6 @@ public class MyTimer {
             commandList.add(command);
             return;
         }
-        L.d("MyTimer", "执行当前命令的树莓派的ID是:" + Constant.getCurrentRaspIds(context));
 
         KJHttp kjHttp = new KJHttp();
         KJStringParams params = new KJStringParams();
@@ -79,12 +79,13 @@ public class MyTimer {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-                L.d("MyTimer", "指令发送成功...s = " + s);
+                Toast.makeText(context, "指令发送成功", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
+                Toast.makeText(context, "指令发送失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -99,7 +100,7 @@ public class MyTimer {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         timerMilliscond = timerSelector[which] * 1000;
-                        new Thread(new MyThread(timerMilliscond)).start();
+                        new Thread(new MyTimerThread(timerMilliscond)).start();
                         L.d("MyTimer", "执行定时器,命令将在 " + timerSelector[which] + " 之后执行");
                     }
                 })
@@ -116,9 +117,9 @@ public class MyTimer {
     /**
      * Runnable接口
      */
-    public class MyThread implements Runnable{
+    public class MyTimerThread implements Runnable{
         private final int millisecond;
-        private MyThread(int millisecond) {
+        private MyTimerThread(int millisecond) {
             this.millisecond = millisecond;
         }
 
@@ -139,7 +140,7 @@ public class MyTimer {
     }
 
     /**
-     * 设置定时时间和变量
+     * 设置定时时间和变量,这个需要和showDialog同时使用
      * @param flag
      * @param time
      */
@@ -164,8 +165,13 @@ public class MyTimer {
         return timerMilliscond;
     }
 
+    /**
+     * 如果调用showDialog的时候则不需要调用这个函数
+     * @param timerMilliscond
+     */
     public void setTimerMilliscond(int timerMilliscond) {
         this.timerMilliscond = timerMilliscond;
+        new Thread(new MyTimerThread(timerMilliscond)).start();
     }
 
     public List<String> getCommandList() {

@@ -1,7 +1,6 @@
 package constant;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.facepp.http.HttpRequests;
 
@@ -11,7 +10,6 @@ import org.kymjs.aframe.http.KJStringParams;
 import org.kymjs.aframe.http.StringCallBack;
 import org.kymjs.aframe.utils.PreferenceHelper;
 
-import module.activity.controler.ControlADActivity;
 import utils.L;
 
 /**

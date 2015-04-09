@@ -15,6 +15,7 @@ import org.kymjs.aframe.ui.BindView;
 
 import constant.Command;
 import constant.Constant;
+import core.json.WeatherInfo;
 import module.core.BaseActivity;
 import utils.L;
 import vgod.smarthome.R;
@@ -65,7 +66,7 @@ public class WeatherInfoActivity extends BaseActivity{
         contentLayout.setOnTouchListener(this);
         kjHttp = new KJHttp();
         getDataFromNet();
-        getDataFromRasp("123457");
+        getDataFromRasp(Constant.getCurrentRaspIds(context));
     }
 
     @Override
@@ -156,7 +157,7 @@ public class WeatherInfoActivity extends BaseActivity{
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
                 L.e("Error Message = " + strMsg);
-                Toast.makeText(WeatherInfoActivity.this, "天气获取失败,请检查网络设备",Toast.LENGTH_SHORT).show();
+                Toast("天气获取失败,请检查网络设备");
             }
         });
     }
