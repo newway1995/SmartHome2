@@ -29,6 +29,8 @@ public class TVChannelConstant {
 
     public static String WhichChannel(final String source){
         String lowerSource = source.toLowerCase();
+        if (!lowerSource.contains("节目"))
+            return null;
         //央视
         if (lowerSource.contains("cctv")){
             if (lowerSource.contains("cctv1"))

@@ -1,5 +1,6 @@
 package module.activity.voicechat;
 
+import android.content.Intent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,6 +25,7 @@ import java.util.List;
 import constant.Command;
 import constant.Constant;
 import constant.MyTimer;
+import constant.TVChannelConstant;
 import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
@@ -119,6 +121,7 @@ public class VoiceControlActivity extends BaseActivity{
             public void stringProcess(String str) {
                 super.stringProcess(str);
                 sendData(str, false);
+                goToTVProgramActivity(str);//是否为查询电视节目
                 if (VoiceCommand.parseVoiceCommand(context, str) != null && VoiceCommand.parseVoiceCommand(context, str).equals(Command.LIGHT_OPEN)) {
                     int time = StringUtils.getInstance().getNumberBeforePattern(str);
                     sendData("您选择了开灯,并且在 " + time + " 秒钟之后执行。",true);
@@ -255,6 +258,18 @@ public class VoiceControlActivity extends BaseActivity{
                 inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
+    /**
+     * 跳转到显示电视节目表
+     */
+    private void goToTVProgramActivity(String string){
+        if (TVChannelConstant.WhichChannel(string) != null)
+        {
+            Intent intent = new Intent(context, TVProgramActivity.class);
+            intent.putExtra("code", TVChannelConstant.WhichChannel(string));
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -279,6 +294,7 @@ public class VoiceControlActivity extends BaseActivity{
         FlowerCollector.onPause(context);
         super.onPause();
     }
+
 
 
 //    @Override
