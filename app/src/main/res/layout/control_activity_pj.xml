@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:id="@+id/control_activity_pj"
+    android:background="@drawable/tv_background"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -11,39 +12,44 @@
 
         <ImageView
             android:id="@+id/pj_channel_ok"
-            style="@style/none_fill_parent"
-            android:background="@drawable/img_power"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/tv_switch"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/app_name" />
+            android:layout_margin="20dp" />
 
         <ImageView
             android:id="@+id/pj_channel_up"
-            style="@style/none_fill_parent"
-            android:background="@drawable/menu_up"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:background="@drawable/tv_up"
             android:layout_centerHorizontal="true"
             android:layout_above="@id/pj_channel_ok"
-            android:contentDescription="@string/app_name" />
+             />
 
         <ImageView
             android:id="@+id/pj_channel_down"
-            style="@style/none_fill_parent"
-            android:background="@drawable/menu_down"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:background="@drawable/tv_down"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/pj_channel_ok"
-            android:contentDescription="@string/app_name" />
+             />
 
         <ImageView
             android:id="@+id/pj_channel_left"
-            style="@style/none_fill_parent"
-            android:background="@drawable/menu_left"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:background="@drawable/tv_left"
             android:layout_toLeftOf="@id/pj_channel_ok"
             android:layout_centerVertical="true"
             android:contentDescription="@string/app_name" />
 
         <ImageView
             android:id="@+id/pj_channel_right"
-            style="@style/none_fill_parent"
-            android:background="@drawable/menu_right"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:background="@drawable/tv_right"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/pj_channel_ok"
             android:contentDescription="@string/app_name" />

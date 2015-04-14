@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="17"
         android:targetSdkVersion="19" />
 
 
@@ -128,6 +128,7 @@
         <activity
             android:name="module.activity.voicechat.VoiceControlActivity"
             android:label="语音控制"/>
+
 
         <!-- 移动统计分析 -->
         <meta-data

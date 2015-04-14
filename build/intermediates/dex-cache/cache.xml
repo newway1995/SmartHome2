@@ -9,6 +9,13 @@
         <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/Sunflower-0b350d14e829d17e25387ff5878218c33bd4c41d.jar" />
     </item>
     <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/usc.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="646bba2800f1c89a0813277de3aac9cbe9dd5534">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/usc-25731fecf7fd03dd959aa978af8865560481b544.jar" />
+    </item>
+    <item
         jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.1.1"
@@ -63,6 +70,13 @@
         revision="21.1.1"
         sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
         <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-7597cefd506c7b9418fb78fad6e20747d665bcfb.jar" />
+    </item>
+    <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/exploded-aar/com.github.manuelpeinado.glassactionbar/glassactionbar/0.3.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="018e6aaefbe75797b879b21274fb2e022c15882e">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/classes-a91ecd20341d32c50a6c5b5d5202c2b95b6fef11.jar" />
     </item>
     <item
         jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/androidsvg-1.2.0.jar"

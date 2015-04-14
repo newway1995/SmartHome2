@@ -1,24 +1,34 @@
 package module.activity.voicechat;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.os.Environment;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.iflytek.sunflower.FlowerCollector;
 
-import org.kymjs.aframe.database.KJDB;
+import org.kymjs.aframe.ui.AnnotateUtil;
 import org.kymjs.aframe.ui.BindView;
 import org.kymjs.aframe.utils.SystemTool;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,14 +39,13 @@ import constant.TVChannelConstant;
 import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
-import module.core.BaseActivity;
-import module.database.TVChannelEntity;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
 import module.database.ChatMsgEntity;
+import module.view.animation.BlurEffect;
 import utils.StringUtils;
+import utils.ViewUtils;
 import vgod.smarthome.R;
-import vgod.smarthome.TestClass;
 
 /**
  * User: niuwei(nniuwei@163.com)
@@ -44,28 +53,16 @@ import vgod.smarthome.TestClass;
  * Time: 00:27
  * 语音控制界面
  */
-public class VoiceControlActivity extends BaseActivity{
+public class VoiceControlActivity extends Activity implements View.OnClickListener{
 
     @BindView(id = R.id.voice_control_relativelayout)
-    private LinearLayout contentLayout;//右滑退出的作用
-
-    @BindView(id = R.id.voice_control_btn_msg_send, click = true)
-    private Button mBtnSend;//发送按钮
+    private LinearLayout contentLayout;
 
     @BindView(id = R.id.voice_control_listview)
     private ListView chatListView;//listview
 
-    @BindView(id = R.id.ivPopUp, click = true)
-    private ImageView chatting_mode_btn;//模式切换按钮-- 语音和文字
-
-    @BindView(id = R.id.et_sendmessage)
-    private EditText mEditTextContent;//文字输入的内容
-
     @BindView(id = R.id.voice_control_btn_record, click = true)
     private TextView mBtnRcd;//按住说话,默认为隐藏
-
-    @BindView(id = R.id.btn_bottom)
-    private RelativeLayout mBottom;//底部显示的edittext和send按钮
 
     private InputMethodManager inputMethodManager;
 
@@ -97,13 +94,27 @@ public class VoiceControlActivity extends BaseActivity{
             "2015-04-01 21:51"};
     private final static int COUNT = 9;
 
+    private Context context = this;
+    private final String TAG = getClass().getSimpleName();
+    private Bitmap bgBitmap;
     //定时器
     private MyTimer myTimer;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_voice_control);
+        AnnotateUtil.initBindView(this);
+        getBlueBackground();
+        initVoice();
+        initData();
+        initListView();
+    }
+
+    @SuppressLint("NewApi")
     protected void initData() {
-        super.initData();
-        contentLayout.setOnTouchListener(this);
+        //contentLayout.setBackground(new BitmapDrawable(getResources(), bgBitmap));
         inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         initVoice();
         initListView();
@@ -116,7 +127,7 @@ public class VoiceControlActivity extends BaseActivity{
     private void initVoice(){
         voiceRecognizeUtils = new VoiceRecognizeUtils(this);
         //给voiceRecognize设置回调函数
-        voiceRecognizeUtils.setVoiceProcessor(new StringProcessor(){
+        voiceRecognizeUtils.setVoiceProcessor(new StringProcessor() {
             @Override
             public void stringProcess(String str) {
                 super.stringProcess(str);
@@ -124,12 +135,11 @@ public class VoiceControlActivity extends BaseActivity{
                 goToTVProgramActivity(str);//是否为查询电视节目
                 if (VoiceCommand.parseVoiceCommand(context, str) != null && VoiceCommand.parseVoiceCommand(context, str).equals(Command.LIGHT_OPEN)) {
                     int time = StringUtils.getInstance().getNumberBeforePattern(str);
-                    sendData("您选择了开灯,并且在 " + time + " 秒钟之后执行。",true);
+                    sendData("您选择了开灯,并且在 " + time + " 秒钟之后执行。", true);
                     myTimer.setTimer(true);
                     myTimer.setTimerMilliscond(time * 1000);
                     myTimer.sendCommand(Command.LIGHT_OPEN);
-                }
-                else if (StringUtils.getInstance().hasCCTV(str)){
+                } else if (StringUtils.getInstance().hasCCTV(str)) {
                     sendData("小威帮您找到了CCTV节目表哦~", true);
                     myTimer.setTimer(true);
                     myTimer.setTimerMilliscond(5000);
@@ -145,6 +155,13 @@ public class VoiceControlActivity extends BaseActivity{
      * 初始化ListView数据
      */
     private void initListView(){
+        // 在代码中实现列表动画
+        Animation animation = (Animation) AnimationUtils.loadAnimation(
+                context, R.anim.list_anim);
+        LayoutAnimationController lac = new LayoutAnimationController(animation);
+        lac.setDelay(0.4f);  //设置动画间隔时间
+        lac.setOrder(LayoutAnimationController.ORDER_NORMAL); //设置列表的显示顺序
+        chatListView.setLayoutAnimation(lac);  //为ListView 添加动画
         for(int i = 0; i < COUNT; i++) {
             ChatMsgEntity entity = new ChatMsgEntity();
             entity.setDate(dataArray[i]);
@@ -173,48 +190,17 @@ public class VoiceControlActivity extends BaseActivity{
         });
     }
 
-
     @Override
-    public void widgetClick(View v) {
-        super.widgetClick(v);
+    public void onClick(View v) {
         switch (v.getId()){
             case R.id.voice_control_btn_record://点击录音
                 voiceRecognizeUtils.startSpeak();
                 break;
             case R.id.ivPopUp://切换输入源
-                switchInputMode();
                 break;
             case R.id.voice_control_btn_msg_send://发送文字按钮被点击
-                sendData(mEditTextContent.getText().toString().trim(), false);
-                mEditTextContent.setText(null);
                 break;
         }
-    }
-
-    /**
-     * 切换输入的模式
-     */
-    private void switchInputMode(){
-        boolean btn_voice = mBtnRcd.getVisibility() == View.VISIBLE;
-        if (btn_voice){//当前模式为语音输入,所以需要切换至文字输入,显示底部输入
-            mBottom.setVisibility(View.VISIBLE);
-            mBtnRcd.setVisibility(View.GONE);
-            chatting_mode_btn.setImageResource(R.drawable.chatting_setmode_msg_btn);
-            showListViewItem(chatListView.getCount() - 1);
-        }else {//当前模式为文字输入,所以需要切换至语音,并且显示"按住说话"
-            mBottom.setVisibility(View.GONE);
-            mBtnRcd.setVisibility(View.VISIBLE);
-            chatting_mode_btn.setImageResource(R.drawable.chatting_setmode_voice_btn);
-        }
-    }
-
-    @Override
-    public void setRootView() {
-        super.setRootView();
-        setContentView(R.layout.activity_voice_control);
-        setActionBarView(true);
-        // 启动activity时不自动弹出软键盘
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
 
@@ -295,44 +281,16 @@ public class VoiceControlActivity extends BaseActivity{
         super.onPause();
     }
 
-
-
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-//            View v = getCurrentFocus();
-//            if (isShouldHideInput(v, ev)) {
-//
-//                if (inputMethodManager != null) {
-//                    inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//                }
-//            }
-//            return super.dispatchTouchEvent(ev);
-//        }
-//        // 必不可少，否则所有的组件都不会有TouchEvent了
-//        if (getWindow().superDispatchTouchEvent(ev)) {
-//            return true;
-//        }
-//        return onTouchEvent(ev);
-//    }
-//
-//    public  boolean isShouldHideInput(View v, MotionEvent event) {
-//        if (v != null && (v instanceof EditText)) {
-//            int[] leftTop = { 0, 0 };
-//            //获取输入框当前的location位置
-//            v.getLocationInWindow(leftTop);
-//            int left = leftTop[0];
-//            int top = leftTop[1];
-//            int bottom = top + v.getHeight();
-//            if (event.getY() > top && event.getY() < bottom) {
-//                // 点击的是输入框区域，保留点击EditText的事件
-//                return false;
-//            }else {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
+    /**
+     * 获得背景虚化的图像
+     */
+    @SuppressWarnings("NewApi")
+    private void getBlueBackground(){
+        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + File.separator + Constant.DIR_ROOT + File.separator + "desktop_capture.jpg");
+        bgBitmap = BlurEffect.apply(this, bitmap, 25);
+        bgBitmap = Bitmap.createBitmap(bgBitmap, 0, 80, bgBitmap.getWidth(), bgBitmap.getHeight() - 80);
+        //BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), ViewUtils.getInstance().convertToBlackWhite(bgBitmap));
+        contentLayout.setBackground(new BitmapDrawable(getResources(), bgBitmap));
+    }
 
 }

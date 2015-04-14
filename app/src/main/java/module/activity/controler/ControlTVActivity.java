@@ -1,10 +1,14 @@
 package module.activity.controler;
 
+import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.ui.BindView;
 
 import constant.Command;
 import constant.Constant;
 import constant.MyTimer;
+import module.core.ui.ColorGenerator;
+import module.core.ui.TextDrawable;
+import module.database.TVChannelEntity;
 import utils.L;
 import vgod.smarthome.R;
 import android.view.Menu;
@@ -31,31 +35,29 @@ public class ControlTVActivity extends BaseActivity{
     private LinearLayout contentLayout;
 
     @BindView(id = R.id.tv_channel_no_voice, click = true)
-    private TextView switchText;
+    private ImageView switchText;
 	@BindView(id = R.id.tv_channel_text)
 	private TextView channel_text;
 	@BindView(id = R.id.tv_channel_0 , click = true)
-	private TextView channel_zero;
+	private ImageView channel_zero;
 	@BindView(id = R.id.tv_channel_1 , click = true)
-	private TextView channel_one;
+	private ImageView channel_one;
 	@BindView(id = R.id.tv_channel_2 , click = true)
-	private TextView channel_two;
+	private ImageView channel_two;
 	@BindView(id = R.id.tv_channel_3 , click = true)
-	private TextView channel_three;
+	private ImageView channel_three;
 	@BindView(id = R.id.tv_channel_4 , click = true)
-	private TextView channel_four;
+	private ImageView channel_four;
 	@BindView(id = R.id.tv_channel_5 , click = true)
-	private TextView channel_five;
+	private ImageView channel_five;
 	@BindView(id = R.id.tv_channel_6 , click = true)
-	private TextView channel_six;
+	private ImageView channel_six;
 	@BindView(id = R.id.tv_channel_7 , click = true)
-	private TextView channel_seven;
+	private ImageView channel_seven;
 	@BindView(id = R.id.tv_channel_8 , click = true)
-	private TextView channel_eight;
+	private ImageView channel_eight;
 	@BindView(id = R.id.tv_channel_9 , click = true)
-	private TextView channel_nine;
-	@BindView(id = R.id.tv_channel_10 , click = true)
-	private TextView channel_ten;
+	private ImageView channel_nine;
 	@BindView(id = R.id.tv_channel_ok , click = true)
 	private ImageView channel_ok;
 	@BindView(id = R.id.tv_channel_up , click = true)
@@ -75,7 +77,16 @@ public class ControlTVActivity extends BaseActivity{
     /* 记录最近一次按键的时间和当前按键的时间 */
     private long currentMilisecond = 0;
     private long lastMilisecond = 0;
-	
+
+    /**
+     * Drawable
+     */
+    private TextDrawable.IBuilder mDrawableBuilder;
+    /**
+     * 颜色生成器
+     */
+    private ColorGenerator mColorGenerator = ColorGenerator.MATERIAL;
+
 	@Override
 	protected void initData() {
 		super.initData();
@@ -83,11 +94,28 @@ public class ControlTVActivity extends BaseActivity{
         L.d(TAG, Constant.getCurrentRaspIds(this));
 
         myTimer = new MyTimer(this);
+        TVChannelEntity.kjdb = KJDB.create(this);
+
+        mDrawableBuilder = TextDrawable.builder()
+                .beginConfig()
+                .withBorder(4)
+                .endConfig()
+                .round();
 	}
 
 	@Override
 	protected void initWidget() {
 		super.initWidget();
+        channel_one.setImageDrawable(mDrawableBuilder.build("1", mColorGenerator.getRandomColor()));
+        channel_two.setImageDrawable(mDrawableBuilder.build("2", mColorGenerator.getRandomColor()));
+        channel_three.setImageDrawable(mDrawableBuilder.build("3", mColorGenerator.getRandomColor()));
+        channel_four.setImageDrawable(mDrawableBuilder.build("4", mColorGenerator.getRandomColor()));
+        channel_five.setImageDrawable(mDrawableBuilder.build("5", mColorGenerator.getRandomColor()));
+        channel_six.setImageDrawable(mDrawableBuilder.build("6", mColorGenerator.getRandomColor()));
+        channel_seven.setImageDrawable(mDrawableBuilder.build("7", mColorGenerator.getRandomColor()));
+        channel_eight.setImageDrawable(mDrawableBuilder.build("8", mColorGenerator.getRandomColor()));
+        channel_nine.setImageDrawable(mDrawableBuilder.build("9", mColorGenerator.getRandomColor()));
+        channel_zero.setImageDrawable(mDrawableBuilder.build("0", mColorGenerator.getRandomColor()));
 	}
 
 	@Override
@@ -95,7 +123,7 @@ public class ControlTVActivity extends BaseActivity{
         lastMilisecond = currentMilisecond;
         currentMilisecond = System.currentTimeMillis();
 
-		switch (v.getId()) {
+        switch (v.getId()) {
 		case R.id.tv_channel_0://按下0
             myTimer.sendCommand(Command.TELEVISION_ZERO);
 			if (!tempChannel.equals("0"))
@@ -137,10 +165,6 @@ public class ControlTVActivity extends BaseActivity{
             myTimer.sendCommand(Command.TELEVISION_NINE);
             updataChannel("9");
 			break;
-		case R.id.tv_channel_10://按下10
-            myTimer.sendCommand(Command.TELEVISION_TEN);
-            updataChannel("10");
-			break;
 		case R.id.tv_channel_ok://按下ok
             myTimer.sendCommand(Command.TELEVISION_OK);
             Toast.makeText(this,"当前频道为 : " + tempChannel,Toast.LENGTH_SHORT).show();
@@ -173,21 +197,26 @@ public class ControlTVActivity extends BaseActivity{
 	}
 
 	@Override
-	public void setRootView() {		
+	public void setRootView() {
 		super.setRootView();
 		setContentView(R.layout.control_activity_tv);
 		setActionBarView(true);
 	}
-	
+
+    /**
+     * 更新频道
+     * @param a
+     */
     private void updataChannel(String a){
         if (isContinuity())
             tempChannel += a;
         else
             tempChannel = a;
         channel_text.setText(tempChannel);
+        showChannelText(Integer.valueOf(tempChannel));
     }
 
-    
+
     private void operateChannel(char ope){
         switch (ope)
         {
@@ -197,7 +226,7 @@ public class ControlTVActivity extends BaseActivity{
                     channel_text.setText(tempChannel);
                 }catch (NumberFormatException e){
                     e.printStackTrace();
-                    L.d(TAG,"operateChannel Up");
+                    L.d(TAG, "operateChannel Up");
                 }
                 break;
             case 'd':
@@ -208,7 +237,7 @@ public class ControlTVActivity extends BaseActivity{
                     }
                 }catch (NumberFormatException e){
                     e.printStackTrace();
-                    L.d(TAG,"operateChannel Up");
+                    L.d(TAG, "operateChannel Up");
                 }
                 break;
             case 'l':
@@ -216,6 +245,7 @@ public class ControlTVActivity extends BaseActivity{
             case 'r':
                 break;            
         }
+        showChannelText(Integer.valueOf(tempChannel));
     }
 
 
@@ -237,6 +267,17 @@ public class ControlTVActivity extends BaseActivity{
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    /**
+     * 将频道号码显示成台 12->湖南卫视
+     * @param number
+     */
+    private void showChannelText(int number){
+        TVChannelEntity entity = TVChannelEntity.query(number);
+        if (entity != null){
+            channel_text.setText(entity.getChannelText());
+        }
     }
 
     /**

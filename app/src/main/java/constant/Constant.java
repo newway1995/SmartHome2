@@ -1,6 +1,7 @@
 package constant;
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.facepp.http.HttpRequests;
 
@@ -26,6 +27,7 @@ public class Constant {
     public static final String FACE_DETECT_APIKEY = "7ad998186db0343811b66fa7d6c78233";
     public static final String FACE_DETECT_APISECRET = "Ok99JGecsH8ghXF_5dTKvlIKSbmTYH_N";
     public static final String DIR_ROOT = "SmartHome";//所有应用的根目录
+    public static final String COMPLETE_DIR_ROOT = Environment.getExternalStorageDirectory() + "/SmartHome";//所有应用的根目录
     public static final String APP_ROOT = "facedetect";//人脸识别的目录
     public static final String TRUE = "true";
     public static final String FALSE = "false";
@@ -41,6 +43,7 @@ public class Constant {
     public static final String PERSON_NAME = "person_name";//人得名字
     public static final String OPEN_GESTURE_PWD = "open_gesture_pwd";//是否打开手势密码
     public static final String SHOW_GESTURE_TRACK = "show_gesture_track";//是否显示手势轨迹
+    public static final String WAKE_UP = "wake_up";//是否开启语音唤醒功能
     public static final String NUM_FACE = "num_face";//人脸的数量
     public static final String FACE_ID = "num_face";//人脸的ID
 
@@ -117,6 +120,24 @@ public class Constant {
         if (PreferenceHelper.readString(context, USER_INFO, UNLOCK_BY_WHAT,UNLOCK_BY_GESTURE) == UNLOCK_BY_GESTURE)
             return UNLOCK_BY_GESTURE;
         return UNLOCK_BY_FACE;
+    }
+
+    /**
+     * 获取是否开启语音唤醒
+     */
+    public static boolean getWakeUp(Context context){
+        if (!PreferenceHelper.readBoolean(context, USER_INFO, WAKE_UP, false))
+            return false;
+        return true;
+    }
+
+    /**
+     * 设置是否开启语音助手
+     * @param context
+     * @param isWakeUp
+     */
+    public static void setWakeUp(Context context, boolean isWakeUp){
+        PreferenceHelper.write(context, USER_INFO, WAKE_UP, isWakeUp);
     }
 
     /**
@@ -228,6 +249,11 @@ public class Constant {
         });
     }
 
+    /**
+     * 数据是否返回正常
+     * @param jsonObject
+     * @return
+     */
     public static boolean isGetDataSuccess(JSONObject jsonObject){
         try{
             if (!jsonObject.getString("success").equals("1"))

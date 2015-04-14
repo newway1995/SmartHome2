@@ -35,6 +35,28 @@
 
         <TextView
             style="@style/none_fill_parent"
+            android:text="语音唤醒"
+            android:padding="15dp"
+            android:textAppearance="@style/black_18" />
+
+        <ImageView
+            android:id="@+id/setting_wakeup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img_switch_no"
+            android:contentDescription="@string/app_name"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/width_fill_parent"
+        android:background="@color/white"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            style="@style/none_fill_parent"
             android:text="人脸识别开锁"
             android:padding="15dp"
             android:textAppearance="@style/black_18" />
@@ -50,10 +72,17 @@
             android:layout_marginRight="20dp" />
     </RelativeLayout>
 
+    <!-- 分割线 -->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/doct_list_item_divider"
+        />
+
     <RelativeLayout
         style="@style/width_fill_parent"
         android:background="@color/white"
-        android:layout_marginTop="20dp">
+        >
 
         <TextView
             style="@style/none_fill_parent"
@@ -76,7 +105,7 @@
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@drawable/doct_list_item_divider"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         />
 
     <RelativeLayout
@@ -182,7 +211,7 @@
     <Button
         android:id="@+id/logout"
         style="@style/width_fill_parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/corners_white"

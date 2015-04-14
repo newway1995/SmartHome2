@@ -45,4 +45,6 @@ public class SystemUtils {
         Vibrator vibrator = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(pattern, repeat);
     }
+
+
 }

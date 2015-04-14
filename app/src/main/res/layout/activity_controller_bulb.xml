@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_controller_bulb"
-    android:background="@color/gray_light">
+    android:background="@drawable/tv_background">
 
     <ImageView
         android:id="@+id/bulb_img"
@@ -13,10 +13,11 @@
         android:layout_centerInParent="true"/>
     <ImageView
         android:id="@+id/bulb_switch"
-        style="@style/none_fill_parent"
-        android:background="@drawable/img_power"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/tv_switch"
         android:layout_below="@id/bulb_img"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:contentDescription="@string/app_name" />
+         />
 </RelativeLayout>

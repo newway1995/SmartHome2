@@ -2,9 +2,13 @@ package module.view.adapter;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,14 +37,16 @@ public class ChatMsgAdapter extends BaseAdapter{
         //自己发出的信息
         int IMVT_TO_MSG = 1;
     }
-
+    private AlphaAnimation mAlphaAnimation;
     public static final String TAG = ChatMsgAdapter.class.getSimpleName();
     private List<ChatMsgEntity> data;
     private LayoutInflater mInflater;
+    private Context context;
 
     public ChatMsgAdapter(Context context, List<ChatMsgEntity> data) {
         this.data = data;
         mInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @Override
@@ -98,30 +104,22 @@ public class ChatMsgAdapter extends BaseAdapter{
                 //如果是自己发出的消息，则显示的是右气泡
                 convertView = mInflater.inflate(R.layout.item_chatting_msg_text_right, null);
             }
-
             viewHolder = new ViewHolder();
-            viewHolder.tvSendTime = (TextView) convertView.findViewById(R.id.tv_sendtime);
-            viewHolder.tvUserName = (TextView) convertView.findViewById(R.id.tv_username);
             viewHolder.tvContent = (TextView) convertView.findViewById(R.id.tv_chatcontent);
-            viewHolder.avatorView = (ImageView) convertView.findViewById(R.id.iv_userhead);
             viewHolder.isComMsg = isComMsg;
-
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder)convertView.getTag();
         }
-
-        if (!isComMsg){
-            try{
-                viewHolder.avatorView.setImageBitmap(BitmapFactory.decodeFile(FileUtils.getInstance().getRootDir() + File.separator + Constant.DIR_ROOT + File.separator + "faceImage.jpg"));
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+        viewHolder.tvContent.setText(isComMsg == true ? chatMsgEntity.getText() : "『 “ " + chatMsgEntity.getText() + " ” 』");
+        TextPaint tp = viewHolder.tvContent.getPaint();
+        tp.setFakeBoldText(true);
+        if (position == data.size() - 1){
+            if (mAlphaAnimation == null)
+                mAlphaAnimation = new AlphaAnimation(0, 1);
+            mAlphaAnimation.setDuration(1000);
+            viewHolder.tvContent.startAnimation(mAlphaAnimation);
         }
-
-        viewHolder.tvContent.setText(chatMsgEntity.getText());
-        viewHolder.tvUserName.setText(chatMsgEntity.getName());
-        viewHolder.tvSendTime.setText(chatMsgEntity.getDate());
         return convertView;
     }
 
@@ -129,9 +127,6 @@ public class ChatMsgAdapter extends BaseAdapter{
      * 通过ViewHolder的方法来显示
      */
     class ViewHolder{
-        public ImageView avatorView;
-        public TextView tvSendTime;
-        public TextView tvUserName;
         public TextView tvContent;
         public boolean isComMsg = true;//默认是对方发送的数据
     }

@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:id="@+id/voice_control_relativelayout"
     android:orientation="vertical"
-    android:background="#f0f0e0" >
+     >
 
     <ListView
         android:id="@+id/voice_control_listview"
@@ -23,7 +23,7 @@
         android:id="@+id/rl_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/chat_footer_bg" >
+         >
 
         <ImageView
             android:id="@+id/ivPopUp"
@@ -32,6 +32,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dip"
+            android:visibility="gone"
             android:src="@drawable/chatting_setmode_msg_btn" />
 
         <RelativeLayout
@@ -40,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:visibility="gone"
             android:layout_toRightOf="@+id/ivPopUp" >
 
             <Button
@@ -73,11 +75,12 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/ivPopUp"
             android:background="@drawable/chat_send_btn"
             android:gravity="center"
             android:text="按住说话"
-            android:visibility="gone" />
+             />
     </RelativeLayout>
 
 

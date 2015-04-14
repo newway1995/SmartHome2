@@ -93,6 +93,8 @@
     <orderEntry type="library" exported="" name="nineoldandroids-library-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.2" level="project" />
     <orderEntry type="library" exported="" name="faceppsdk_min" level="project" />
+    <orderEntry type="library" exported="" name="glassactionbar-0.3.0" level="project" />
+    <orderEntry type="library" exported="" name="usc" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.2" level="project" />
     <orderEntry type="library" exported="" name="Sunflower" level="project" />
   </component>

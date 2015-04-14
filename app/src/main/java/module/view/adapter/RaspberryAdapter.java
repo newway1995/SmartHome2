@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import module.core.ui.ColorGenerator;
+import module.core.ui.TextDrawable;
 import vgod.smarthome.R;
 
 /**
@@ -24,6 +27,14 @@ public class RaspberryAdapter extends BaseAdapter{
     private final static String TAG = "DoctorAdapter";
     ArrayList<HashMap<String, String >> list;
     private LayoutInflater inflater;
+    /**
+     * Drawable
+     */
+    private TextDrawable.IBuilder mDrawableBuilder;
+    /**
+     * 颜色生成器
+     */
+    private ColorGenerator mColorGenerator = ColorGenerator.MATERIAL;
 
     public RaspberryAdapter(Context context,ArrayList<HashMap<String, String>> list){
         this.list = list;
@@ -56,7 +67,14 @@ public class RaspberryAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.list_item_raspberry, null);
         TextView nicknameText = (TextView)convertView.findViewById(R.id.list_item_rasp_nickname);
         TextView functionText = (TextView)convertView.findViewById(R.id.list_item_rasp_function);
+        ImageView imageView = (ImageView)convertView.findViewById(R.id.list_item_rasp_img);
 
+        mDrawableBuilder = TextDrawable.builder()
+                                        .beginConfig()
+                                        .withBorder(4)
+                                        .endConfig()
+                                        .roundRect(10);
+        imageView.setImageDrawable(mDrawableBuilder.build("R", mColorGenerator.getRandomColor()));
         nicknameText.setText(list.get(position).get("nickname"));
         functionText.setText(list.get(position).get("function"));
         return convertView;

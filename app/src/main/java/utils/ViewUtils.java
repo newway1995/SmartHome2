@@ -1,20 +1,26 @@
 package utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.ThumbnailUtils;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.view.ViewGroup.LayoutParams;
@@ -166,37 +172,101 @@ public class ViewUtils {
 
 
     /**
-     * 强制显示/隐藏软键盘
+     * 获取屏幕截图
      * @param context
-     * @param view
-     * @param isShow
      */
-    public void switchSoftInputMethod(Context context, View view, boolean isShow){
-        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (isShow){
-            imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);
-        }else{
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+    public Bitmap getScreenCapture(Activity context){
+        Bitmap bmp;
+        //获取屏幕
+        View decorView = context.getWindow().getDecorView();
+        decorView.setDrawingCacheEnabled(true);
+        bmp = decorView.getDrawingCache();
+        return bmp;
+    }
+
+    /**
+     * 根据view来生成bitmap图片，可用于截图功能
+     */
+    public Bitmap getScreenCapture(View v) {
+        v.clearFocus(); //
+        v.setPressed(false); //
+        // 能画缓存就返回false
+        boolean willNotCache = v.willNotCacheDrawing();
+        v.setWillNotCacheDrawing(false);
+        int color = v.getDrawingCacheBackgroundColor();
+        v.setDrawingCacheBackgroundColor(0);
+        if (color != 0) {
+            v.destroyDrawingCache();
         }
+        v.buildDrawingCache();
+        Bitmap cacheBitmap = v.getDrawingCache();
+        if (cacheBitmap == null) {
+            return null;
+        }
+        Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
+        // Restore the view
+        v.destroyDrawingCache();
+        v.setWillNotCacheDrawing(willNotCache);
+        v.setDrawingCacheBackgroundColor(color);
+        return bitmap;
     }
 
     /**
-     * 显示软键盘
+     * 模糊处理
      * @param context
-     * @param editView
+     * @param bitmap
+     * @return
      */
-    public void showSoftInputMethod(Context context, EditText editView){
-        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInputFromInputMethod(editView.getWindowToken(), 0);
+    @SuppressWarnings("NewApi")
+    public Bitmap blurBitmap(Context context, Bitmap bitmap){
+        Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        RenderScript rs = RenderScript.create(context);
+        ScriptIntrinsicBlur blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        Allocation allIn = Allocation.createFromBitmap(rs, bitmap);
+        Allocation allOut = Allocation.createFromBitmap(rs, outBitmap);
+        blurScript.setRadius(25.f);
+        blurScript.setInput(allIn);
+        blurScript.forEach(allOut);
+        allOut.copyTo(outBitmap);
+        bitmap.recycle();
+        rs.destroy();
+        return outBitmap;
     }
 
     /**
-     * 隐藏软键盘
-     * @param context
-     * @param editView
+     * 将彩色图转换为纯黑白二色
+     *
+     * @param bmp
+     * @return 返回转换好的位图
      */
-    public void hiddenSoftInputMethod(Context context, EditText editView){
-        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromInputMethod(editView.getWindowToken(), 0);
+    public Bitmap convertToBlackWhite(Bitmap bmp) {
+        int width = bmp.getWidth(); // 获取位图的宽
+        int height = bmp.getHeight(); // 获取位图的高
+        int[] pixels = new int[width * height]; // 通过位图的大小创建像素点数组
+
+        bmp.getPixels(pixels, 0, width, 0, 0, width, height);
+        int alpha = 0xFF << 24;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int grey = pixels[width * i + j];
+
+                //分离三原色
+                int red = ((grey & 0x00FF0000) >> 16);
+                int green = ((grey & 0x0000FF00) >> 8);
+                int blue = (grey & 0x000000FF);
+
+                //转化成灰度像素
+                grey = (int) (red * 0.3 + green * 0.59 + blue * 0.11);
+                grey = alpha | (grey << 16) | (grey << 8) | grey;
+                pixels[width * i + j] = grey;
+            }
+        }
+        //新建图片
+        Bitmap newBmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        //设置图片数据
+        newBmp.setPixels(pixels, 0, width, 0, 0, width, height);
+
+        Bitmap resizeBmp = ThumbnailUtils.extractThumbnail(newBmp, 380, 460);
+        return resizeBmp;
     }
 }

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/air_background"
     android:padding="20dp"
     android:id="@+id/control_activity_ad"
     android:orientation="vertical">
@@ -19,31 +20,31 @@
             <ImageView
                 android:id="@+id/ad_mode_auto"
                 style="@style/width_zero_fix"
-                android:contentDescription="@string/app_name"
+
                 android:src="@drawable/mode_auto" />
 
             <ImageView
                 android:id="@+id/ad_mode_cold"
                 style="@style/width_zero_fix"
-                android:contentDescription="@string/app_name"
+
                 android:src="@drawable/mode_cold" />
 
             <ImageView
                 android:id="@+id/ad_mode_drying"
                 style="@style/width_zero_fix"
-                android:contentDescription="@string/app_name"
+
                 android:src="@drawable/mode_drying" />
 
             <ImageView
                 android:id="@+id/ad_mode_warm"
                 style="@style/width_zero_fix"
-                android:contentDescription="@string/app_name"
+
                 android:src="@drawable/mode_warm" />
 
             <ImageView
                 android:id="@+id/ad_mode_wind"
                 style="@style/width_zero_fix"
-                android:contentDescription="@string/app_name"
+
                 android:src="@drawable/mode_wind" />
         </LinearLayout>
 
@@ -63,13 +64,13 @@
             <ImageView
                 android:id="@+id/ad_temp_text"
                 style="@style/width_zero_fix"
-                android:contentDescription="@string/app_name"
+
                 android:background="@drawable/img_temp_17" />
 
             <ImageView
                 android:id="@+id/ad_temp_image"
                 style="@style/width_zero_fix"
-                android:contentDescription="@string/app_name" />
+ />
         </LinearLayout>
 
         <TextView
@@ -91,10 +92,10 @@
 
             <ImageView
                 android:id="@+id/ad_switch"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_round_white"
-                android:src="@drawable/img_power"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+
+                android:background="@drawable/air_switch"
                 android:scaleType="center"
                  />
 
@@ -107,19 +108,19 @@
 
             <ImageView
                 android:id="@+id/ad_temp_up"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_round_white"
-                android:src="@drawable/up_wifi"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/air_up"
                 android:scaleType="center"
                 android:layout_gravity="center" />
 
             <ImageView
                 android:id="@+id/ad_temp_down"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_round_white"
-                android:src="@drawable/down_wifi"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/air_down"
                 android:scaleType="center"
                 android:layout_gravity="center" />
         </LinearLayout>
@@ -131,27 +132,24 @@
 
             <ImageView
                 android:id="@+id/ad_cold"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_round_white"
-                android:src="@drawable/mode_cold"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/air_snow"
                 android:scaleType="center"
                 android:layout_gravity="center" />
 
             <ImageView
                 android:id="@+id/ad_hot"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_round_white"
-                android:src="@drawable/mode_warm"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/air_sun"
                 android:scaleType="center"
                 android:layout_gravity="center" />
             <ImageView
                 android:id="@+id/ad_wet"
-                style="@style/none_fill_parent"
-                android:contentDescription="@string/app_name"
-                android:background="@drawable/btn_key_round_white"
-                android:src="@drawable/mode_drying"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/air_drop"
                 android:scaleType="center"
                 android:layout_gravity="center" />
         </LinearLayout>

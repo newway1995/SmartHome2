@@ -16,7 +16,6 @@ import module.activity.common.ContactUsActivity;
 import module.activity.common.SelectControllerActivity;
 import module.activity.common.SettingActivity;
 import module.activity.common.WeatherInfoActivity;
-import module.activity.security.SecurityCameraActivity;
 import module.activity.voicechat.VoiceControlActivity;
 import module.core.ui.ImportMenuView;
 import module.core.ui.ResideMenu;
@@ -27,13 +26,16 @@ import module.database.EntityDao;
 import module.database.RaspberryEntity;
 import module.inter.NormalProcessor;
 import module.view.adapter.RaspberryAdapter;
+import utils.FileUtils;
 import utils.L;
+import utils.ViewUtils;
 import vgod.smarthome.R;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -48,6 +50,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -63,6 +66,9 @@ import java.util.List;
  * @useage:Main
  */
 public class MainActivity extends FragmentActivity implements View.OnClickListener , RadioGroup.OnCheckedChangeListener{
+    @BindView(id = R.id.main_contentView)
+    private RelativeLayout contentLayout;
+
     @BindView(id = R.id.nav_actionbar_segment , click = true)
     private SegmentedGroup segmentedGroup;//segment
     @BindView(id = R.id.nav_actionbar_menu , click = true)
@@ -101,6 +107,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private Context context = this;
 
+    /**
+     * 语音唤醒
+     */
+    //private WakeUpControl mWakeUpControl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +120,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         AnnotateUtil.initBindView(this);
         initView();
         initData();
+        initWakeUp();
     }
 
     @Override
@@ -183,7 +195,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         ripple.setRippleFinishListener(new RippleLayout.RippleFinishListener() {
             @Override
             public void rippleFinish(int id) {
-                if(id == R.id.more2){
+                if (id == R.id.more2) {
                     menuView.setVisibility(View.VISIBLE);
                     menuView.setEnabled(true);
                     menuView.setFocusable(true);
@@ -198,6 +210,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         raspList = new ArrayList<>();
         getRaspberryFromDB();
         entityDao = new EntityDao(this);
+    }
+
+    /**
+     * 初始化唤醒
+     */
+    private void initWakeUp(){
+
     }
 
     @Override
@@ -256,7 +275,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.nav_actionbar_segment_device:
                 break;
             case R.id.nav_actionbar_segment_scene:
-                startActivity(new Intent(context,VoiceControlActivity.class));
+                Bitmap bitmap = ViewUtils.getInstance().getScreenCapture(this);
+                FileUtils.getInstance().saveBitmap(bitmap, Constant.DIR_ROOT, "desktop_capture.jpg");
+                startActivity(new Intent(context, VoiceControlActivity.class));
                 break;
         }
     }
@@ -353,7 +374,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         params.put("action", "GET_RASP");
         params.put("user_name", Constant.getUsername(this));
         L.d("USERNAME = " + Constant.getUsername(context));
-        kjHttp.post(this, Constant.HTTP_SINA_API, params,new StringCallBack() {
+        kjHttp.post(this, Constant.HTTP_SINA_API, params, new StringCallBack() {
             @Override
             public void onSuccess(final String s) {
                 raspList = new ArrayList<>();
@@ -363,7 +384,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     JSONObject jObj = new JSONObject(s);
                     //如果返回的数据不正确则退出
                     if (!jObj.getString("success").equals("1"))
-                        return ;
+                        return;
                     JSONArray jArrry = jObj.getJSONArray("data");
                     for (int i = 0; i < jArrry.length(); i++) {
                         JSONObject jsonObject = jArrry.getJSONObject(i);
@@ -376,9 +397,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         raspList.add(map);
 
                         /* 添加到数据库当中 */
-                        try{
-                            entityDao.saveRaspberry(rasp_ids, "password",nick_name,"function");
-                        }catch(Exception e){
+                        try {
+                            entityDao.saveRaspberry(rasp_ids, "password", nick_name, "function");
+                        } catch (Exception e) {
                             L.e("数据库存储异常...");
                             e.printStackTrace();
                         }
@@ -441,4 +462,26 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         listView.postInvalidate();
     }
 
+    /**
+     * 是否可以唤醒
+     * @param str
+     * @return
+     */
+    private boolean isCanWakeUp(String str){
+        if (str.contains("你好")
+                && (str.contains("小威") || str.contains("小伟")
+                || str.contains("小微") || str.contains("小薇")
+                || str.contains("小魏") || str.contains("小唯"))) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 释放资源
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
