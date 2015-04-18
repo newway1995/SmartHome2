@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 开灯-->
+    <string-array name="open_bulb">
+        <item>开灯</item>
+        <item>把灯打开</item>
+        <item>把电灯打开</item>
+        <item>把灯泡打开</item>
+        <item>芝麻开灯</item>
+        <item>好黑</item>
+        <item>看不见</item>
+    </string-array>
+    <!-- 关灯-->
+    <string-array name="close_bulb">
+        <item>关灯</item>
+        <item>把灯关</item>
+        <item>把电灯关</item>
+        <item>把灯泡关</item>
+    </string-array>
+
+
+    <!-- 开空调-->
+    <string-array name="open_air_condition">
+        <item>把空调打开</item>
+        <item>打开空调</item>
+        <item>开空调</item>
+    </string-array>
+    <!-- 关空调-->
+    <string-array name="close_air_condition">
+        <item>把空调关</item>
+        <item>关闭空调</item>
+        <item>关了空调</item>
+    </string-array>
+    <!-- 调大-->
+    <string-array name="down_air_condition">
+        <item>调大</item>
+        <item>增大</item>
+        <item>开大</item>
+    </string-array>
+    <!-- 调小-->
+    <string-array name="up_air_condition">
+        <item>调小</item>
+        <item>减小</item>
+        <item>开小</item>
+    </string-array>
+    <!-- 空调制冷模式-->
+    <string-array name="cold_mode">
+        <item>制冷</item>
+    </string-array>
+    <!-- 空调制热模式-->
+    <string-array name="hot_mode">
+        <item>制热</item>
+    </string-array>
+    <!-- 空调除湿模式-->
+    <string-array name="drop_mode">
+        <item>除湿</item>
+    </string-array>
+    <!-- 空调度数-->
+    <string-array name="air_condition_degree">
+        <item>16度</item>
+        <item>17度</item>
+        <item>18度</item>
+        <item>19度</item>
+        <item>20度</item>
+        <item>21度</item>
+        <item>22度</item>
+        <item>23度</item>
+        <item>24度</item>
+        <item>25度</item>
+        <item>26度</item>
+        <item>28度</item>
+        <item>29度</item>
+        <item>30度</item>
+        <item>31度</item>
+    </string-array>
+
+
+
+    <!-- 打开风扇-->
+    <string-array name="open_fan">
+        <item>开风扇</item>
+        <item>风扇打开</item>
+    </string-array>
+    <!-- 关闭风扇-->
+    <string-array name="close_fan">
+        <item>关闭风扇</item>
+        <item>关了风扇</item>
+        <item>关风扇</item>
+        <item>风扇关</item>
+    </string-array>
+    <!-- 调大风扇-->
+    <string-array name="add_fan">
+        <item>调大风扇</item>
+        <item>加大风扇</item>
+        <item>风扇开大</item>
+    </string-array>
+    <!-- 调小风扇-->
+    <string-array name="minus_fan">
+        <item>调小风扇</item>
+        <item>减小风扇</item>
+        <item>风扇调小</item>
+        <item>风扇开小</item>
+    </string-array>
+    <!-- 摇头-->
+    <string-array name="shake_fan">
+        <item>摇头</item>
+    </string-array>
+    <!-- 风扇1-->
+    <string-array name="fan_mode1">
+        <item>风扇调到1档</item>
+        <item>风扇开到1档</item>
+    </string-array>
+    <!-- 风扇2-->
+    <string-array name="fan_mode2">
+        <item>风扇调到2档</item>
+        <item>风扇开到2档</item>
+    </string-array>
+    <!-- 风扇3-->
+    <string-array name="fan_mode3">
+        <item>风扇调到3档</item>
+        <item>风扇开到3档</item>
+    </string-array>
+
+
+    <!-- 打开投影仪-->
+    <string-array name="open_projectot">
+        <item>开投影</item>
+        <item>投影仪打开</item>
+    </string-array>
+    <!-- 关闭投影仪-->
+    <string-array name="close_projector">
+        <item>关闭投影仪</item>
+        <item>关了投影仪</item>
+        <item>关投影仪</item>
+        <item>投影仪关</item>
+    </string-array>
+    <!-- 焦距拉近-->
+    <string-array name="up_projector">
+        <item>拉近</item>
+    </string-array>
+    <!-- 焦距拉圆-->
+    <string-array name="down_projector">
+        <item>拉远</item>
+    </string-array>
+</resources>

@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import org.kymjs.aframe.ui.BindView;
 import constant.Command;
+import constant.Constant;
+import constant.ConstantStatus;
 import constant.MyTimer;
 import module.core.BaseActivity;
 import utils.L;
@@ -63,6 +65,15 @@ public class ControlADActivity extends BaseActivity {
         myTimer = new MyTimer(this);
 	}
 
+    /**
+     * 从保存的状态文件恢复
+     */
+    private void initFromStatus(){
+        currentTemp = Integer.valueOf(ConstantStatus.getAirStatus(context));
+        setDrawableByTemp();
+        if (ConstantStatus.getAirSwitch(context).equals("on"))
+            ad_open.setSelected(true);
+    }
 	
 	@Override
 	protected void initWidget() {
@@ -74,6 +85,7 @@ public class ControlADActivity extends BaseActivity {
         temp_down_view.setOnClickListener(this);
         temp_up_view.setOnClickListener(this);
         ad_open.setOnClickListener(this);
+        initFromStatus();
 	}
 
 
@@ -94,17 +106,25 @@ public class ControlADActivity extends BaseActivity {
                 break;
             case R.id.ad_switch:
                 myTimer.sendCommand(Command.AIRCONDITION_SWITCH);
+                if (ConstantStatus.getAirSwitch(context).equals("on"))
+                    ConstantStatus.setAirSwitch(context, "off");
+                else
+                    ConstantStatus.setAirSwitch(context, "on");
                 break;
             case R.id.ad_cold:
                 myTimer.sendCommand(Command.AIRCONDITION_COLD);
+                ConstantStatus.setAirMode(context, "cold");
                 break;
             case R.id.ad_hot:
                 myTimer.sendCommand(Command.AIRCONDITION_HOT);
+                ConstantStatus.setAirMode(context, "hot");
                 break;
             case R.id.ad_wet:
                 myTimer.sendCommand(Command.AIRCONDITION_WETOUT);
+                ConstantStatus.setAirMode(context, "wet");
                 break;
         }
+        ConstantStatus.setAirStatus(context, currentTemp + "");
     }
 
 	

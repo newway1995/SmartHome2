@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import org.kymjs.aframe.ui.BindView;
 import constant.Command;
+import constant.Constant;
+import constant.ConstantStatus;
 import constant.MyTimer;
 import module.core.BaseActivity;
 import module.view.animation.GifView;
@@ -47,7 +49,7 @@ public class ControlFanActivity extends BaseActivity{
         contentLayout.setOnTouchListener(this);
         gifView.setMovieResource(R.raw.fan2);
         gifView.setPaused(true);
-
+        initFromStatus();
         myTimer = new MyTimer(this);
     }
 
@@ -60,6 +62,22 @@ public class ControlFanActivity extends BaseActivity{
     public void setRootView() {
         super.setRootView();
         setContentView(R.layout.control_activity_fan);
+    }
+
+    /**
+     * 获取状态初始化
+     */
+    private void initFromStatus(){
+        if (ConstantStatus.getFanStatus(context).equals("on")){
+            switchView.setSelected(true);
+            String dangwei = ConstantStatus.getFanStatus(context);
+            if (dangwei.equals("1"))
+                changeView.setBackgroundResource(R.drawable.onedang);
+            else if(dangwei.equals("2"))
+                changeView.setBackgroundResource(R.drawable.twodang);
+            else if(dangwei.equals("3"))
+                changeView.setBackgroundResource(R.drawable.threedang);
+        }
     }
 
     @Override
@@ -76,10 +94,18 @@ public class ControlFanActivity extends BaseActivity{
                     changeView.setBackgroundResource(R.drawable.onedang);
                     dangwei = 0;//0代表一档
                 }
+                if (ConstantStatus.getFanSwitch(context).equals("on"))
+                    ConstantStatus.getFanStatus(context).equals("off");
+                else
+                    ConstantStatus.getFanSwitch(context).equals("on");
                 myTimer.sendCommand(Command.FAN_SWITCH);
                 break;
             case R.id.fan_shake:
                 myTimer.sendCommand(Command.FAN_SHAKE);
+                if (ConstantStatus.getFanStatus(context).equals("on"))
+                    ConstantStatus.getFanStatus(context).equals("off");
+                else
+                    ConstantStatus.getFanStatus(context).equals("on");
                 break;
             case R.id.fan_change:
                 if (dangwei == -1)//还没有打开
@@ -92,6 +118,7 @@ public class ControlFanActivity extends BaseActivity{
                 else if (dangwei == 2)
                     changeView.setBackgroundResource(R.drawable.threedang);
                 myTimer.sendCommand(Command.FAN_ADD);
+                ConstantStatus.setFanStatus(context, dangwei+"");
                 break;
         }
         super.widgetClick(v);

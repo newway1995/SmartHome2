@@ -9,6 +9,7 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -123,6 +124,7 @@ public class ViewUtils {
      * @param id
      *              int Notification的ID
      */
+    @SuppressWarnings("NewApi")
     public void showNotification(Context context, String title, String content, Bitmap largeIcon, Intent notificationIntent, int id){
         // 创建一个NotificationManager的引用
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -268,5 +270,53 @@ public class ViewUtils {
 
         Bitmap resizeBmp = ThumbnailUtils.extractThumbnail(newBmp, 380, 460);
         return resizeBmp;
+    }
+
+    /**
+     * 转换透明度
+     * @return
+     */
+    public Bitmap createAlphaBitmap(Context context, int alpha){
+        Drawable drawable = context.getResources().getDrawable(R.drawable.black);
+        Bitmap bmp = FormatUtils.getInstance().drawable2Bitmap(drawable);
+        int width = bmp.getWidth(); // 获取位图的宽
+        int height = bmp.getHeight(); // 获取位图的高
+        int[] pixels = new int[width * height]; // 通过位图的大小创建像素点数组
+
+        bmp.getPixels(pixels, 0, width, 0, 0, width, height);
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int grey = pixels[width * i + j];
+                //转化成灰度像素
+                grey = alpha | (grey << 16) | (grey << 8) | grey;
+                pixels[width * i + j] = grey;
+            }
+        }
+
+        //新建图片
+        Bitmap newBmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        //设置图片数据
+        newBmp.setPixels(pixels, 0, width, 0, 0, width, height);
+        return newBmp;
+    }
+
+    public Bitmap combimeBitmap(Context context, Bitmap resource, int alpha){
+        Bitmap backBitmap = createAlphaBitmap(context, alpha);
+        if (backBitmap == null) {
+            return null;
+        }
+        int bgWidth = backBitmap.getWidth();
+        int bgHeight = backBitmap.getHeight();
+        int fgWidth = resource.getWidth();
+        int fgHeight = resource.getHeight();
+        Bitmap newmap = Bitmap
+                .createBitmap(bgWidth, bgHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newmap);
+        canvas.drawBitmap(backBitmap, 0, 0, null);
+        canvas.drawBitmap(resource, (bgWidth - fgWidth) / 2,
+                (bgHeight - fgHeight) / 2, null);
+        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.restore();
+        return newmap;
     }
 }

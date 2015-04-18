@@ -91,6 +91,15 @@ public class MyTimer {
     }
 
     /**
+     * 发送指令集合
+     * @param commandList
+     */
+    public void sendCommand(List<String> commandList){
+        for (int i = 0; i < commandList.size(); i++)
+            sendCommand(commandList.get(i));
+    }
+
+    /**
      * 显示时间选择器
      */
     public void showTimerDialog(){
@@ -158,6 +167,7 @@ public class MyTimer {
     }
 
     public void setTimer(boolean isTimer) {
+        commandList.clear();
         this.isTimer = isTimer;
     }
 

@@ -21,6 +21,7 @@ import java.util.List;
 
 import constant.Command;
 import constant.Constant;
+import constant.ConstantStatus;
 import module.core.BaseActivity;
 import utils.L;
 import vgod.smarthome.R;
@@ -55,6 +56,16 @@ public class ControllerBulbActivity extends BaseActivity{
         isTimer = false;
         timerMilliscond = 0;
         commandList = new ArrayList<>();
+        initFromStatus();
+    }
+
+    /**
+     * 获取状态初始化
+     */
+    private void initFromStatus(){
+        if (ConstantStatus.getFanStatus(context).equals("on")){
+            bulbImage.setSelected(true);
+        }
     }
 
     @Override
@@ -111,11 +122,14 @@ public class ControllerBulbActivity extends BaseActivity{
         isOpen = !isOpen;
         if (isOpen) {
             switchBulb.setBackgroundResource(R.drawable.img_power_open);
+            ConstantStatus.setBulbSwitch(context, "on");
             //bulbImage.setBackgroundResource(R.drawable.bulb_light);
         }else {
             switchBulb.setBackgroundResource(R.drawable.img_power);
+            ConstantStatus.setBulbSwitch(context, "off");
             //bulbImage.setBackgroundResource(R.drawable.bulb_dark);
         }
+
     }
 
     @Override

@@ -17,6 +17,7 @@ import module.activity.common.SelectControllerActivity;
 import module.activity.common.SettingActivity;
 import module.activity.common.WeatherInfoActivity;
 import module.activity.voicechat.VoiceControlActivity;
+import module.activity.voicechat.WakeUpControl;
 import module.core.ui.ImportMenuView;
 import module.core.ui.ResideMenu;
 import module.core.ui.ResideMenuItem;
@@ -25,6 +26,7 @@ import module.core.ui.SegmentedGroup;
 import module.database.EntityDao;
 import module.database.RaspberryEntity;
 import module.inter.NormalProcessor;
+import module.inter.StringProcessor;
 import module.view.adapter.RaspberryAdapter;
 import utils.FileUtils;
 import utils.L;
@@ -53,6 +55,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,11 +109,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ListView listView;
 
     private Context context = this;
+    /** 语音唤醒 **/
+    private WakeUpControl mWakeUpControl;
 
-    /**
-     * 语音唤醒
-     */
-    //private WakeUpControl mWakeUpControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,8 +217,34 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      * 初始化唤醒
      */
     private void initWakeUp(){
+        if (!Constant.getWakeUp(context))
+            return;
+        mWakeUpControl = new WakeUpControl(this);
+        mWakeUpControl.setVoiceProcessor(new StringProcessor() {
+            @Override
+            public void stringProcess(String str) {
+                super.stringProcess(str);
+                //Bitmap bitmap = ViewUtils.getInstance().getScreenCapture(MainActivity.this);
+                //FileUtils.getInstance().saveBitmap(bitmap, Constant.DIR_ROOT, "desktop_capture.jpg");
+                //saveBitmapCapture();
+                startActivity(new Intent(MainActivity.this, VoiceControlActivity.class));
+                mWakeUpControl.stop();
 
+            }
+        });
+        mWakeUpControl.startSpeak();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!Constant.getWakeUp(context))
+            return;
+        L.d("TAG_", "mWakeUpControl = " + (mWakeUpControl == null));
+        initWakeUp();
+        mWakeUpControl.startSpeak();
+    }
+
 
     @Override
     public void onClick(View v){
@@ -275,10 +302,22 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.nav_actionbar_segment_device:
                 break;
             case R.id.nav_actionbar_segment_scene:
-                Bitmap bitmap = ViewUtils.getInstance().getScreenCapture(this);
-                FileUtils.getInstance().saveBitmap(bitmap, Constant.DIR_ROOT, "desktop_capture.jpg");
+                //Bitmap bitmap = ViewUtils.getInstance().getScreenCapture(this);
+                //FileUtils.getInstance().saveBitmap(bitmap, Constant.DIR_ROOT, "desktop_capture.jpg");
+                //saveBitmapCapture();
                 startActivity(new Intent(context, VoiceControlActivity.class));
                 break;
+        }
+    }
+
+    /**
+     * 保存截屏
+     */
+    private void saveBitmapCapture(){
+        File file = new File(FileUtils.getInstance().getRootDir() + File.separator + "SmartHome" + File.separator + "desktop_capture.jpg");
+        if (!file.exists()){
+            Bitmap bitmap = ViewUtils.getInstance().getScreenCapture(this);
+            FileUtils.getInstance().saveBitmap(bitmap, Constant.DIR_ROOT, "desktop_capture.jpg");
         }
     }
 

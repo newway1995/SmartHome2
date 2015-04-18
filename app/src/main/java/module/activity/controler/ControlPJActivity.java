@@ -11,6 +11,7 @@ import org.kymjs.aframe.http.KJHttp;
 import org.kymjs.aframe.ui.BindView;
 
 import constant.Command;
+import constant.ConstantStatus;
 import constant.MyTimer;
 import module.core.BaseActivity;
 import vgod.smarthome.R;
@@ -49,6 +50,14 @@ public class ControlPJActivity extends BaseActivity{
         myTimer = new MyTimer(this);
     }
 
+    /**
+     * 获取状态初始化
+     */
+    private void initFromStatus(){
+        if (ConstantStatus.getFanStatus(context).equals("on")){
+            powerView.setSelected(true);
+        }
+    }
 
     @Override
     public void setRootView() {
@@ -64,6 +73,10 @@ public class ControlPJActivity extends BaseActivity{
         {
             case R.id.pj_channel_ok:
                 myTimer.sendCommand(Command.PROJECTOR_OPEN);
+                if (ConstantStatus.getPjSwitch(context).equals("on"))
+                    ConstantStatus.setPjSwitch(context, "off");
+                else
+                    ConstantStatus.setPjSwitch(context, "on");
                 break;
             case R.id.pj_channel_right:
                 myTimer.sendCommand(Command.PROJECTOR_UP_ZOOM);

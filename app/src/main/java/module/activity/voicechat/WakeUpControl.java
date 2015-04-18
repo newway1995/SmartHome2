@@ -1,12 +1,30 @@
 package module.activity.voicechat;
 
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Environment;
 import android.widget.Toast;
 
-import cn.yunzhisheng.common.USCError;
-import cn.yunzhisheng.wakeup.WakeUpRecognizer;
-import cn.yunzhisheng.wakeup.WakeUpRecognizerListener;
-import utils.SystemUtils;
+import com.iflytek.cloud.ErrorCode;
+import com.iflytek.cloud.InitListener;
+import com.iflytek.cloud.RecognizerListener;
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechRecognizer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
+import core.json.VoiceJsonParser;
+import core.voice.ApkInstaller;
+import module.inter.StringProcessor;
 
 /**
  * User: niuwei(nniuwei@163.com)
@@ -15,82 +33,191 @@ import utils.SystemUtils;
  * 唤醒控制
  */
 public class WakeUpControl {
-    public static final String appKey = "_appKey_";
-    public static final String  secret = "_secret_";
-
-    private WakeUpRecognizer mWakeUpRecognize;
     private Context context;
+    private StringProcessor voiceProcessor;
 
-    private SkipToOther mSkipToOther;
+    /* 语音控制部分 */
+    //语音听写对象
+    private SpeechRecognizer mIat;
+    //用HashMap保存听写的结果
+    private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
+    //引擎类型 云端
+    private String mEngineType = SpeechConstant.TYPE_CLOUD;
+    // 语音+安装助手类
+    private ApkInstaller mInstaller;
+    private SharedPreferences mSharedPreferences;
 
+    /**
+     * 构造函数
+     * @param context
+     */
     public WakeUpControl(Context context) {
         this.context = context;
-        init();
+        initVoice();
+        setParam();
     }
 
     /**
-     * 初始化函数
+     * 初始化语音控制
      */
-    private void init(){
-        mWakeUpRecognize = new WakeUpRecognizer(context, appKey);
-        mWakeUpRecognize.setListener(new WakeUpRecognizerListener() {
-            @Override
-            public void onWakeUpRecognizerStart() {
-                Toast("小威语音助手准备就绪");
+    private void initVoice(){
+        mSharedPreferences = context.getSharedPreferences(IatSettings.PREFER_NAME,
+                Activity.MODE_PRIVATE);
+        // 初始化识别对象
+        mIat = SpeechRecognizer.createRecognizer(context, mInitListener);
+        mEngineType = SpeechConstant.TYPE_CLOUD;
+    }
+
+    /**
+     * 参数设置
+     * @return
+     */
+    public void setParam() {
+        // 清空参数
+        mIat.setParameter(SpeechConstant.PARAMS, null);
+
+        // 设置听写引擎
+        mIat.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
+        // 设置返回结果格式
+        mIat.setParameter(SpeechConstant.RESULT_TYPE, "json");
+
+        String lag = mSharedPreferences.getString("iat_language_preference",
+                "mandarin");
+        if (lag.equals("en_us")) {
+            // 设置语言
+            mIat.setParameter(SpeechConstant.LANGUAGE, "en_us");
+        } else {
+            // 设置语言
+            mIat.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
+            // 设置语言区域
+            mIat.setParameter(SpeechConstant.ACCENT, lag);
+        }
+        // 设置语音前端点
+        mIat.setParameter(SpeechConstant.VAD_BOS, mSharedPreferences.getString("iat_vadbos_preference", "4000"));
+        // 设置语音后端点
+        mIat.setParameter(SpeechConstant.VAD_EOS, mSharedPreferences.getString("iat_vadeos_preference", "1000"));
+        // 设置标点符号
+        mIat.setParameter(SpeechConstant.ASR_PTT, mSharedPreferences.getString("iat_punc_preference", "1"));
+        // 设置音频保存路径
+        mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory()
+                + "/iflytek/wavaudio.pcm");
+        // 设置听写结果是否结果动态修正，为“1”则在听写过程中动态递增地返回结果，否则只在听写结束之后返回最终结果
+        // 注：该参数暂时只对在线听写有效
+        mIat.setParameter(SpeechConstant.ASR_DWA, mSharedPreferences.getString("iat_dwa_preference", "0"));
+    }
+
+    /**
+     * 初始化监听器。
+     */
+    private InitListener mInitListener = new InitListener() {
+
+        @Override
+        public void onInit(int code) {
+            if (code != ErrorCode.SUCCESS) {
+                Toast.makeText(context, "初始化失败，错误码：" + code, Toast.LENGTH_SHORT).show();
             }
+        }
+    };
 
-            @Override
-            public void onWakeUpRecognizerStop() {
-                Toast("停止语音唤醒");
+    /**
+     * 听写监听器。不显示Dialog的时候才运行这个
+     */
+    private RecognizerListener recognizerListener = new RecognizerListener() {
+        private boolean isContinue = true;
+
+        @Override
+        public void onBeginOfSpeech() {
+        }
+
+        @Override
+        public void onError(SpeechError error) {
+        }
+
+        @Override
+        public void onEndOfSpeech() {
+            if (isContinue) {
+                startSpeak();
             }
+        }
 
-            @Override
-            public void onWakeUpResult(boolean b, String s, float v) {
-                if (b) {//成功就跳转
-                    SystemUtils.getInstance().vibrate(context, 200);
-                    mSkipToOther.skip();
-                }
+        @Override
+        public void onResult(RecognizerResult results, boolean isLast) {
+            String text = parseResult(results);
+            if (text.contains("你好") && (text.contains("小威")||text.contains("小伟")||text.contains("小微")||text.contains("小薇")||text.contains("小魏"))){
+                voiceProcessor.stringProcess(text);
             }
+        }
 
-            @Override
-            public void onWakeUpError(USCError uscError) {
-                Toast("唤醒失败");
-            }
-        });
+        @Override
+        public void onVolumeChanged(int volume) {
+        }
+
+        @Override
+        public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
+        }
+    };
+
+
+    /**
+     * 解析语音转化的文字结果
+     * @param results
+     * @return
+     */
+    private String parseResult(RecognizerResult results){
+        String text = VoiceJsonParser.parseIatResult(results.getResultString());
+        String sn = null;
+
+        //读取json结果中得sn字段
+        // 读取json结果中的sn字段
+        try {
+            JSONObject resultJson = new JSONObject(results.getResultString());
+            sn = resultJson.optString("sn");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        mIatResults.put(sn, text);
+
+        StringBuffer resultBuffer = new StringBuffer();
+        for (String key : mIatResults.keySet()) {
+            resultBuffer.append(mIatResults.get(key));
+        }
+        return resultBuffer.toString();
     }
 
     /**
-     * 开始唤醒
+     * 针对调用Activity的点击事件
      */
-    public void startWakeUp(){
-        mWakeUpRecognize.start();
+    public void startSpeak(){
+        int ret = 0; // 函数调用返回值
+
+        mIatResults.clear();
+        // 不显示听写对话框
+        ret = mIat.startListening(recognizerListener);
+        if (ret != ErrorCode.SUCCESS) {
+            Toast.makeText(context,"听写失败,错误码：" + ret, Toast.LENGTH_SHORT).show();
+        } else {
+            //Toast.makeText(context,"请开始说话…", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
-     * 停止唤醒
+     * 语音处理函数
+     * @param voiceProcessor
      */
-    public void stopWakeUp(){
-        mWakeUpRecognize.stop();
-        mWakeUpRecognize.release();
+    public void setVoiceProcessor(StringProcessor voiceProcessor) {
+        this.voiceProcessor = voiceProcessor;
     }
 
-    /**
-     * 显示信息
-     * @param msg
-     */
-    private void Toast(String msg){
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    public void stop(){
+        // 退出时释放连接
+        mIat.cancel();
+        //mIat.destroy();
     }
 
-    /**
-     * 设置回调
-     * @param mSkipToOther
-     */
-    public void setmSkipToOther(SkipToOther mSkipToOther) {
-        this.mSkipToOther = mSkipToOther;
+    public void start(){
+        if (!mIat.isListening())
+            mIat.startListening(recognizerListener);
     }
 
-    public interface SkipToOther{
-        void skip();
-    }
 }

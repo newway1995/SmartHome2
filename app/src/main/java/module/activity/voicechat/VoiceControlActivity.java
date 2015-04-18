@@ -20,7 +20,6 @@ import android.view.animation.LayoutAnimationController;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.iflytek.sunflower.FlowerCollector;
 
@@ -44,7 +43,6 @@ import module.view.adapter.ChatMsgAdapter;
 import module.database.ChatMsgEntity;
 import module.view.animation.BlurEffect;
 import utils.StringUtils;
-import utils.ViewUtils;
 import vgod.smarthome.R;
 
 /**
@@ -71,6 +69,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
      */
     private VoiceRecognizeUtils voiceRecognizeUtils;
     private VoiceSpeakUtils voiceSpeakUtils;
+    private List<String> commandList;
 
     private ChatMsgAdapter mAdapter ;
     /* 需要显示的数据 */
@@ -133,12 +132,16 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
                 super.stringProcess(str);
                 sendData(str, false);
                 goToTVProgramActivity(str);//是否为查询电视节目
-                if (VoiceCommand.parseVoiceCommand(context, str) != null && VoiceCommand.parseVoiceCommand(context, str).equals(Command.LIGHT_OPEN)) {
-                    int time = StringUtils.getInstance().getNumberBeforePattern(str);
-                    sendData("您选择了开灯,并且在 " + time + " 秒钟之后执行。", true);
+                /** 当前所有的指令集合 **/
+                commandList = VoiceCommand.parseVoiceCommand(context, str);
+                /** 定时时间 **/
+                int time = StringUtils.getInstance().getNumberBeforePattern(str);
+                if (commandList != null && commandList.size() > 0) {
+                    //testForVideo();
                     myTimer.setTimer(true);
                     myTimer.setTimerMilliscond(time * 1000);
-                    myTimer.sendCommand(Command.LIGHT_OPEN);
+                    myTimer.sendCommand(commandList);
+                    sendData("指令集合为" + commandList + ",并且在 " + time + " 秒钟之后执行。", true);
                 } else if (StringUtils.getInstance().hasCCTV(str)) {
                     sendData("小威帮您找到了CCTV节目表哦~", true);
                     myTimer.setTimer(true);
@@ -149,6 +152,24 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         });
 
         voiceSpeakUtils = new VoiceSpeakUtils(this);
+    }
+
+    int count = 0;
+    /**
+     * 测试代码
+     */
+    private void testForVideo(){
+        if (count == 0){
+            sendData("好的,小V正在帮您把空调打开了,并且温度调节了26度,模式为除湿模式", true);
+        }else if(count == 1){
+            sendData("好的,小V将帮您把热水器打开,十分钟之后执行", true);
+        }else if (count == 2){
+            sendData("好的,小V正在帮您把窗帘关闭", true);
+        }else if (count == 3){
+            sendData("好的,小V正在帮您把灯卡开", true);
+        }
+        count++;
+        count = count % 4;
     }
 
     /**
@@ -167,7 +188,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             entity.setDate(dataArray[i]);
             if (i % 2 == 0)
             {
-                entity.setName("小溪");
+                entity.setName("小微");
                 entity.setMsgType(true);
             }else{
                 entity.setName("GodV");
@@ -286,7 +307,9 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
      */
     @SuppressWarnings("NewApi")
     private void getBlueBackground(){
-        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + File.separator + Constant.DIR_ROOT + File.separator + "desktop_capture.jpg");
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;//圖片寬高都為原來的二分之一，即圖片為原來的四分之一
+        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + File.separator + Constant.DIR_ROOT + File.separator + "desktop_capture.jpg", options);
         bgBitmap = BlurEffect.apply(this, bitmap, 25);
         bgBitmap = Bitmap.createBitmap(bgBitmap, 0, 80, bgBitmap.getWidth(), bgBitmap.getHeight() - 80);
         //BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), ViewUtils.getInstance().convertToBlackWhite(bgBitmap));

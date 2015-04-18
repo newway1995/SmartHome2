@@ -65,6 +65,4 @@ public class Command {
     public static final String PROJECTOR_UP_ZOOM = "PJ_PROJECTOR_UP_ZOOM";//焦距拉近
     public static final String PROJECTOR_DOWN_ZOOM = "PJ_PROJECTOR_DOWN_ZOOM";//焦距拉远
     public static final String PROJECTOR_OPEN = "PJ_PROJECTOR_OPEN";//开关
-
-
 }

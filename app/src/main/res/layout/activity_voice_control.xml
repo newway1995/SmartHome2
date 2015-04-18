@@ -69,17 +69,15 @@
 
         <TextView
             android:id="@+id/voice_control_btn_record"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/ivPopUp"
-            android:background="@drawable/chat_send_btn"
+            android:background="@drawable/voice_control"
             android:gravity="center"
-            android:text="按住说话"
              />
     </RelativeLayout>
 
@@ -88,7 +86,7 @@
         <!--android:id="@+id/voice_control_btn_record"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/voice_control"-->
+        <!--android:background="@drawable/voice_control_black"-->
         <!--android:layout_centerHorizontal="true"-->
         <!--android:layout_marginBottom="20dp"-->
         <!--android:layout_alignParentBottom="true"/>-->

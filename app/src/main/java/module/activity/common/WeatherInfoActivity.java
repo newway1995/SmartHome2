@@ -12,6 +12,7 @@ import org.kymjs.aframe.http.KJHttp;
 import org.kymjs.aframe.http.KJStringParams;
 import org.kymjs.aframe.http.StringCallBack;
 import org.kymjs.aframe.ui.BindView;
+import org.kymjs.aframe.utils.PreferenceHelper;
 
 import constant.Command;
 import constant.Constant;
@@ -65,8 +66,17 @@ public class WeatherInfoActivity extends BaseActivity{
         super.initData();
         contentLayout.setOnTouchListener(this);
         kjHttp = new KJHttp();
+        initRaspData();
         getDataFromNet();
         getDataFromRasp(Constant.getCurrentRaspIds(context));
+    }
+
+    /**
+     * 初始化当前家庭环境
+     */
+    private void initRaspData(){
+        raspTemp.setText("当前家庭温度: " + getLastTemp() + " ℃");
+        raspHumidity.setText("当前家庭湿度: "+getLastWet() + " %");
     }
 
     @Override
@@ -106,6 +116,7 @@ public class WeatherInfoActivity extends BaseActivity{
 //                        return;
                     raspTemp.setText("当前家庭温度: " + jsonObject.getString("temp") + " ℃");
                     raspHumidity.setText("当前家庭湿度: "+jsonObject.getString("humi") + " %");
+                    saveLastData(jsonObject.getString("temp"), jsonObject.getString("humi"));
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -123,10 +134,10 @@ public class WeatherInfoActivity extends BaseActivity{
         kjHttp.get(this, url, new StringCallBack() {
             @Override
             public void onSuccess(String s) {
-                L.d(TAG,"Weather = " + s);
+                L.d(TAG, "Weather = " + s);
                 try {
                     JSONObject jsonObject = new JSONObject(s);
-                    if (!jsonObject.getString("status").equals("success")){
+                    if (!jsonObject.getString("status").equals("success")) {
                         L.e("天气获取返回数据异常,请检查");
                         return;
                     }
@@ -148,7 +159,7 @@ public class WeatherInfoActivity extends BaseActivity{
                     tempRangeText.setText(todayObject.getString("temperature"));//当前温度
                     windText.setText(todayObject.getString("wind"));//风速
                     weatherText.setText(todayObject.getString("weather"));//天气状况
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -192,6 +203,31 @@ public class WeatherInfoActivity extends BaseActivity{
         int length = date.length();
         return date.substring(11,length - 1);
     }
+
+    public static final String RASP_LAST_TEMP = "RASP_LAST_TEMP";
+    public static final String RASP_LAST_WET = "RASP_LAST_WET";
+    public static final String RASP_DATA = "RASP_DATA";
+
+    /**
+     * 保存上一次树莓派的温湿度
+     */
+    private void saveLastData(String temp, String wet){
+        PreferenceHelper.write(context, RASP_DATA, RASP_LAST_TEMP, temp);
+        PreferenceHelper.write(context, RASP_DATA, RASP_LAST_WET, wet);
+    }
+    /**
+     * 获取上一次树莓派的温度
+     */
+    private String getLastTemp(){
+         return PreferenceHelper.readString(context, RASP_DATA, RASP_LAST_TEMP, "18");
+    }
+    /**
+     * 获取上一次树莓派的湿度
+     */
+    private String getLastWet(){
+        return PreferenceHelper.readString(context, RASP_DATA, RASP_LAST_WET, "25");
+    }
+
 
     private String parseDate(String date){
         return date.substring(0, 10);

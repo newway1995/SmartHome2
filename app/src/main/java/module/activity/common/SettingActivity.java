@@ -63,6 +63,7 @@ public class SettingActivity extends BaseActivity{
     @BindView(id = R.id.setting_portrait)
     private ImageView portrait;
 
+
     private String[] items = new String[]{"选择本地图片", "拍照"};
     /* 头像名称 */
     private static final String IMAGE_FILE_NAME = "faceImage.jpg";
@@ -79,6 +80,9 @@ public class SettingActivity extends BaseActivity{
     private ImageView unLockFaceView;
     @BindView(id = R.id.setting_unclock_gesture, click = true)
     private ImageView unLockGestureView;
+    /** 语音唤醒 **/
+    @BindView(id = R.id.setting_wakeup, click = true)
+    private ImageView setting_wakeup;
 
     @Override
     protected void initData() {
@@ -87,6 +91,7 @@ public class SettingActivity extends BaseActivity{
         faceCompare = new FaceCompare();
         initPortrait();
         initUnLock();
+        switchWakeUp(Constant.getWakeUp(context));
     }
 
     /**
@@ -113,6 +118,18 @@ public class SettingActivity extends BaseActivity{
             unLockGestureView.setBackgroundResource(R.drawable.img_switch_no);
         }
     }
+
+    /**
+     * 切换语音唤醒
+     */
+    private void switchWakeUp(boolean isNeedWakeUp){
+        Constant.setWakeUp(context, isNeedWakeUp);
+        if (Constant.getWakeUp(context) == true)
+            setting_wakeup.setBackgroundResource(R.drawable.img_switch_yes);
+        else
+            setting_wakeup.setBackgroundResource(R.drawable.img_switch_no);
+    }
+
 
 
     @Override
@@ -160,8 +177,12 @@ public class SettingActivity extends BaseActivity{
                 switchUnLock(Constant.UNLOCK_BY_GESTURE);
                 break;
             case R.id.setting_unclock_face:
-                Constant.setUnlockByWhat(this,1);
+                Constant.setUnlockByWhat(this, 1);
                 switchUnLock(Constant.UNLOCK_BY_FACE);
+                break;
+//            设置是否唤醒
+            case R.id.setting_wakeup:
+                switchWakeUp(!Constant.getWakeUp(context));
                 break;
 
         }
