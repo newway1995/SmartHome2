@@ -29,7 +29,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.2'
     compile 'com.github.manuelpeinado.glassactionbar:glassactionbar:0.3.0'
     compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/androidsvg-1.2.0.jar')
-    compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/faceppsdk_min.jar')
+    compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/faceppsdk.jar')
     compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/KJFrameForAndroid_V1.21.jar')
     compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/nineoldandroids-library-2.4.0.jar')
     compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/Sunflower.jar')

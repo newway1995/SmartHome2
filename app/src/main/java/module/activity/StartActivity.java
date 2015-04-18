@@ -4,6 +4,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.os.Handler;
+
+import org.kymjs.aframe.utils.PreferenceHelper;
+
 import constant.Constant;
 import module.activity.gesturepwd.SettingGesturePasswordActivity;
 import module.activity.gesturepwd.UnLockGesturePasswordActivity;
@@ -42,6 +45,12 @@ public class StartActivity extends BaseActivity{
     protected void initData() {
         super.initData();
         initFileSystem();
+        testData();
+    }
+
+    private void testData(){
+        L.d("SharedPreference","IS_FIRST_OPEN_ME = " + PreferenceHelper.readString(context, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, "default"));
+        L.d("SharedPreference","UnlockByWhat = " + Constant.getUnlockByWhat(context));
     }
 
     @Override

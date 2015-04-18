@@ -5,6 +5,7 @@ import org.kymjs.aframe.http.KJHttp;
 import org.kymjs.aframe.http.KJStringParams;
 import org.kymjs.aframe.http.StringCallBack;
 import org.kymjs.aframe.ui.BindView;
+import org.kymjs.aframe.utils.PreferenceHelper;
 
 import constant.Command;
 import constant.Constant;
@@ -59,6 +60,12 @@ public class LoginActivity extends BaseActivity{
         contentLayout.setOnTouchListener(this);
         kjHttp = new KJHttp();
         faceCompare = new FaceCompare();
+        testData();
+    }
+
+    private void testData(){
+        L.d("SharedPreference","IS_FIRST_OPEN_ME = " + PreferenceHelper.readString(context, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, "default"));
+        L.d("SharedPreference","UnlockByWhat = " + Constant.getUnlockByWhat(context));
     }
 
     @Override
@@ -123,6 +130,7 @@ public class LoginActivity extends BaseActivity{
                     //如果是首次使用软件
                     if (CacheHandler.readCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME).equals("")){
                         CacheHandler.writeCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, Constant.TRUE);
+                        testData();
                         skipActivity(LoginActivity.this, SettingGesturePasswordActivity.class);
                         LoginActivity.this.finish();
                     }

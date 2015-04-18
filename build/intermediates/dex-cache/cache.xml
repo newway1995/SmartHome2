@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/faceppsdk.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="d3384595c699a5be231ad099b07b96741806750a">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/faceppsdk-d240408b4c5b7f2c13834ff815b3eb16c99f2b28.jar" />
+    </item>
+    <item
         jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/Sunflower.jar"
         jumboMode="false"
         revision="21.1.1"

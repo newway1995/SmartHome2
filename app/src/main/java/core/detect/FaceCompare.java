@@ -2,7 +2,6 @@ package core.detect;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Matrix;
 
 import com.facepp.error.FaceppParseException;
@@ -15,7 +14,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 
 import constant.Constant;
-import utils.JsonUtils;
+import module.inter.NormalProcessor;
 import utils.L;
 
 /**
@@ -27,6 +26,11 @@ import utils.L;
 public class FaceCompare {
     private final String TAG = "FaceCompare";
     private NetResultHandler resultHandler;//回调接口
+    private NormalProcessor mErrorProcessor;
+
+    public void setmErrorProcessor(NormalProcessor mErrorProcessor) {
+        this.mErrorProcessor = mErrorProcessor;
+    }
 
     public void setResultHandler(NetResultHandler resulrHandler) {
         this.resultHandler = resulrHandler;
@@ -68,6 +72,7 @@ public class FaceCompare {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    mErrorProcessor.onProcess();
                     L.d(TAG, "FaceppParseException and JSONException");
                 } catch (FaceppParseException e) {
                     // TODO Auto-generated catch block

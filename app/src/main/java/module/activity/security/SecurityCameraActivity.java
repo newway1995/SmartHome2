@@ -28,6 +28,7 @@ import module.core.security.CameraSurfaceView;
 import module.core.security.FaceView;
 import module.core.security.GoogleFaceDetect;
 import module.inter.BitmapProcessor;
+import module.inter.NormalProcessor;
 import utils.DensityUtils;
 import utils.FileUtils;
 import utils.ImageUtils;
@@ -200,14 +201,24 @@ public class SecurityCameraActivity extends BaseActivity {
                     L.d("TAG", "BitmapProcessor JSONObejct = " + rst.toString());
                     try {
                         String similarity = rst.getString("similarity");
-                        if (Float.parseFloat(similarity) < 60.0f)
+                        L.d("TAG", "BitmapProcessor similarity = " + similarity);
+                        if (Float.parseFloat(similarity) < 40.0f)
                             SecurityCameraActivity.this.finish();
                         else {
                             startActivity(new Intent(SecurityCameraActivity.this, MainActivity.class));
                             SecurityCameraActivity.this.finish();
                         }
-                    }catch (Exception e){e.printStackTrace();}
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
+                }
+            });
+            faceCompare.setmErrorProcessor(new NormalProcessor(){
+                @Override
+                public void onProcess() {
+                    super.onProcess();
+                    Toast.makeText(context, "光线太弱,请移至光线较强的地方", Toast.LENGTH_SHORT).show();
                 }
             });
             faceCompare.detect(Constant.getFaceID(SecurityCameraActivity.this), bitmap);
