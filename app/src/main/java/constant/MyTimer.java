@@ -35,7 +35,6 @@ public class MyTimer {
 
     public MyTimer(Context context) {
         this.context = context;
-
         isTimer = false;
         timerMilliscond = 0;
         commandList = new ArrayList<>();
@@ -54,7 +53,7 @@ public class MyTimer {
     };
 
     /**
-     * 发送指令
+     * 发送一个指令
      * @param command
      */
     public void sendCommand(String command){

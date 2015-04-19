@@ -1,5 +1,7 @@
 package module.database;
 
+import android.util.Log;
+
 import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.database.annotate.Id;
 
@@ -22,6 +24,8 @@ public class CommandEntity {
     private long currentTime;
     /** 定时时间 **/
     private long timer;
+    /** 是否被执行 **/
+    private boolean isExecuted;
 
     public CommandEntity() {
     }
@@ -32,10 +36,11 @@ public class CommandEntity {
      * @param currentTime
      * @param timer
      */
-    public CommandEntity(String command, long currentTime, long timer) {
+    public CommandEntity(String command, long currentTime, long timer, boolean isExecuted) {
         this.command = command;
         this.currentTime = currentTime;
         this.timer = timer;
+        this.isExecuted = isExecuted;
     }
 
 
@@ -69,6 +74,14 @@ public class CommandEntity {
 
     public void setTimer(long timer) {
         this.timer = timer;
+    }
+
+    public boolean isExecuted() {
+        return isExecuted;
+    }
+
+    public void setIsExecuted(boolean isExecuted) {
+        this.isExecuted = isExecuted;
     }
 
     /**
@@ -119,6 +132,22 @@ public class CommandEntity {
      */
     public static List<CommandEntity> queryAll(){
         return kjdb.findAll(CommandEntity.class);
+    }
+
+    /**
+     * 查询没有执行的command
+     * @return
+     */
+    public static List<CommandEntity> queryAllByNotExecuted(){
+        List<CommandEntity> commandEntityList = kjdb.findAllByWhere(CommandEntity.class, "isExecuted=0");
+        for (CommandEntity entity : commandEntityList){
+            Log.d("ThreadInfo", "2.queryAllByNotExecuted:" + entity.toString());
+        }
+        return commandEntityList;
+    }
+
+    public String toString(){
+        return "command = " + command + ",timer = " + timer + ", isExecuted = " + isExecuted;
     }
 
 }

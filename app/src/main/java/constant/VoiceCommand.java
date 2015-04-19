@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import module.database.CommandEntity;
+import utils.L;
+import utils.StringUtils;
 import utils.SystemUtils;
 import vgod.smarthome.R;
 
@@ -34,6 +36,10 @@ public class VoiceCommand {
         parseBulb(context, source);
         parseFan(context, source);
         parseProjector(context, source);
+
+        int time = StringUtils.getInstance().getNumberBeforePattern(source);
+        /** 将数据保存到数据库 **/
+        saveCommandList2DB(context, commandList, time);
         return commandList;
     }
 
@@ -44,12 +50,13 @@ public class VoiceCommand {
      * @param commandList
      *          String
      * @param time
-     *          Minute
+     *          Second
      */
     public static void saveCommandList2DB(Context context, final List<String> commandList, long time){
         CommandEntity.kjdb = KJDB.create(context);
         for (String command : commandList){
-            CommandEntity entity = new CommandEntity(command, System.currentTimeMillis(), time * 1000);
+            CommandEntity entity = new CommandEntity(command, System.currentTimeMillis(), time * 1000, false);
+            L.d("ThreadInfo", "1. saveCommandList2DB:" + entity.toString());
             CommandEntity.insert(entity);
         }
     }

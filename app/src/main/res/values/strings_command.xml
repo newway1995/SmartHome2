@@ -3,6 +3,7 @@
     <!-- 开灯-->
     <string-array name="open_bulb">
         <item>开灯</item>
+        <item>开电灯</item>
         <item>把灯打开</item>
         <item>把电灯打开</item>
         <item>把灯泡打开</item>

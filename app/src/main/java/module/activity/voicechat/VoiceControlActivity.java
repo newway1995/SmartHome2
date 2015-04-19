@@ -27,6 +27,7 @@ import constant.Command;
 import constant.ConstantStatus;
 import constant.MyTimer;
 import constant.TVChannelConstant;
+import constant.TimingExecute;
 import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
@@ -88,6 +89,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     private final String TAG = getClass().getSimpleName();
     //定时器
     private MyTimer myTimer;
+    private TimingExecute timingExecute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
      * 初始化语音帮助类
      */
     private void initVoice(){
+        timingExecute = new TimingExecute(context);
         voiceRecognizeUtils = new VoiceRecognizeUtils(this);
         //给voiceRecognize设置回调函数
         voiceRecognizeUtils.setVoiceProcessor(new StringProcessor() {
@@ -138,11 +141,13 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
                 /** 定时时间 **/
                 int time = StringUtils.getInstance().getNumberBeforePattern(str);
                 if (commandList != null && commandList.size() > 0) {
-                    //testForVideo();
-                    myTimer.setTimer(true);
-                    myTimer.setTimerMilliscond(time * 1000);
-                    myTimer.sendCommand(commandList);
+                    //myTimer.setTimer(true);
+                    //myTimer.setTimerMilliscond(time * 1000);
+                    //myTimer.sendCommand(commandList);
+
                     sendData("指令集合为" + commandList + ",并且在 " + time + " 秒钟之后执行。", true);
+                    timingExecute.initThread();
+                    timingExecute.sendData();
                 } else if (StringUtils.getInstance().hasCCTV(str)) {
                     sendData("小威帮您找到了CCTV节目表哦~", true);
                     myTimer.setTimer(true);
