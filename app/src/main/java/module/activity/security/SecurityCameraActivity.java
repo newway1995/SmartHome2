@@ -214,14 +214,24 @@ public class SecurityCameraActivity extends BaseActivity {
 
                 }
             });
-            faceCompare.setmErrorProcessor(new NormalProcessor(){
+            faceCompare.setmErrorProcessor(new NormalProcessor() {
                 @Override
                 public void onProcess() {
                     super.onProcess();
-                    Toast.makeText(context, "光线太弱,请移至光线较强的地方", Toast.LENGTH_SHORT).show();
+                    mHandler.sendEmptyMessage(1);
                 }
             });
             faceCompare.detect(Constant.getFaceID(SecurityCameraActivity.this), bitmap);
+        }
+    };
+
+    //更新UI线程
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 1)
+                Toast.makeText(context, "检测不到人脸,请对准脸部点击拍照", Toast.LENGTH_SHORT).show();
         }
     };
 

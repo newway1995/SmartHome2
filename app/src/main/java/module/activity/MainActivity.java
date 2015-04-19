@@ -28,16 +28,13 @@ import module.database.RaspberryEntity;
 import module.inter.NormalProcessor;
 import module.inter.StringProcessor;
 import module.view.adapter.RaspberryAdapter;
-import utils.FileUtils;
 import utils.L;
-import utils.ViewUtils;
 import vgod.smarthome.R;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -55,7 +52,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -124,11 +120,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         initWakeUp();
     }
 
+    private boolean isReset = false;//是否重置到nav_actionbar_segment_device
     @Override
     protected void onStart() {
         super.onStart();
-        L.d("OnStart()");
         getRaspberryFromDB();
+        if (isReset)
+            ((RadioButton)findViewById(R.id.nav_actionbar_segment_device)).setChecked(true);
     }
 
     //初始化界面
@@ -171,9 +169,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 startActivity(new Intent(context, ContactUsActivity.class));
             }
         });
-        aboutFrame.setOnClickListener(new View.OnClickListener(){
+        aboutFrame.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 startActivity(new Intent(context, AboutActivity.class));
             }
         });
@@ -224,9 +222,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             @Override
             public void stringProcess(String str) {
                 super.stringProcess(str);
-                //Bitmap bitmap = ViewUtils.getInstance().getScreenCapture(MainActivity.this);
-                //FileUtils.getInstance().saveBitmap(bitmap, Constant.DIR_ROOT, "desktop_capture.jpg");
-                //saveBitmapCapture();
                 startActivity(new Intent(MainActivity.this, VoiceControlActivity.class));
                 mWakeUpControl.stop();
 
@@ -302,24 +297,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.nav_actionbar_segment_device:
                 break;
             case R.id.nav_actionbar_segment_scene:
-                //Bitmap bitmap = ViewUtils.getInstance().getScreenCapture(this);
-                //FileUtils.getInstance().saveBitmap(bitmap, Constant.DIR_ROOT, "desktop_capture.jpg");
-                //saveBitmapCapture();
                 startActivity(new Intent(context, VoiceControlActivity.class));
                 break;
         }
     }
 
-    /**
-     * 保存截屏
-     */
-    private void saveBitmapCapture(){
-        File file = new File(FileUtils.getInstance().getRootDir() + File.separator + "SmartHome" + File.separator + "desktop_capture.jpg");
-        if (!file.exists()){
-            Bitmap bitmap = ViewUtils.getInstance().getScreenCapture(this);
-            FileUtils.getInstance().saveBitmap(bitmap, Constant.DIR_ROOT, "desktop_capture.jpg");
-        }
-    }
 
     /**
      * 设置ripple的点击事件
@@ -522,5 +504,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        isReset = true;
     }
 }

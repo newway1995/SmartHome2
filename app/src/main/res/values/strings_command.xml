@@ -142,4 +142,24 @@
     <string-array name="down_projector">
         <item>拉远</item>
     </string-array>
+
+
+    <!-- 电器状态-->
+    <string-array name="current_elec_status">
+        <item>当前电器状态</item>
+        <item>电器状态</item>
+        <item>电器连接状态</item>
+        <item>电视机状态</item>
+        <item>电灯状态</item>
+        <item>投影仪状态</item>
+        <item>风扇状态</item>
+        <item>空调状态</item>
+    </string-array>
+    <!-- 当前指令集合-->
+    <string-array name="current_command_list">
+        <item>指令集</item>
+        <item>我的指令</item>
+        <item>当前指令</item>
+    </string-array>
+
 </resources>

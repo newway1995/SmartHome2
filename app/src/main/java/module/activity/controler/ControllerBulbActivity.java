@@ -63,8 +63,8 @@ public class ControllerBulbActivity extends BaseActivity{
      * 获取状态初始化
      */
     private void initFromStatus(){
-        if (ConstantStatus.getFanStatus(context).equals("on")){
-            bulbImage.setSelected(true);
+        if (ConstantStatus.getBulbSwitch(context).equals(ConstantStatus.SWITCH_ON)){
+            switchBulb.setBackgroundResource(R.drawable.tv_switch3);
         }
     }
 
@@ -119,14 +119,13 @@ public class ControllerBulbActivity extends BaseActivity{
      * 状态切换
      */
     private void switchClick(){
-        isOpen = !isOpen;
-        if (isOpen) {
-            switchBulb.setBackgroundResource(R.drawable.img_power_open);
-            ConstantStatus.setBulbSwitch(context, "on");
+        if (ConstantStatus.getBulbSwitch(context).equals(ConstantStatus.SWITCH_OFF)) {//如果现在为关闭状态
+            ConstantStatus.setBulbSwitch(context, ConstantStatus.SWITCH_ON);//调整为打开
+            switchBulb.setBackgroundResource(R.drawable.tv_switch3);
             //bulbImage.setBackgroundResource(R.drawable.bulb_light);
         }else {
-            switchBulb.setBackgroundResource(R.drawable.img_power);
-            ConstantStatus.setBulbSwitch(context, "off");
+            ConstantStatus.setBulbSwitch(context, ConstantStatus.SWITCH_OFF);
+            switchBulb.setBackgroundResource(R.drawable.tv_switch1);
             //bulbImage.setBackgroundResource(R.drawable.bulb_dark);
         }
 

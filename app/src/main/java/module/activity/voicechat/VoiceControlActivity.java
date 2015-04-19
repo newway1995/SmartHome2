@@ -4,11 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,17 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.iflytek.sunflower.FlowerCollector;
-
 import org.kymjs.aframe.ui.AnnotateUtil;
 import org.kymjs.aframe.ui.BindView;
 import org.kymjs.aframe.utils.SystemTool;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import constant.Command;
-import constant.Constant;
+import constant.ConstantStatus;
 import constant.MyTimer;
 import constant.TVChannelConstant;
 import constant.VoiceCommand;
@@ -41,7 +33,6 @@ import core.voice.VoiceSpeakUtils;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
 import module.database.ChatMsgEntity;
-import module.view.animation.BlurEffect;
 import utils.StringUtils;
 import vgod.smarthome.R;
 
@@ -95,7 +86,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
 
     private Context context = this;
     private final String TAG = getClass().getSimpleName();
-    private Bitmap bgBitmap;
     //定时器
     private MyTimer myTimer;
 
@@ -105,7 +95,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_voice_control);
         AnnotateUtil.initBindView(this);
-        getBlueBackground();
+        //getBlueBackground();
         initVoice();
         initData();
         initListView();
@@ -131,7 +121,18 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             public void stringProcess(String str) {
                 super.stringProcess(str);
                 sendData(str, false);
-                goToTVProgramActivity(str);//是否为查询电视节目
+                if (str.contains("跳转"))
+                {
+                    testActivity();
+                }
+                /** 是否显示电器连接状态 **/
+                if (VoiceCommand.isShowElecStatus(context, str))
+                    sendData(ConstantStatus.getAllStatus(context), true);
+                /** 是否显示当前CommandList **/
+                if(VoiceCommand.isShowCommandList(context, str))
+                    startActivity(new Intent(VoiceControlActivity.this, ShowCommandListActivity.class));
+                /** 是否为查询电视节目 **/
+                goToTVProgramActivity(str);
                 /** 当前所有的指令集合 **/
                 commandList = VoiceCommand.parseVoiceCommand(context, str);
                 /** 定时时间 **/
@@ -154,22 +155,8 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         voiceSpeakUtils = new VoiceSpeakUtils(this);
     }
 
-    int count = 0;
-    /**
-     * 测试代码
-     */
-    private void testForVideo(){
-        if (count == 0){
-            sendData("好的,小V正在帮您把空调打开了,并且温度调节了26度,模式为除湿模式", true);
-        }else if(count == 1){
-            sendData("好的,小V将帮您把热水器打开,十分钟之后执行", true);
-        }else if (count == 2){
-            sendData("好的,小V正在帮您把窗帘关闭", true);
-        }else if (count == 3){
-            sendData("好的,小V正在帮您把灯卡开", true);
-        }
-        count++;
-        count = count % 4;
+    private void testActivity(){
+        startActivity(new Intent(VoiceControlActivity.this, ShowCommandListActivity.class));
     }
 
     /**
@@ -240,6 +227,8 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             mDataArrays.add(entity);
             mAdapter.notifyDataSetChanged();
             chatListView.setSelection(chatListView.getCount() - 1);
+            if (isComMsg)
+                voiceSpeakUtils.startSpeak(contString);
         }
     }
 
@@ -300,20 +289,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         FlowerCollector.onPageEnd(TAG);
         FlowerCollector.onPause(context);
         super.onPause();
-    }
-
-    /**
-     * 获得背景虚化的图像
-     */
-    @SuppressWarnings("NewApi")
-    private void getBlueBackground(){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 2;//圖片寬高都為原來的二分之一，即圖片為原來的四分之一
-        Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + File.separator + Constant.DIR_ROOT + File.separator + "desktop_capture.jpg", options);
-        bgBitmap = BlurEffect.apply(this, bitmap, 25);
-        bgBitmap = Bitmap.createBitmap(bgBitmap, 0, 80, bgBitmap.getWidth(), bgBitmap.getHeight() - 80);
-        //BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), ViewUtils.getInstance().convertToBlackWhite(bgBitmap));
-        contentLayout.setBackground(new BitmapDrawable(getResources(), bgBitmap));
     }
 
 }

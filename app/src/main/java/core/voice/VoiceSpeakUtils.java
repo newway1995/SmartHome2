@@ -93,14 +93,13 @@ public class VoiceSpeakUtils {
         public void onSpeakProgress(int percent, int beginPos, int endPos) {
             // 播放进度
             mPercentForPlaying = percent;
-            showTip(String.format(context.getString(R.string.tts_toast_format),
-                    mPercentForBuffering, mPercentForPlaying));
+            //showTip(String.format(context.getString(R.string.tts_toast_format), mPercentForBuffering, mPercentForPlaying));
         }
 
         @Override
         public void onCompleted(SpeechError error) {
             if (error == null) {
-                showTip("播放完成");
+                //showTip("播放完成");
             } else if (error != null) {
                 showTip(error.getPlainDescription(true));
             }

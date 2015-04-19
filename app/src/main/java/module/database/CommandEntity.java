@@ -28,13 +28,11 @@ public class CommandEntity {
 
     /**
      * 构造函数
-     * @param id
      * @param command
      * @param currentTime
      * @param timer
      */
-    public CommandEntity(int id, String command, long currentTime, long timer) {
-        this.id = id;
+    public CommandEntity(String command, long currentTime, long timer) {
         this.command = command;
         this.currentTime = currentTime;
         this.timer = timer;

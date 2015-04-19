@@ -98,7 +98,6 @@ public class SettingActivity extends BaseActivity{
      * 初始化解锁的界面
      */
     private void initUnLock(){
-        L.d("initUnLock() UNLOCK BY = " + Constant.getUnlockByWhat(this));
         if (Constant.getUnlockByWhat(this).equals(Constant.UNLOCK_BY_FACE)){
             switchUnLock(Constant.UNLOCK_BY_FACE);
         }else if(Constant.getUnlockByWhat(this).equals(Constant.UNLOCK_BY_GESTURE)){
@@ -173,12 +172,14 @@ public class SettingActivity extends BaseActivity{
                 break;
 //            开锁
             case R.id.setting_unclock_gesture:
-                Constant.setUnlockByWhat(this,0);
+                Constant.setUnlockByWhat(this, 0);
                 switchUnLock(Constant.UNLOCK_BY_GESTURE);
+                L.d("Setting", "手势开锁 = " + Constant.getUnlockByWhat(context));
                 break;
             case R.id.setting_unclock_face:
                 Constant.setUnlockByWhat(this, 1);
                 switchUnLock(Constant.UNLOCK_BY_FACE);
+                L.d("Setting", "人脸识别开锁 = " + Constant.getUnlockByWhat(context));
                 break;
 //            设置是否唤醒
             case R.id.setting_wakeup:
@@ -187,6 +188,12 @@ public class SettingActivity extends BaseActivity{
 
         }
         super.widgetClick(v);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        L.d("Setting", "UnLock By What ? " + Constant.getUnlockByWhat(context));
     }
 
     @Override

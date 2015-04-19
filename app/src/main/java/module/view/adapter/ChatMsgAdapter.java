@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,7 +40,12 @@ public class ChatMsgAdapter extends BaseAdapter{
         //自己发出的信息
         int IMVT_TO_MSG = 1;
     }
+    /** 动画 **/
     private AlphaAnimation mAlphaAnimation;
+    private TranslateAnimation mTranslateAnimation;
+    private AnimationSet mAnimationSet;
+    private static final int DURATION = 1000;
+
     public static final String TAG = ChatMsgAdapter.class.getSimpleName();
     private List<ChatMsgEntity> data;
     private LayoutInflater mInflater;
@@ -47,6 +55,25 @@ public class ChatMsgAdapter extends BaseAdapter{
         this.data = data;
         mInflater = LayoutInflater.from(context);
         this.context = context;
+        initAnimation();
+    }
+
+    /**
+     * 初始化动画
+     */
+    private void initAnimation(){
+        mAlphaAnimation = new AlphaAnimation(0, 1);
+        mAlphaAnimation.setDuration(DURATION);
+
+        mTranslateAnimation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 50.0f,Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f,Animation.RELATIVE_TO_SELF, 0.0f);
+        mTranslateAnimation.setDuration(DURATION);
+
+        mAnimationSet = new AnimationSet(true);
+        mAnimationSet.addAnimation(mTranslateAnimation);
+        mAnimationSet.addAnimation(mAlphaAnimation);
+        mAnimationSet.setFillAfter(false);
     }
 
     @Override
@@ -115,10 +142,7 @@ public class ChatMsgAdapter extends BaseAdapter{
         TextPaint tp = viewHolder.tvContent.getPaint();
         tp.setFakeBoldText(true);
         if (position == data.size() - 1){
-            if (mAlphaAnimation == null)
-                mAlphaAnimation = new AlphaAnimation(0, 1);
-            mAlphaAnimation.setDuration(1000);
-            viewHolder.tvContent.startAnimation(mAlphaAnimation);
+            viewHolder.tvContent.startAnimation(mAnimationSet);
         }
         return convertView;
     }

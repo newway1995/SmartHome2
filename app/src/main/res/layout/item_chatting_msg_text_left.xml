@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="#9f000000"
+        android:textColor="#ffffffff"
         android:layout_marginBottom="30dp"
         android:lineSpacingExtra="2dp"
         android:clickable="true"

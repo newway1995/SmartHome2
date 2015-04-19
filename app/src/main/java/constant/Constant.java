@@ -109,7 +109,6 @@ public class Constant {
             PreferenceHelper.write(context, USER_INFO, UNLOCK_BY_WHAT,UNLOCK_BY_GESTURE);
         else if(s == 1)
             PreferenceHelper.write(context, USER_INFO, UNLOCK_BY_WHAT,UNLOCK_BY_FACE);
-        L.d("UNLOCK", "By "+getUnlockByWhat(context));
     }
 
     /**

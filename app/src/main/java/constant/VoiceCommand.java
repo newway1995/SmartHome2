@@ -2,9 +2,14 @@ package constant;
 
 import android.content.Context;
 
+import org.kymjs.aframe.database.KJDB;
+import org.kymjs.aframe.utils.SystemTool;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import module.database.CommandEntity;
+import utils.SystemUtils;
 import vgod.smarthome.R;
 
 /**
@@ -30,6 +35,23 @@ public class VoiceCommand {
         parseFan(context, source);
         parseProjector(context, source);
         return commandList;
+    }
+
+    /**
+     * 保存CommandList到数据库
+     * @param context
+     *          上下文
+     * @param commandList
+     *          String
+     * @param time
+     *          Minute
+     */
+    public static void saveCommandList2DB(Context context, final List<String> commandList, long time){
+        CommandEntity.kjdb = KJDB.create(context);
+        for (String command : commandList){
+            CommandEntity entity = new CommandEntity(command, System.currentTimeMillis(), time * 1000);
+            CommandEntity.insert(entity);
+        }
     }
 
 
@@ -294,5 +316,35 @@ public class VoiceCommand {
                 break;
             }
         }
+    }
+
+    /**
+     * 是否显示电器状态
+     * @return boolean
+     */
+    public static boolean isShowElecStatus(Context context, final String source){
+        String content[] = context.getResources().getStringArray(R.array.current_elec_status);
+        for (String str : content){
+            if (source.contains(str)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 是否显示当前指令结合
+     * @param context
+     * @param source
+     * @return
+     */
+    public static boolean isShowCommandList(Context context, final String source){
+        String content[] = context.getResources().getStringArray(R.array.current_command_list);
+        for (String str : content){
+            if (source.contains(str)){
+                return true;
+            }
+        }
+        return false;
     }
 }
