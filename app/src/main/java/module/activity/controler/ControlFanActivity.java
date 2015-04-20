@@ -144,4 +144,17 @@ public class ControlFanActivity extends BaseActivity{
         return true;
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        contentLayout = null;
+        gifView = null;
+        switchView = null;
+        changeView = null;
+        shakeView = null;
+        setContentView(R.layout.null_view);
+        finish();
+        System.gc();
+    }
+
 }

@@ -220,4 +220,15 @@ public class ControllerBulbActivity extends BaseActivity{
         }
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        contentLayout = null;
+        switchBulb = null;
+        bulbImage = null;
+        setContentView(R.layout.null_view);
+        finish();
+        System.gc();
+    }
 }

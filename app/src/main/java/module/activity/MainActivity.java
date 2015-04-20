@@ -235,7 +235,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onResume();
         if (!Constant.getWakeUp(context))
             return;
-        L.d("TAG_", "mWakeUpControl = " + (mWakeUpControl == null));
         initWakeUp();
         mWakeUpControl.startSpeak();
     }

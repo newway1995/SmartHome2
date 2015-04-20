@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_tv_settings"
+        android:title="定时执行"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_tv_timer"
+        android:title="取消定时"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_tv_show_program"
+        android:title="显示电视节目表"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+</menu>

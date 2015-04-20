@@ -27,7 +27,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.2'
-    compile 'com.github.manuelpeinado.glassactionbar:glassactionbar:0.3.0'
+    compile 'com.diegocarloslima:fgelv:0.1.+@aar'
     compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/androidsvg-1.2.0.jar')
     compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/faceppsdk.jar')
     compile files('/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/KJFrameForAndroid_V1.21.jar')

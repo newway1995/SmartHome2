@@ -252,4 +252,9 @@ public abstract class BaseActivity extends Activity implements OnClickListener, 
         int velocity = (int) mVelocityTracker.getXVelocity();
         return Math.abs(velocity);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

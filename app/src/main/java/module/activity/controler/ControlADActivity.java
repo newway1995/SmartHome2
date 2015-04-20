@@ -7,10 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import org.kymjs.aframe.ui.BindView;
 import constant.Command;
-import constant.Constant;
 import constant.ConstantStatus;
 import constant.MyTimer;
 import module.core.BaseActivity;
@@ -231,5 +229,21 @@ public class ControlADActivity extends BaseActivity {
                 currentTempView.setBackgroundResource(R.drawable.img_temp_16);
                 break;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        contentLayout = null;
+        temp_up_view = null;
+        temp_down_view = null;
+        ad_open = null;
+        mode_wram = null;
+        mode_cold = null;
+        mode_wetout = null;
+        currentTempView = null;
+        setContentView(R.layout.null_view);
+        finish();
+        System.gc();
     }
 }

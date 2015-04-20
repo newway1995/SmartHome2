@@ -7,6 +7,8 @@ import android.os.Handler;
 
 import org.kymjs.aframe.utils.PreferenceHelper;
 
+import java.lang.ref.WeakReference;
+
 import constant.Constant;
 import module.activity.gesturepwd.SettingGesturePasswordActivity;
 import module.activity.gesturepwd.UnLockGesturePasswordActivity;
@@ -27,6 +29,10 @@ import vgod.smarthome.R;
  * 启动界面
  */
 public class StartActivity extends BaseActivity{
+
+    LinearLayout container;
+    LayoutInflater inflater;
+
     @Override
     public void setRootView() {
         mShowActionBar = false;
@@ -56,14 +62,14 @@ public class StartActivity extends BaseActivity{
     @Override
     protected void initWidget() {
         super.initWidget();
-        LinearLayout container = (LinearLayout) findViewById(R.id.start_container);
-        LayoutInflater inflater = getLayoutInflater();
+        container = (LinearLayout) findViewById(R.id.start_container);
+        inflater = getLayoutInflater();
         addSvgView(inflater,container);
     }
 
     private void addSvgView(LayoutInflater inflater, LinearLayout container){
-        final View view = inflater.inflate(R.layout.view_item_svg,container,false);
-        final SvgView svgView = (SvgView) view.findViewById(R.id.svg);
+        View view = inflater.inflate(R.layout.view_item_svg,container,false);
+        SvgView svgView = (SvgView) view.findViewById(R.id.svg);
 
         svgView.setSvgResource(R.raw.house);
         view.setBackgroundResource(R.color.md_blue_400);
@@ -92,5 +98,15 @@ public class StartActivity extends BaseActivity{
         });
         container.addView(view);
         svgView.startAnimation();//开启动画
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        inflater = null;
+        container = null;
+        setContentView(R.layout.null_view);
+        finish();
+        System.gc();
     }
 }

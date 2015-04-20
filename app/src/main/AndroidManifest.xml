@@ -112,6 +112,9 @@
             android:name="module.activity.security.SecurityCameraActivity"
             android:label="@string/title_activity_security_camera" >
         </activity>
+        <activity android:name="module.activity.voicechat.TVProgramActivity"
+            android:label="电视节目单">
+        </activity>
 
         <!--common模块-->
         <activity android:name="module.activity.common.AboutActivity"            

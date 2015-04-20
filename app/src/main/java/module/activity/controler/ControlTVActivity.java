@@ -6,11 +6,14 @@ import org.kymjs.aframe.ui.BindView;
 import constant.Command;
 import constant.Constant;
 import constant.MyTimer;
+import module.activity.voicechat.TVProgramActivity;
 import module.core.ui.ColorGenerator;
 import module.core.ui.TextDrawable;
 import module.database.TVChannelEntity;
 import utils.L;
 import vgod.smarthome.R;
+
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -253,11 +256,13 @@ public class ControlTVActivity extends BaseActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
             finish();
-        else if (item.getItemId() == R.id.action_settings){//执行定时功能
+        else if (item.getItemId() == R.id.menu_tv_settings){//执行定时功能
             myTimer.setTimer(true);
             myTimer.showTimerDialog();
-        } else if (item.getItemId() == R.id.action_cancel_timer){
+        } else if (item.getItemId() == R.id.menu_tv_settings){
             myTimer.setTimerAndTimerMillisecond(false, 0);
+        } else if (item.getItemId() == R.id.menu_tv_show_program){
+            startActivity(new Intent(ControlTVActivity.this, TVProgramActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -265,7 +270,7 @@ public class ControlTVActivity extends BaseActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_controller_tv, menu);
         return true;
     }
 
@@ -288,4 +293,36 @@ public class ControlTVActivity extends BaseActivity{
         return (currentMilisecond - lastMilisecond) < 1000 ? true : false;
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        resetMemory();
+    }
+
+    /**
+     * 回收内存
+     */
+    private void resetMemory(){
+        contentLayout = null;
+        switchText = null;
+        channel_text = null;
+        channel_zero = null;
+        channel_one = null;
+        channel_two = null;
+        channel_three = null;
+        channel_four = null;
+        channel_five = null;
+        channel_six = null;
+        channel_seven = null;
+        channel_eight = null;
+        channel_nine = null;
+        channel_ok = null;
+        channel_up = null;
+        channel_down = null;
+        channel_left = null;
+        channel_right = null;
+        setContentView(R.layout.null_view);
+        finish();
+        System.gc();
+    }
 }

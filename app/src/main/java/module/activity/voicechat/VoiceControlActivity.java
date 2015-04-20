@@ -97,7 +97,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_voice_control);
         AnnotateUtil.initBindView(this);
-        //getBlueBackground();
         initVoice();
         initData();
         initListView();
@@ -124,15 +123,14 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             public void stringProcess(String str) {
                 super.stringProcess(str);
                 sendData(str, false);
-                if (str.contains("跳转"))
-                {
+                if (str.contains("跳转")) {
                     testActivity();
                 }
                 /** 是否显示电器连接状态 **/
                 if (VoiceCommand.isShowElecStatus(context, str))
                     sendData(ConstantStatus.getAllStatus(context), true);
                 /** 是否显示当前CommandList **/
-                if(VoiceCommand.isShowCommandList(context, str))
+                if (VoiceCommand.isShowCommandList(context, str))
                     startActivity(new Intent(VoiceControlActivity.this, ShowCommandListActivity.class));
                 /** 是否为查询电视节目 **/
                 goToTVProgramActivity(str);
@@ -281,6 +279,15 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     }
 
     @Override
+    protected void onStop(){
+        super.onStop();
+        cleanMemory();
+        setContentView(R.layout.null_view);
+        finish();
+        System.gc();
+    }
+
+    @Override
     protected void onResume() {
         // 移动数据统计分析
         FlowerCollector.onResume(context);
@@ -296,4 +303,13 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         super.onPause();
     }
 
+    /**
+     * 清理内存
+     */
+    private void cleanMemory(){
+        contentLayout = null;
+        chatListView = null;//listview
+        mBtnRcd = null;//按住说话,默认为隐藏
+        inputMethodManager = null;
+    }
 }

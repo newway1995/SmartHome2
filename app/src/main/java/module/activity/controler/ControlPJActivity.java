@@ -114,4 +114,18 @@ public class ControlPJActivity extends BaseActivity{
         inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        contentLayout = null;
+        powerView = null;
+        leftView = null;
+        rightView = null;
+        downView = null;
+        upView = null;
+        setContentView(R.layout.null_view);
+        finish();
+        System.gc();
+    }
 }

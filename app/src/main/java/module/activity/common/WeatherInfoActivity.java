@@ -228,8 +228,29 @@ public class WeatherInfoActivity extends BaseActivity{
         return PreferenceHelper.readString(context, RASP_DATA, RASP_LAST_WET, "25");
     }
 
-
     private String parseDate(String date){
         return date.substring(0, 10);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        cityText = null;
+        publishTime = null;
+        tempText = null;
+        humidityText = null;
+        pmNumberText = null;
+        pmText = null;
+        dateText = null;
+        tempRangeText = null;
+        windText = null;
+        weatherText = null;
+        raspTemp = null;
+        raspHumidity = null;
+        raspPublishTime = null;
+        contentLayout = null;
+        setContentView(R.layout.null_view);
+        finish();//这一个执行没什么影响
+        System.gc();
     }
 }
