@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.os.Handler;
 
+import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.utils.PreferenceHelper;
 
 import java.lang.ref.WeakReference;
@@ -15,6 +16,7 @@ import module.activity.gesturepwd.UnLockGesturePasswordActivity;
 import module.activity.security.SecurityCameraActivity;
 import module.activity.user.LoginActivity;
 import module.core.BaseActivity;
+import module.database.TVChannelEntity;
 import module.view.svg.SvgCompletedCallBack;
 import module.view.svg.SvgView;
 import utils.CacheHandler;
@@ -55,8 +57,14 @@ public class StartActivity extends BaseActivity{
     }
 
     private void testData(){
-        L.d("SharedPreference","IS_FIRST_OPEN_ME = " + PreferenceHelper.readString(context, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, "default"));
-        L.d("SharedPreference","UnlockByWhat = " + Constant.getUnlockByWhat(context));
+        TVChannelEntity.kjdb = KJDB.create(this);
+        try {
+            TVChannelEntity.deleteAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        L.d("SharedPreference", "IS_FIRST_OPEN_ME = " + PreferenceHelper.readString(context, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, "default"));
+        L.d("SharedPreference", "UnlockByWhat = " + Constant.getUnlockByWhat(context));
     }
 
     @Override

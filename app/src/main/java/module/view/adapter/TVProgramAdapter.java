@@ -8,6 +8,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import vgod.smarthome.R;
 
 /**
@@ -21,11 +23,11 @@ public class TVProgramAdapter extends BaseExpandableListAdapter{
     private final LayoutInflater mLayoutInflater;
 
     /** 显示的内容 **/
-    private String[] mTvChannel;
+    private List<String> mTvChannel;
     private String[][] mTvProgram;
     private int[] mGroupDrawables;
 
-    public TVProgramAdapter(Context context, String[] mTvChannel, String[][] mTvProgram, int []mGroupDrawables) {
+    public TVProgramAdapter(Context context, List<String> mTvChannel, String[][] mTvProgram, int []mGroupDrawables) {
         mContext = context;
         this.mTvChannel = mTvChannel;
         this.mTvProgram = mTvProgram;
@@ -35,12 +37,12 @@ public class TVProgramAdapter extends BaseExpandableListAdapter{
 
     @Override
     public int getGroupCount() {
-        return mTvChannel.length;
+        return mTvChannel.size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return mTvChannel[groupPosition];
+        return mTvChannel.get(groupPosition);
     }
 
     @Override
@@ -58,7 +60,7 @@ public class TVProgramAdapter extends BaseExpandableListAdapter{
         image.setImageResource(mGroupDrawables[groupPosition]);
 
         final TextView text = (TextView) convertView.findViewById(R.id.activity_list_group_item_text);
-        text.setText(mTvChannel[groupPosition]);
+        text.setText(mTvChannel.get(groupPosition));
 
         final ImageView expandedImage = (ImageView) convertView.findViewById(R.id.activity_list_group_expanded_image);
         final int resId = isExpanded ? R.drawable.minus : R.drawable.plus;

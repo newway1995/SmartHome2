@@ -15,19 +15,9 @@ public class TestClass {
     private TVChannelEntity entity;
 
     public TestClass() {
-        testInsert();
         testQuery();
     }
 
-    /**
-     * 测试数据库
-     */
-    private void testInsert(){
-        for (int i = 0; i < 100; i++){
-            entity = new TVChannelEntity(i,"湖南卫视: " + i);
-            TVChannelEntity.insert(entity);
-        }
-    }
 
     private void testQuery(){
         List<TVChannelEntity> tvChannelEntities = TVChannelEntity.queryAll();

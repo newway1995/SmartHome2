@@ -13,8 +13,10 @@ import java.util.List;
  */
 public class TVChannelEntity {
     @Id()
+    int id;
     int number;
     String channelText;
+    String channelRel;
 
     public static KJDB kjdb;
 
@@ -25,9 +27,18 @@ public class TVChannelEntity {
      * @param number
      * @param channelText
      */
-    public TVChannelEntity(int number, String channelText) {
+    public TVChannelEntity(int number, String channelText, String channelRel) {
         this.number = number;
         this.channelText = channelText;
+        this.channelRel = channelRel;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getNumber() {
@@ -46,6 +57,14 @@ public class TVChannelEntity {
         this.channelText = channelText;
     }
 
+    public String getChannelRel() {
+        return channelRel;
+    }
+
+    public void setChannelRel(String channelRel) {
+        this.channelRel = channelRel;
+    }
+
     /**
      * 插入数据
      * @param entity TVChannelEntity
@@ -56,7 +75,7 @@ public class TVChannelEntity {
 
     /**
      * 删除 by number
-     * @param number
+     * @param number int
      */
     public static void delete(int number){
         kjdb.deleteById(TVChannelEntity.class, number);
@@ -71,7 +90,7 @@ public class TVChannelEntity {
 
     /**
      * 删除 by 文字
-     * @param channelText
+     * @param channelText String
      */
     public static void delete(String channelText){
         kjdb.deleteByWhere(TVChannelEntity.class, "channelText=" + channelText);
@@ -80,24 +99,36 @@ public class TVChannelEntity {
     /**
      * 更新
      * @param entity
+     *          TVChannelEntity
      */
     public static void update(TVChannelEntity entity){
-        kjdb.update(entity);
+        if (query(entity.getNumber()) != null)
+            kjdb.update(entity);
+        else
+            insert(entity);
     }
 
     /**
      * 查询返回一条数据
-     * @param number
+     * @param number int
      * @return
      */
     public static TVChannelEntity query(int number){
         return kjdb.findById(number, TVChannelEntity.class);
     }
 
+    /**
+     * 查询返回一条数据
+     * @param channelRel String
+     * @return
+     */
+    public static TVChannelEntity query(String channelRel) {
+        return kjdb.findAllByWhere(TVChannelEntity.class, "channelRel=" + channelRel).get(0);
+    }
 
     /**
      * 查询所有的数据
-     * @return
+     * @return List<TVChannelEntity>
      */
     public static List<TVChannelEntity> queryAll(){
         return kjdb.findAll(TVChannelEntity.class);
