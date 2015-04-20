@@ -45,6 +45,17 @@
         android:layout_margin="5dp"
         android:layout_below="@id/devicelist_bg"
         android:divider="@drawable/doct_list_item_divider"
+        android:visibility="visible"
+        android:scrollbars="none" />
+
+    <ListView
+        android:id="@+id/sceen_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_below="@id/devicelist_bg"
+        android:divider="@drawable/doct_list_item_divider"
+        android:visibility="gone"
         android:scrollbars="none" />
 
 </RelativeLayout>

@@ -102,7 +102,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ArrayList<HashMap<String, String>> raspList;
     private RaspberryAdapter raspberryAdapter;
     @BindView(id = R.id.rasp_list)
-    private ListView listView;
+    private ListView raspListView;
+    @BindView(id = R.id.sceen_list)
+    private ListView sceenListView;
 
     private Context context = this;
     /** 语音唤醒 **/
@@ -264,12 +266,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      * 初始化ListView的点击事件
      */
     private void initListViewClick(){
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        raspListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String rasp_ids = raspList.get(position).get("rasp_ids");
                 Constant.setCurrentRaspIds(context, rasp_ids);
                 startActivity(new Intent(context,SelectControllerActivity.class));
+            }
+        });
+        /** 场景的ListView */
+        sceenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             }
         });
     }
@@ -289,14 +298,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     /**
      * SegmentedGroup点击事件
-     * */
+     */
     @Override
     public void onCheckedChanged(RadioGroup radioGroup , int checkedId){
         switch (checkedId){
             case R.id.nav_actionbar_segment_device:
+                raspListView.setVisibility(View.VISIBLE);
+                sceenListView.setVisibility(View.GONE);
                 break;
             case R.id.nav_actionbar_segment_scene:
-                startActivity(new Intent(context, VoiceControlActivity.class));
+                //startActivity(new Intent(context, VoiceControlActivity.class));
+                raspListView.setVisibility(View.GONE);
+                sceenListView.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -478,8 +491,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             raspList.add(map);
         }
         raspberryAdapter = new RaspberryAdapter(this, raspList);
-        listView.setAdapter(raspberryAdapter);
-        listView.postInvalidate();
+        raspListView.setAdapter(raspberryAdapter);
+        raspListView.postInvalidate();
     }
 
     /**

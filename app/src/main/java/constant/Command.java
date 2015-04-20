@@ -33,17 +33,16 @@ public class Command {
     public static final String TELEVISION_DOWN_VOL = "TELEVISION_DOWN_VOL";
     public static final String TELEVISION_UP_CHANNEL = "TELEVISION_UP_CHANNEL";
     public static final String TELEVISION_DOWN_CHANNEL = "TELEVISION_DOWN_CHANNEL";
-    public static final String TELEVISION_ONE = "TELEVISION_ONE";
-    public static final String TELEVISION_TWO = "TELEVISION_TWO";
-    public static final String TELEVISION_THREE = "TELEVISION_THREE";
-    public static final String TELEVISION_FOUR = "TELEVISION_FOUR";
-    public static final String TELEVISION_FIVE = "TELEVISION_FIVE";
-    public static final String TELEVISION_SIX = "TELEVISION_SIX";
-    public static final String TELEVISION_SEVEN = "TELEVISION_SEVEN";
-    public static final String TELEVISION_EIGHT = "TELEVISION_EIGHT";
-    public static final String TELEVISION_NINE = "TELEVISION_NINE";
-    public static final String TELEVISION_ZERO = "TELEVISION_ZERO";
-    public static final String TELEVISION_TEN = "TELEVISION_TEN";
+    public static final String TELEVISION_ONE = "TELEVISION_1";
+    public static final String TELEVISION_TWO = "TELEVISION_2";
+    public static final String TELEVISION_THREE = "TELEVISION_3";
+    public static final String TELEVISION_FOUR = "TELEVISION_4";
+    public static final String TELEVISION_FIVE = "TELEVISION_5";
+    public static final String TELEVISION_SIX = "TELEVISION_6";
+    public static final String TELEVISION_SEVEN = "TELEVISION_7";
+    public static final String TELEVISION_EIGHT = "TELEVISION_8";
+    public static final String TELEVISION_NINE = "TELEVISION_9";
+    public static final String TELEVISION_ZERO = "TELEVISION_0";
     public static final String TELEVISION_SWITCH = "TELEVISION_SWITCH";
     public static final String TELEVISION_OK = "TELEVISION_OK";
 
