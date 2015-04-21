@@ -95,6 +95,7 @@ public class ControlTVActivity extends BaseActivity{
 		super.initData();
         contentLayout.setOnTouchListener(this);
         L.d(TAG, Constant.getCurrentRaspIds(this));
+        updataChannel("1");
 
         myTimer = new MyTimer(this);
         TVChannelEntity.kjdb = KJDB.create(this);
@@ -234,6 +235,8 @@ public class ControlTVActivity extends BaseActivity{
                 break;
             case 'd':
                 try {
+                    if (tempChannel.equals("1"))
+                        break;
                     if (!tempChannel.equals("0") && !tempChannel.equals("")){
                         tempChannel = Integer.parseInt(tempChannel) - 1 + "";
                         channel_text.setText(tempChannel);
@@ -259,7 +262,7 @@ public class ControlTVActivity extends BaseActivity{
         else if (item.getItemId() == R.id.menu_tv_settings){//执行定时功能
             myTimer.setTimer(true);
             myTimer.showTimerDialog();
-        } else if (item.getItemId() == R.id.menu_tv_settings){
+        } else if (item.getItemId() == R.id.menu_tv_timer){
             myTimer.setTimerAndTimerMillisecond(false, 0);
         } else if (item.getItemId() == R.id.menu_tv_show_program){
             startActivity(new Intent(ControlTVActivity.this, TVProgramActivity.class));
@@ -281,16 +284,16 @@ public class ControlTVActivity extends BaseActivity{
     private void showChannelText(int number){
         TVChannelEntity entity = TVChannelEntity.query(number);
         if (entity != null){
-            channel_text.setText(entity.getChannelText());
+            channel_text.setText(tempChannel + "\t" + entity.getChannelText());
         }
     }
 
     /**
      * 判断是否连续
-     * @return
+     * @return true | false
      */
     private boolean isContinuity(){
-        return (currentMilisecond - lastMilisecond) < 1000 ? true : false;
+        return (currentMilisecond - lastMilisecond) < 1000;
     }
 
     @Override

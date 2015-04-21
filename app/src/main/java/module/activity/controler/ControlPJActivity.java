@@ -73,10 +73,13 @@ public class ControlPJActivity extends BaseActivity{
         {
             case R.id.pj_channel_ok:
                 myTimer.sendCommand(Command.PROJECTOR_OPEN);
-                if (ConstantStatus.getPjSwitch(context).equals("on"))
-                    ConstantStatus.setPjSwitch(context, "off");
-                else
-                    ConstantStatus.setPjSwitch(context, "on");
+                if (ConstantStatus.getPjSwitch(context).equals(ConstantStatus.SWITCH_ON)) {
+                    ConstantStatus.setPjSwitch(context, ConstantStatus.SWITCH_OFF);
+                    powerView.setBackgroundResource(R.drawable.tv_switch1);
+                } else {
+                    ConstantStatus.setPjSwitch(context, ConstantStatus.SWITCH_ON);
+                    powerView.setBackgroundResource(R.drawable.tv_switch3);
+                }
                 break;
             case R.id.pj_channel_right:
                 myTimer.sendCommand(Command.PROJECTOR_UP_ZOOM);

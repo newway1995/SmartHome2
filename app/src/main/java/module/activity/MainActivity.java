@@ -1,15 +1,9 @@
 package module.activity;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.http.KJHttp;
-import org.kymjs.aframe.http.KJStringParams;
-import org.kymjs.aframe.http.StringCallBack;
 import org.kymjs.aframe.ui.AnnotateUtil;
 import org.kymjs.aframe.ui.BindView;
 
-import constant.Command;
 import constant.Constant;
 import module.activity.common.AboutActivity;
 import module.activity.common.ContactUsActivity;
@@ -24,37 +18,28 @@ import module.core.ui.ResideMenuItem;
 import module.core.ui.RippleLayout;
 import module.core.ui.SegmentedGroup;
 import module.database.EntityDao;
-import module.database.RaspberryEntity;
 import module.inter.NormalProcessor;
 import module.inter.StringProcessor;
 import module.view.adapter.RaspberryAdapter;
-import utils.L;
 import vgod.smarthome.R;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author niuwei
@@ -107,6 +92,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ListView sceenListView;
 
     private Context context = this;
+    private MainModel mainModel = new MainModel();
     /** 语音唤醒 **/
     private WakeUpControl mWakeUpControl;
 
@@ -136,7 +122,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         resideMenu = new ResideMenu(this);
         resideMenu.setBackgroundResource(R.drawable.menu_bg);
         resideMenu.attachToActivity(this);
-        resideMenu.setMenuListener(menuListener);
         resideMenu.setScaleValueX(0.5f);//x = 0.7,y = 0.7的时候发生变换
         resideMenu.setScaleValueY(0.7f);
         resideMenu.setDirectionDisable(ResideMenu.DIRECTION_RIGHT);//右侧禁止滑动
@@ -283,18 +268,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         });
     }
 
-    /**
-     * 监听ResideMenu打开或者关闭的情况
-     */
-    private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
-        @Override
-        public void openMenu() {
-        }
-
-        @Override
-        public void closeMenu() {
-        }
-    };
 
     /**
      * SegmentedGroup点击事件
@@ -328,145 +301,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         menuView.setSecondProcessor(new NormalProcessor() {
             @Override
             public void onProcess() {
-                showAddRaspberryDialog();
+                mainModel.showAddRaspberryDialog(MainActivity.this, kjHttp);
             }
         });
     }
 
-    /**
-     * 显示添加树莓派的对话框
-     */
-    private void showAddRaspberryDialog(){
-        ViewGroup alertView = (ViewGroup)LayoutInflater.from(this).inflate(R.layout.pop_add_raspberry,null,true);
-        final EditText usernameText = (EditText)alertView.findViewById(R.id.add_raspberry_username);
-        final EditText passwordText = (EditText)alertView.findViewById(R.id.add_raspberry_pwd);
-        final EditText nicknameText = (EditText)alertView.findViewById(R.id.add_raspberry_nickname);
-        final EditText functionText = (EditText)alertView.findViewById(R.id.add_raspberry_function);
-
-        new AlertDialog.Builder(this)
-                .setTitle("添加树莓派")
-                .setView(alertView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final String username = usernameText.getText().toString().trim();
-                        final String password = passwordText.getText().toString().trim();
-                        final String nickname = nicknameText.getText().toString().trim();
-                        final String function = functionText.getText().toString().trim();
-                        /* 验证账户密码是否正确 */
-                        KJStringParams params = new KJStringParams();
-                        params.put(Command.COMMAND_DEVICE, Command.PHONE);
-                        params.put("action", "ADD_RASP");
-                        params.put("user_name", Constant.getUsername(context));
-                        params.put("rasp_pwd", password);
-                        params.put("rasp_ids", username);
-                        params.put("nick_name", nickname);
-                        kjHttp.post(Constant.HTTP_SINA_API, params, new StringCallBack() {
-                            @Override
-                            public void onSuccess(String s) {
-
-                                try {
-                                    if (!Constant.isGetDataSuccess(new JSONObject(s)))
-                                        return;
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    KJDB kjdb = KJDB.create(context);
-                                    kjdb.save(new RaspberryEntity(username, password, nickname, function));
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    Toast.makeText(context, "不能重复添加树莓派", Toast.LENGTH_SHORT).show();
-                                }
-                                Toast.makeText(context, "树莓派添加成功...", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onFailure(Throwable t, int errorNo, String strMsg) {
-                                super.onFailure(t, errorNo, strMsg);
-                                L.d("树莓派添加失败,ErrorMsg = " + strMsg);
-                                Toast.makeText(context, "树莓派添加失败,请检查网络设置", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "取消操作", Toast.LENGTH_SHORT).show();
-                    }
-                }).show();
-    }
 
     /**
      * 在添加遥控器的时候需要提示树莓派列表
      */
     private void showRaspberryListDialog(){
-        KJStringParams params = new KJStringParams();
-        params.put(Command.COMMAND_DEVICE, Command.PHONE);
-        params.put("action", "GET_RASP");
-        params.put("user_name", Constant.getUsername(this));
-        L.d("USERNAME = " + Constant.getUsername(context));
-        kjHttp.post(this, Constant.HTTP_SINA_API, params, new StringCallBack() {
+        mainModel.showRaspberryListDialog(context, kjHttp, entityDao, new NormalProcessor(){
             @Override
-            public void onSuccess(final String s) {
-                raspList = new ArrayList<>();
-                List<String> nicknamesList = new ArrayList<>();
-                try {
-                    L.d("RASP", "JSONObject = " + s);
-                    JSONObject jObj = new JSONObject(s);
-                    //如果返回的数据不正确则退出
-                    if (!jObj.getString("success").equals("1"))
-                        return;
-                    JSONArray jArrry = jObj.getJSONArray("data");
-                    for (int i = 0; i < jArrry.length(); i++) {
-                        JSONObject jsonObject = jArrry.getJSONObject(i);
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        String rasp_ids = jsonObject.getString("rasp_ids");
-                        String nick_name = jsonObject.getString("nick_name");
-                        map.put("rasp_ids", rasp_ids);
-                        map.put("nick_name", nick_name);
-                        nicknamesList.add(i, jsonObject.getString("nick_name"));
-                        raspList.add(map);
-
-                        /* 添加到数据库当中 */
-                        try {
-                            entityDao.saveRaspberry(rasp_ids, "password", nick_name, "function");
-                        } catch (Exception e) {
-                            L.e("数据库存储异常...");
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                String[] nicknames = nicknamesList.toArray(new String[nicknamesList.size()]);
-
-                //显示对话框选择按钮
-                new AlertDialog.Builder(context)
-                        .setTitle("选择树莓派")
-                        .setItems(nicknames, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String rasp_ids = raspList.get(which).get("rasp_ids");
-                                Constant.setCurrentRaspIds(context, rasp_ids);
-                                startActivity(new Intent(context, SelectControllerActivity.class));
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
-                        .show();
-            }
-
-            @Override
-            public void onFailure(Throwable t, int errorNo, String strMsg) {
-                super.onFailure(t, errorNo, strMsg);
-                Toast.makeText(context, "添加遥控器失败", Toast.LENGTH_SHORT).show();
+            public void onProcess() {
+                super.onProcess();
+                startActivity(new Intent(context, SelectControllerActivity.class));
             }
         });
     }
@@ -475,39 +324,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      * 从SQLite当中获取树莓派列表
      */
     private void getRaspberryFromDB(){
-        raspList = new ArrayList<>();
-        EntityDao entityDao = new EntityDao(this);
-        List<RaspberryEntity> list = entityDao.getRaspberry();
-        L.d("MainActivity", "getRaspberryFromDB = " + list.size());
-        if (list == null || list.size() == 0)
-            return;
-        for (int i = 0; i < list.size(); i++){
-            RaspberryEntity raspberryEntity = list.get(i);
-            HashMap<String, String> map = new HashMap<>();
-            map.put("nickname",raspberryEntity.getNickname());
-            map.put("password",raspberryEntity.getPasswrod());
-            map.put("rasp_ids",raspberryEntity.getRaspid());
-            map.put("function",raspberryEntity.getFunction());
-            raspList.add(map);
-        }
+        raspList = mainModel.getRaspberryFromDB(context);
         raspberryAdapter = new RaspberryAdapter(this, raspList);
         raspListView.setAdapter(raspberryAdapter);
         raspListView.postInvalidate();
-    }
-
-    /**
-     * 是否可以唤醒
-     * @param str
-     * @return
-     */
-    private boolean isCanWakeUp(String str){
-        if (str.contains("你好")
-                && (str.contains("小威") || str.contains("小伟")
-                || str.contains("小微") || str.contains("小薇")
-                || str.contains("小魏") || str.contains("小唯"))) {
-            return true;
-        }
-        return false;
     }
 
     /**

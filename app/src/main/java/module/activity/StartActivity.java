@@ -23,6 +23,7 @@ import utils.CacheHandler;
 import utils.FileUtils;
 import utils.L;
 import vgod.smarthome.R;
+import vgod.smarthome.TestClass;
 
 /**
  * User: niuwei(nniuwei@163.com)
@@ -58,11 +59,7 @@ public class StartActivity extends BaseActivity{
 
     private void testData(){
         TVChannelEntity.kjdb = KJDB.create(this);
-        try {
-            TVChannelEntity.deleteAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //TestClass.test();
         L.d("SharedPreference", "IS_FIRST_OPEN_ME = " + PreferenceHelper.readString(context, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, "default"));
         L.d("SharedPreference", "UnlockByWhat = " + Constant.getUnlockByWhat(context));
     }

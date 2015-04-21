@@ -65,6 +65,7 @@ public class ControllerBulbActivity extends BaseActivity{
     private void initFromStatus(){
         if (ConstantStatus.getBulbSwitch(context).equals(ConstantStatus.SWITCH_ON)){
             switchBulb.setBackgroundResource(R.drawable.tv_switch3);
+            bulbImage.setBackgroundResource(R.drawable.bulb_light);
         }
     }
 
@@ -122,11 +123,11 @@ public class ControllerBulbActivity extends BaseActivity{
         if (ConstantStatus.getBulbSwitch(context).equals(ConstantStatus.SWITCH_OFF)) {//如果现在为关闭状态
             ConstantStatus.setBulbSwitch(context, ConstantStatus.SWITCH_ON);//调整为打开
             switchBulb.setBackgroundResource(R.drawable.tv_switch3);
-            //bulbImage.setBackgroundResource(R.drawable.bulb_light);
+            bulbImage.setBackgroundResource(R.drawable.bulb_light);
         }else {
             ConstantStatus.setBulbSwitch(context, ConstantStatus.SWITCH_OFF);
             switchBulb.setBackgroundResource(R.drawable.tv_switch1);
-            //bulbImage.setBackgroundResource(R.drawable.bulb_dark);
+            bulbImage.setBackgroundResource(R.drawable.bulb_dark);
         }
 
     }

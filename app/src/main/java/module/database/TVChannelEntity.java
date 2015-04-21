@@ -1,5 +1,6 @@
 package module.database;
 
+
 import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.database.annotate.Id;
 
@@ -93,7 +94,7 @@ public class TVChannelEntity {
      * @param channelText String
      */
     public static void delete(String channelText){
-        kjdb.deleteByWhere(TVChannelEntity.class, "channelText=" + channelText);
+        kjdb.deleteByWhere(TVChannelEntity.class, "channelText=" + "'" + channelText + "'");
     }
 
     /**
@@ -114,7 +115,10 @@ public class TVChannelEntity {
      * @return
      */
     public static TVChannelEntity query(int number){
-        return kjdb.findById(number, TVChannelEntity.class);
+        List<TVChannelEntity> entitys = kjdb.findAllByWhere(TVChannelEntity.class, "number=" + number + " ORDER BY id DESC");
+        if (entitys != null && entitys.size() > 0)
+            return entitys.get(0);
+        return null;
     }
 
     /**
@@ -123,7 +127,7 @@ public class TVChannelEntity {
      * @return
      */
     public static TVChannelEntity query(String channelRel) {
-        return kjdb.findAllByWhere(TVChannelEntity.class, "channelRel=" + channelRel).get(0);
+        return kjdb.findAllByWhere(TVChannelEntity.class, "channelRel='" + channelRel + "'ORDER BY id DESC").get(0);
     }
 
     /**
@@ -132,5 +136,9 @@ public class TVChannelEntity {
      */
     public static List<TVChannelEntity> queryAll(){
         return kjdb.findAll(TVChannelEntity.class);
+    }
+
+    public String toString() {
+        return "id = " + id + ", number = " + number + ", channel = " + channelText + ", rel = " + channelRel;
     }
 }
