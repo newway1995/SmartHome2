@@ -4,19 +4,22 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/activity_connect_wifi_password"
+        android:hint="Wifi密码"
+        android:inputType="textPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+
+    <EditText
         android:id="@+id/activity_connect_wifi_username"
+        android:inputType="text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_above="@id/activity_connect_wifi_password"
         android:layout_marginBottom="20dp"/>
-
-    <EditText
-        android:id="@+id/activity_connect_wifi_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        />
 
     <ImageView
         android:id="@+id/activity_connect_wifi_submit"

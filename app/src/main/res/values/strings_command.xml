@@ -144,6 +144,26 @@
         <item>拉远</item>
     </string-array>
 
+    <!-- 门禁和窗帘-->
+    <string-array name="door_open">
+        <item>开门</item>
+        <item>门打开</item>
+    </string-array>
+    <string-array name="door_close">
+        <item>关门</item>
+        <item>关闭门</item>
+        <item>门关</item>
+    </string-array>
+    <string-array name="curtain_open">
+        <item>开窗帘</item>
+        <item>窗帘打开</item>
+    </string-array>
+    <string-array name="curtain_close">
+        <item>关窗帘</item>
+        <item>关闭窗帘</item>
+        <item>窗帘关</item>
+    </string-array>
+
 
     <!-- 电器状态-->
     <string-array name="current_elec_status">

@@ -25,8 +25,10 @@ public class TVChannelEntity {
 
     /**
      * 构造函数
-     * @param number
-     * @param channelText
+     * @param number int
+     * @param channelText String
+     * @param channelRel String
+     * @return Entity
      */
     public TVChannelEntity(int number, String channelText, String channelRel) {
         this.number = number;
@@ -128,6 +130,19 @@ public class TVChannelEntity {
      */
     public static TVChannelEntity query(String channelRel) {
         return kjdb.findAllByWhere(TVChannelEntity.class, "channelRel='" + channelRel + "'ORDER BY id DESC").get(0);
+    }
+
+    /**
+     * 根据channelText获取number <湖南卫视 =》 13>
+     * @param channelText    节目
+     * @return 频道 int
+     */
+    public static int getNumberByChannelText(String channelText) {
+        List<TVChannelEntity> entitys = kjdb.findAllByWhere(TVChannelEntity.class, "channelText='" + channelText + "' ORDER BY id DESC");
+        if (entitys != null && entitys.size() != 0) {
+            return entitys.get(0).getNumber();
+        }
+        return -1;
     }
 
     /**

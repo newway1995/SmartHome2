@@ -1,6 +1,8 @@
 package module.activity;
 
 import android.content.Context;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.view.View;
@@ -8,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import org.kymjs.aframe.ui.BindView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import module.core.BaseActivity;
 import vgod.smarthome.R;
@@ -28,7 +33,7 @@ public class FastConnectWifiActivity extends BaseActivity{
     @Override
     protected void initData() {
         super.initData();
-        wifiName.setText(getWifiName());
+        wifiName.setText(getWifiName().substring(1, getWifiName().length() - 1));
     }
 
     @Override
@@ -76,6 +81,40 @@ public class FastConnectWifiActivity extends BaseActivity{
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         printWifiInfo(wifiInfo);
         return wifiInfo != null ? wifiInfo.getSSID() : null;
+    }
+
+    /**
+     * 返回已经手机中配置过的 Wifi 名称
+     * @return 返回已经手机中配置过的 Wifi 名称
+     */
+    private List<String> getConfiguredWifiName() {
+        WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        List<WifiConfiguration> configurations  = wifiManager.getConfiguredNetworks();
+        if (configurations == null || configurations.size() == 0) {
+            return null;
+        }
+        List<String> results = new ArrayList<>();
+        for (WifiConfiguration wifiConfiguration : configurations) {
+            results.add(wifiConfiguration.SSID);
+        }
+        return results;
+    }
+
+    /**
+     * 获取最近扫描的 Wifi
+     * @return 最近扫描的 Wifi
+     */
+    private List<String> getScanWifiName() {
+        WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        List<ScanResult> scanResults = wifiManager.getScanResults();
+        if (scanResults == null || scanResults.size() == 0) {
+            return null;
+        }
+        List<String> results = new ArrayList<>();
+        for (ScanResult scanResult : scanResults) {
+            results.add(scanResult.SSID);
+        }
+        return results;
     }
 
     //打印调试

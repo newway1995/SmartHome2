@@ -109,6 +109,12 @@
             android:name="module.activity.controler.ControlPJActivity"
             android:label="@string/controller" />
         <activity
+            android:name="module.activity.controler.ControlCurtainActivity"
+            android:label="@string/controller" />
+        <activity
+            android:name="module.activity.controler.ControlDoorActivity"
+            android:label="@string/controller" />
+        <activity
             android:name="module.activity.security.SecurityCameraActivity"
             android:label="@string/title_activity_security_camera" >
         </activity>
@@ -125,6 +131,8 @@
         <activity android:name="module.activity.common.SettingActivity"
             android:label="设置"
             />
+        <activity android:name="module.activity.FastConnectWifiActivity"
+            android:label="快速连接Wifi"/>
         <activity android:name="module.activity.common.WeatherInfoActivity"
             android:label="天气"/>
 

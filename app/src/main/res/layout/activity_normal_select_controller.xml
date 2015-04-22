@@ -102,4 +102,42 @@
             android:layout_alignParentRight="true"
             android:contentDescription="@string/app_name"/>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/select_controller_door"
+        android:padding="15dp"
+        android:background="@drawable/clickd_gray"
+        android:layout_marginTop="10dp"
+        style="@style/width_fill_parent">
+        <TextView
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:text="门禁设备"
+            />
+        <ImageView
+            style="@style/none_fill_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/right_arrow"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/app_name"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/select_controller_curtain"
+        android:padding="15dp"
+        android:background="@drawable/clickd_gray"
+        android:layout_marginTop="10dp"
+        style="@style/width_fill_parent">
+        <TextView
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:text="窗帘"
+            />
+        <ImageView
+            style="@style/none_fill_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/right_arrow"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/app_name"/>
+    </RelativeLayout>
 </LinearLayout>

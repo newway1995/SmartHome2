@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import org.kymjs.aframe.ui.BindView;
 
 import module.activity.controler.ControlADActivity;
+import module.activity.controler.ControlCurtainActivity;
+import module.activity.controler.ControlDoorActivity;
 import module.activity.controler.ControlFanActivity;
 import module.activity.controler.ControlPJActivity;
 import module.activity.controler.ControlTVActivity;
@@ -39,6 +41,10 @@ public class SelectControllerActivity extends BaseActivity{
     private RelativeLayout selectFan;
     @BindView(id = R.id.select_controller_bulb, click = true)
     private RelativeLayout selectBuld;
+    @BindView(id = R.id.select_controller_curtain, click = true)
+    private RelativeLayout selectCurtain;
+    @BindView(id = R.id.select_controller_door, click = true)
+    private RelativeLayout selectDoor;
 
     @Override
     protected void initData() {
@@ -65,6 +71,12 @@ public class SelectControllerActivity extends BaseActivity{
                 break;
             case R.id.select_controller_bulb:
                 startActivity(new Intent(SelectControllerActivity.this, ControllerBulbActivity.class));
+                break;
+            case R.id.select_controller_curtain:
+                startActivity(new Intent(SelectControllerActivity.this, ControlCurtainActivity.class));
+                break;
+            case R.id.select_controller_door:
+                startActivity(new Intent(SelectControllerActivity.this, ControlDoorActivity.class));
                 break;
         }
     }

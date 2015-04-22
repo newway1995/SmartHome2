@@ -6,22 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.iflytek.sunflower.FlowerCollector;
+
+import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.ui.AnnotateUtil;
 import org.kymjs.aframe.ui.BindView;
 import org.kymjs.aframe.utils.SystemTool;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import constant.Command;
 import constant.ConstantStatus;
@@ -31,9 +28,11 @@ import constant.TimingExecute;
 import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
+import module.database.TVChannelEntity;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
 import module.database.ChatMsgEntity;
+import utils.L;
 import utils.StringUtils;
 import vgod.smarthome.R;
 
@@ -54,7 +53,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     @BindView(id = R.id.voice_control_btn_record, click = true)
     private TextView mBtnRcd;//按住说话,默认为隐藏
 
-    private InputMethodManager inputMethodManager;
 
     /**
      * 语音识别帮助类
@@ -78,11 +76,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             "我要睡觉了",
             "收到,电视已经为您关闭,电灯已经为您关闭,空调已经设置到睡眠模式"};
 
-    private String[]dataArray = new String[]{"2015-04-01 18:00", "2015-04-01 18:10",
-            "2015-04-01 18:16", "2015-04-01 19:10",
-            "2015-04-01 19:10", "2015-04-01 20:07",
-            "2015-04-01 20:08", "2015-04-01 21:50",
-            "2015-04-01 21:51"};
+    
     private final static int COUNT = 9;
 
     private Context context = this;
@@ -104,8 +98,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
 
     @SuppressLint("NewApi")
     protected void initData() {
-        //contentLayout.setBackground(new BitmapDrawable(getResources(), bgBitmap));
-        inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         initVoice();
         initListView();
         myTimer = new MyTimer(context);
@@ -123,26 +115,14 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             public void stringProcess(String str) {
                 super.stringProcess(str);
                 sendData(str, false);
-                if (str.contains("跳转")) {
-                    testActivity();
-                }
-                /** 是否显示电器连接状态 **/
-                if (VoiceCommand.isShowElecStatus(context, str))
-                    sendData(ConstantStatus.getAllStatus(context), true);
-                /** 是否显示当前CommandList **/
-                if (VoiceCommand.isShowCommandList(context, str))
-                    startActivity(new Intent(VoiceControlActivity.this, ShowCommandListActivity.class));
-                /** 是否为查询电视节目 **/
-                goToTVProgramActivity(str);
+                /** 测试设置 */
+                processVoiceSetting(str);
+
                 /** 当前所有的指令集合 **/
                 commandList = VoiceCommand.parseVoiceCommand(context, str);
                 /** 定时时间 **/
                 int time = StringUtils.getInstance().getNumberBeforePattern(str);
                 if (commandList != null && commandList.size() > 0) {
-                    //myTimer.setTimer(true);
-                    //myTimer.setTimerMilliscond(time * 1000);
-                    //myTimer.sendCommand(commandList);
-
                     sendData("指令集合为" + commandList + ",并且在 " + time + " 秒钟之后执行。", true);
                     timingExecute.initThread();
                     timingExecute.sendData();
@@ -158,47 +138,75 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         voiceSpeakUtils = new VoiceSpeakUtils(this);
     }
 
-    private void testActivity(){
-        startActivity(new Intent(VoiceControlActivity.this, ShowCommandListActivity.class));
+    /**
+     * 封装一个函数来解决发送指令的问题
+     */
+    private void processVoiceCommand(final String str) {
+
     }
+
+    /**
+     * 封装一个函数解决非指令发送的问题
+     */
+    private void processVoiceSetting(final String str) {
+        /** 是否显示电器连接状态 **/
+        processShowElecStatus(str);
+        /** 是否显示当前CommandList **/
+        processShowCommandList(str);
+        /** 是否为查询电视节目 **/
+        goToTVProgramActivity(str);
+        /** 是否为电视节目选择 */
+        processTVProgramSelect(str);
+        /** 设置电视节目键值对 */
+        processTVProgramSetting(str);
+    }
+
+    /** 是否为电视节目选择 */
+    private void processTVProgramSelect(final String str) {
+        HashMap<String, String> map = VoiceCommand.parseTVProgramSelect(context, str);
+        if (map != null) {
+            sendData(map.get("channelText"), true);
+            sendData(map.get("number"), true);
+        }
+    }
+
+    /** 是否显示电器连接状态 **/
+    private void processShowElecStatus(final String str) {
+        if (VoiceCommand.isShowElecStatus(context, str))
+            sendData(ConstantStatus.getAllStatus(context), true);
+    }
+
+    /** 是否显示当前CommandList **/
+    private void processShowCommandList(final String str) {
+        if (VoiceCommand.isShowCommandList(context, str))
+            startActivity(new Intent(VoiceControlActivity.this, ShowCommandListActivity.class));
+    }
+
+    /** 设置电视节目键值对 */
+    private void processTVProgramSetting(final String str) {
+        HashMap<String, String> map = VoiceCommand.parseTVProgramSetting(context, str);
+        TVChannelEntity.kjdb = KJDB.create(this);
+        if (map != null) {
+            TVChannelEntity.insert(new TVChannelEntity(Integer.parseInt(map.get("number")), map.get("channelText"), map.get("channelRel")));
+        } else {
+            sendData("不好意思,小V无法明白您的意思...", true);
+        }
+    }
+
 
     /**
      * 初始化ListView数据
      */
     private void initListView(){
-        // 在代码中实现列表动画
-        Animation animation = (Animation) AnimationUtils.loadAnimation(
-                context, R.anim.list_anim);
-        LayoutAnimationController lac = new LayoutAnimationController(animation);
-        lac.setDelay(0.4f);  //设置动画间隔时间
-        lac.setOrder(LayoutAnimationController.ORDER_NORMAL); //设置列表的显示顺序
-        chatListView.setLayoutAnimation(lac);  //为ListView 添加动画
         for(int i = 0; i < COUNT; i++) {
             ChatMsgEntity entity = new ChatMsgEntity();
-            entity.setDate(dataArray[i]);
-            if (i % 2 == 0)
-            {
-                entity.setName("小微");
-                entity.setMsgType(true);
-            }else{
-                entity.setName("GodV");
-                entity.setMsgType(false);
-            }
-
+            entity.setMsgType(i % 2 == 0);
             entity.setText(msgArray[i]);
             mDataArrays.add(entity);
         }
         mAdapter = new ChatMsgAdapter(this, mDataArrays);
         chatListView.setAdapter(mAdapter);
         showListViewItem(mAdapter.getCount());
-        //设置外部点击事件
-        chatListView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                hideKeyBoard();
-                return false;
-            }
-        });
     }
 
     @Override
@@ -206,10 +214,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         switch (v.getId()){
             case R.id.voice_control_btn_record://点击录音
                 voiceRecognizeUtils.startSpeak();
-                break;
-            case R.id.ivPopUp://切换输入源
-                break;
-            case R.id.voice_control_btn_msg_send://发送文字按钮被点击
                 break;
         }
     }
@@ -224,7 +228,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         {
             ChatMsgEntity entity = new ChatMsgEntity();
             entity.setDate(SystemTool.getDataTime("yyyy-MM-dd : hh:mm"));
-            entity.setName(isComMsg == true ? "小威" : "VGOD");
+            entity.setName(isComMsg ? "小威" : "VGOD");
             entity.setMsgType(isComMsg);
             entity.setText(contString);
             mDataArrays.add(entity);
@@ -248,14 +252,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         chatListView.setSelection(i);
     }
 
-    /**
-     * 隐藏软键盘
-     */
-    private void hideKeyBoard(){
-        if (getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
-            if (getCurrentFocus() != null)
-                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    }
 
     /**
      * 跳转到显示电视节目表
@@ -310,6 +306,5 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         contentLayout = null;
         chatListView = null;//listview
         mBtnRcd = null;//按住说话,默认为隐藏
-        inputMethodManager = null;
     }
 }

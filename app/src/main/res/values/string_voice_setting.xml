@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tv_category">
+        <item>篮球</item>
+        <item>足球</item>
+        <item>排球</item>
+        <item>篮球</item>
+    </string-array>
+
+    <!-- 电视节目表-->
+    <string-array name="tv_program_list">
+        <item>湖南卫视</item>
+        <item>北京卫视</item>
+        <item>吉林卫视</item>
+        <item>湖北卫视</item>
+        <item>中央一台</item>
+    </string-array>
+    <string-array name="tv_program_rel_list">
+        <item>hunan</item>
+        <item>beijing</item>
+        <item>jilin</item>
+        <item>hubei</item>
+        <item>cctv1</item>
+    </string-array>
+
+    <!-- TVProgram调节-->
+    <string-array name="tv_program_select">
+        <item>要看</item>
+        <item>想看</item>
+        <item>调到</item>
+        <item>换到</item>
+    </string-array>
+</resources>

@@ -33,6 +33,10 @@ public class ConstantStatus {
     //电视机
     public static final String TV_SWITCH = "TV_SWITCH";
     public static final String TV_STATUS = "TV_STATUS";
+    //门
+    public static final String DOOR_SWITCH = "DOOR_SWITCH";
+    //窗帘
+    public static final String CURTAIN_SWITCH = "CURTAIN_SWITCH";
     
     public static final String SWITCH_ON = "on";
     public static final String SWITCH_OFF = "off";
@@ -112,6 +116,22 @@ public class ConstantStatus {
         return PreferenceHelper.readString(context, ELEC_APP_INFO, TV_STATUS, DEFAULT_INTEGER_VALUE);
     }
 
+
+    //door
+    public static void setDoorSwitch(Context context, String str) {
+        PreferenceHelper.write(context, ELEC_APP_INFO, DOOR_SWITCH, str);
+    }
+    public static String getDoorSwitch(Context context) {
+        return PreferenceHelper.readString(context, ELEC_APP_INFO, DOOR_SWITCH, DEFAULT_INTEGER_VALUE);
+    }
+    //curtain
+    public static void setCurtainSwitch(Context context, String str) {
+        PreferenceHelper.write(context, ELEC_APP_INFO, CURTAIN_SWITCH, str);
+    }
+    public static String getCurtainSwitch(Context context) {
+        return PreferenceHelper.readString(context, ELEC_APP_INFO, CURTAIN_SWITCH, DEFAULT_INTEGER_VALUE);
+    }
+
     /**
      * 获取所有的状态
      * @param context
@@ -151,11 +171,20 @@ public class ConstantStatus {
         //判断空调状态
         if (getAirSwitch(context).equals(SWITCH_ON)){
             stringBuilder.append("空调状态: 开\n");
-            stringBuilder.append("\t\t空调模式: " + getAirMode(context) + "\n");
-            stringBuilder.append("\t\t空调档位为: " + getAirStatus(context) + "\n\n");
+            stringBuilder.append("\t\t空调模式: " + getAirMode(context));
+            stringBuilder.append("\n\t\t空调档位为: " + getAirStatus(context) + "\n\n");
         }else if (getAirSwitch(context).equals(SWITCH_OFF)){
             stringBuilder.append("空调状态: 关\n\n");
         }
+
+        //判断门的状态
+        stringBuilder.append("门禁状态: ");
+        stringBuilder.append((getDoorSwitch(context).equals(SWITCH_ON) ? "开" : "关"));
+        //判断窗帘的状态
+        stringBuilder.append("\n\n窗帘状态: ");
+        stringBuilder.append((getCurtainSwitch(context).equals(SWITCH_ON) ? "开" : "关"));
+        stringBuilder.append("\n\n");
+
         return stringBuilder.toString();
     }
 

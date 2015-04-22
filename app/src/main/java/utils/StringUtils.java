@@ -23,6 +23,32 @@ public class StringUtils {
         return false;
     }
 
+    /**
+     * 从“湖南卫视是13频道”解析出13
+     * @return int
+     */
+    public int getChannelNumberFromString(final String source) {
+        //如果是大写的情况
+        if (getChNum(source) != null && getChNum(source).length() > 0){
+            return (int)chnNum2Digit(getChNum(source));
+        }
+        int result = 0;
+        if (source.contains("频道")) {
+            int index = source.indexOf("频道");
+            int count = 1;
+            for(int i = index - 1; i >= 0; i-- ){
+                char ch = source.charAt(i);
+                if (ch - 48 >= 0 && ch -48 < 10) {
+                    result += count * (ch - 48);
+                    count *= 10;
+                }else {
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
 
     /**
      * 从一段字符串当中获取source之前的数字
@@ -101,6 +127,32 @@ public class StringUtils {
             return sb.reverse().toString();
         }else if(source.contains("分钟")){
             int index = source.indexOf("分钟");
+            for(int i = index - 1; i >= 0; i-- ){
+                switch (source.charAt(i)) {
+                    case '零':
+                    case '一':
+                    case '二':
+                    case '三':
+                    case '四':
+                    case '五':
+                    case '六':
+                    case '七':
+                    case '八':
+                    case '九':
+                    case '十':
+                    case '百':
+                    case '千':
+                    case '万':
+                    case '亿':
+                        sb.append(source.charAt(i));
+                        break;
+                    default:
+                        return sb.reverse().toString();
+                }
+            }
+            return sb.reverse().toString();
+        }else if(source.contains("频道")){
+            int index = source.indexOf("频道");
             for(int i = index - 1; i >= 0; i-- ){
                 switch (source.charAt(i)) {
                     case '零':

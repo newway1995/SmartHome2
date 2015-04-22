@@ -72,7 +72,7 @@ public class ControllerBulbActivity extends BaseActivity{
     @Override
     public void setRootView() {
         super.setRootView();
-        setContentView(R.layout.activity_controller_bulb);
+        setContentView(R.layout.control_activity_bulb);
         setActionBarView(true);
     }
 

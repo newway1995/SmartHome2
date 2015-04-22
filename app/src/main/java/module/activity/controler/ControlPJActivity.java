@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import org.kymjs.aframe.http.KJHttp;
 import org.kymjs.aframe.ui.BindView;
 
@@ -24,7 +25,6 @@ import vgod.smarthome.R;
  */
 public class ControlPJActivity extends BaseActivity{
 
-    private KJHttp kjHttp;
     @BindView(id = R.id.control_activity_pj)
     private LinearLayout contentLayout;
 
@@ -45,8 +45,6 @@ public class ControlPJActivity extends BaseActivity{
     protected void initData() {
         super.initData();
         contentLayout.setOnTouchListener(this);
-        kjHttp = new KJHttp();
-
         myTimer = new MyTimer(this);
     }
 
