@@ -65,11 +65,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @BindView(id = R.id.nav_actionbar_segment_scene , click = true)
     private RadioButton sceneRadio;//场景
 
-    private ResideMenuItem mainFrame;
-    private ResideMenuItem deviceFrame;
-    private ResideMenuItem settingFrame;
-    private ResideMenuItem helpFrame;
-    private ResideMenuItem aboutFrame;
+    private ResideMenuItem mainFrame;//主界面
+    private ResideMenuItem deviceFrame;//设备列表
+    private ResideMenuItem settingFrame;//设置
+    private ResideMenuItem helpFrame;//帮助
+    private ResideMenuItem aboutFrame;//关于
+    private ResideMenuItem fastConnectWifi;//快速连接Wifi技术
 
     @BindView(id = R.id.add)
     public static ImageButton add;
@@ -131,6 +132,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         settingFrame = new ResideMenuItem(this , R.drawable.icon_setting , "设置");
         helpFrame = new ResideMenuItem(this , R.drawable.icon_faq , "帮助");
         aboutFrame = new ResideMenuItem(this , R.drawable.icon_about , "关于");
+        fastConnectWifi = new ResideMenuItem(this, R.drawable.icon_about, "快速连接");
 
         mainFrame.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -149,25 +151,32 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             public void onClick(View v){
                 startActivity(new Intent(context, SettingActivity.class));
             }
-        });
+        });//设置
         helpFrame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 startActivity(new Intent(context, ContactUsActivity.class));
             }
-        });
+        });//帮助
         aboutFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context, AboutActivity.class));
             }
-        });
+        });//关于
+        fastConnectWifi.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, FastConnectWifiActivity.class));
+            }
+        });//快速连接Wifi
 
         resideMenu.addMenuItem(mainFrame);
         resideMenu.addMenuItem(deviceFrame);
         resideMenu.addMenuItem(settingFrame);
         resideMenu.addMenuItem(helpFrame);
         resideMenu.addMenuItem(aboutFrame);
+        resideMenu.addMenuItem(fastConnectWifi);
 
         segmentedGroup.check(R.id.nav_actionbar_segment_device);
         segmentedGroup.setOnCheckedChangeListener(this);
