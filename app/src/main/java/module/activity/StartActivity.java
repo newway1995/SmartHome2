@@ -59,7 +59,7 @@ public class StartActivity extends BaseActivity{
 
     private void testData(){
         TVChannelEntity.kjdb = KJDB.create(this);
-        //TestClass.test();
+        TestClass.test();
         L.d("SharedPreference", "IS_FIRST_OPEN_ME = " + PreferenceHelper.readString(context, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, "default"));
         L.d("SharedPreference", "UnlockByWhat = " + Constant.getUnlockByWhat(context));
     }

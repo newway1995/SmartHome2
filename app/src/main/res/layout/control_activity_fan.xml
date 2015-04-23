@@ -29,9 +29,20 @@
             style="@style/none_fill_parent"
             android:background="@drawable/zerodang"
             android:layout_toLeftOf="@id/fan_switch"
+            android:layout_toStartOf="@id/fan_switch"
             android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_centerVertical="true"
             android:layout_marginTop="20dp"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/fan_time"
+            style="@style/none_fill_parent"
+            android:background="@drawable/fan_timer"
+            android:layout_below="@id/fan_change"
+            android:layout_alignRight="@id/fan_change"
+            android:layout_alignEnd="@id/fan_change"
             android:contentDescription="@string/app_name" />
 
         <ImageView
@@ -39,9 +50,22 @@
             style="@style/none_fill_parent"
             android:background="@drawable/shake"
             android:layout_toRightOf="@id/fan_switch"
+            android:layout_toEndOf="@id/fan_shake"
             android:layout_centerVertical="true"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/fan_type"
+            style="@style/none_fill_parent"
+            android:background="@drawable/fan_moon"
+            android:layout_alignRight="@id/fan_shake"
+            android:layout_alignEnd="@id/fan_change"
+            android:layout_below="@id/fan_shake"
             android:contentDescription="@string/app_name" />
     </RelativeLayout>
+
+
 </RelativeLayout>

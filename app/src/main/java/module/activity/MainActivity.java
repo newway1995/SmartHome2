@@ -335,9 +335,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      */
     private void getRaspberryFromDB(){
         raspList = mainModel.getRaspberryFromDB(context);
-        raspberryAdapter = new RaspberryAdapter(this, raspList);
-        raspListView.setAdapter(raspberryAdapter);
-        raspListView.postInvalidate();
+        if (raspList != null && raspList.size() != 0) {
+            raspberryAdapter = new RaspberryAdapter(this, raspList);
+            raspListView.setAdapter(raspberryAdapter);
+            raspListView.postInvalidate();
+        }
     }
 
     /**

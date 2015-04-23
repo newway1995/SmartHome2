@@ -123,7 +123,7 @@ public class SettingActivity extends BaseActivity{
      */
     private void switchWakeUp(boolean isNeedWakeUp){
         Constant.setWakeUp(context, isNeedWakeUp);
-        if (Constant.getWakeUp(context) == true)
+        if (Constant.getWakeUp(context))
             setting_wakeup.setBackgroundResource(R.drawable.img_switch_yes);
         else
             setting_wakeup.setBackgroundResource(R.drawable.img_switch_no);

@@ -77,10 +77,25 @@
 
 
 
+    <!--电视机指令-->
+    <string-array name="tv_open">
+        <item>开电视</item>
+        <item>电视打开</item>
+    </string-array>
+    <string-array name="tv_close">
+        <item>关闭电视</item>
+        <item>电视关</item>
+    </string-array>
+
+
+
     <!-- 打开风扇-->
     <string-array name="open_fan">
         <item>开风扇</item>
         <item>风扇打开</item>
+        <item>天气好热</item>
+        <item>天气真热</item>
+        <item>天气真是热</item>
     </string-array>
     <!-- 关闭风扇-->
     <string-array name="close_fan">
@@ -102,6 +117,10 @@
         <item>风扇调小</item>
         <item>风扇开小</item>
     </string-array>
+    <!-- 风扇定时-->
+    <string-array name="fan_time">
+        <item>风扇定时</item>
+    </string-array>
     <!-- 摇头-->
     <string-array name="shake_fan">
         <item>摇头</item>
@@ -121,6 +140,9 @@
         <item>风扇调到3档</item>
         <item>风扇开到3档</item>
     </string-array>
+
+
+
 
 
     <!-- 打开投影仪-->
@@ -181,6 +203,14 @@
         <item>指令集</item>
         <item>我的指令</item>
         <item>当前指令</item>
+    </string-array>
+
+    <!-- 开始演示-->
+    <string-array name="start_perform">
+        <item>开始表演</item>
+        <item>表演开始</item>
+        <item>开始演示</item>
+        <item>演示开始</item>
     </string-array>
 
 </resources>

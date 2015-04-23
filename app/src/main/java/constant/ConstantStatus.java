@@ -130,7 +130,7 @@ public class ConstantStatus {
         PreferenceHelper.write(context, ELEC_APP_INFO, TV_STATUS, str);
     }
     public static String getTvStatus(Context context){
-        return PreferenceHelper.readString(context, ELEC_APP_INFO, TV_STATUS, DEFAULT_INTEGER_VALUE);
+        return PreferenceHelper.readString(context, ELEC_APP_INFO, TV_STATUS, "1");
     }
 
 

@@ -52,6 +52,8 @@ public class Command {
     public static final String FAN_ADD = "FAN_ADD";
     public static final String FAN_SWITCH = "FAN_SWITCH";
     public static final String FAN_SHAKE = "FAN_SHAKE";
+    public static final String FAN_TIME = "FAN_TIME";
+    public static final String FAN_TYPE = "FAN_TYPE";
 
     /**
      * 电灯指令集

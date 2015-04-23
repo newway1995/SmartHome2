@@ -38,7 +38,7 @@ public class RaspberryAdapter extends BaseAdapter{
 
     public RaspberryAdapter(Context context,ArrayList<HashMap<String, String>> list){
         this.list = list;
-        Log.d(TAG, list.toString());
+        //Log.d(TAG, list.toString());
         inflater=LayoutInflater.from(context);
     }
 
