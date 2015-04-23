@@ -58,7 +58,11 @@ public class StringUtils {
     public int getNumberBeforePattern(final String source){
         //如果是大写的情况
         if (getChNum(source) != null && getChNum(source).length() > 0){
-            return (int)chnNum2Digit(getChNum(source));
+            if (isMinute(source)) {
+                return ((int)chnNum2Digit(getChNum(source))) * 60;
+            } else {
+                return (int)chnNum2Digit(getChNum(source));
+            }
         }
         int time = 0;//结果
         if (source.contains("秒钟") || source.contains("秒")){
@@ -91,11 +95,18 @@ public class StringUtils {
         return time;
     }
 
+    /**
+     * 是否为分钟
+     */
+    public boolean isMinute(String source) {
+        return source.contains("分钟");
+    }
+
 
     /**
      * 读取大写数字
-     * @param source
-     * @return
+     * @param source 输入源
+     * @return String
      */
     public String getChNum(String source){
         StringBuilder sb = new StringBuilder();

@@ -81,10 +81,12 @@
     <string-array name="tv_open">
         <item>开电视</item>
         <item>电视打开</item>
+        <item>电视机打开</item>
     </string-array>
     <string-array name="tv_close">
         <item>关闭电视</item>
         <item>电视关</item>
+        <item>电视机关</item>
     </string-array>
 
 

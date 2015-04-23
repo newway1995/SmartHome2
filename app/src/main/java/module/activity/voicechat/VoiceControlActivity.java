@@ -58,7 +58,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
      */
     private VoiceRecognizeUtils voiceRecognizeUtils;
     private VoiceSpeakUtils voiceSpeakUtils;
-    private List<String> commandList;
+    private List<String> commandList;//不是commandList而是resultList
 
     private ChatMsgAdapter mAdapter ;
     /* 需要显示的数据 */
@@ -114,6 +114,8 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             public void stringProcess(String str) {
                 super.stringProcess(str);
                 sendData(str, false);
+                //测试
+                //VoiceCommand.parseVoiceCommand(context, str);
                 /** 测试设置 */
                 processVoiceSetting(str);
                 /** 当前所有的指令集合 **/

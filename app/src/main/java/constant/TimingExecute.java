@@ -62,7 +62,6 @@ public class TimingExecute {
      */
     public void sendData(){
         for (CommandEntity entity : commandEntityList){
-            L.d("ThreadInfo", "4.sendData:" + entity.toString());
             mCachedThreadPool.execute(new TimingExecuteRunnable(entity));
         }
     }
@@ -77,7 +76,6 @@ public class TimingExecute {
         CommandEntity.kjdb = KJDB.create(context);
         commandEntityList = CommandEntity.queryAllByNotExecuted();
         for (CommandEntity entity : commandEntityList){
-            L.d("ThreadInfo", "3.getAllCommandEntity:" + entity);
         }
         return commandEntityList;
     }
@@ -91,6 +89,7 @@ public class TimingExecute {
             {
                 case 1://execute some commands
                     sendCommand(data.getString("command"));
+                    L.d("TimingExecute", "Send Command = " + data.getString("command"));
                     break;
             }
         }
@@ -131,7 +130,7 @@ public class TimingExecute {
      * 发送一个指令
      * @param command
      */
-    public void sendCommand(String command){
+    public void sendCommand(final String command){
 
         KJHttp kjHttp = new KJHttp();
         KJStringParams params = new KJStringParams();
@@ -148,7 +147,7 @@ public class TimingExecute {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-                Toast.makeText(context, "指令发送成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "指令[" + command + "]发送成功", Toast.LENGTH_SHORT).show();
             }
 
             @Override

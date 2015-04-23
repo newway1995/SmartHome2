@@ -23,7 +23,24 @@ public class VoiceCommand {
     private static List<String> commandList;
     /** 返回内容 */
     private static List<String> resultsList;
+    /** 多久之后执行,因为需要在后面使用到 */
+    private static int time = 0;
 
+    /**
+     * 解析全部语句,返回所有指令
+     * @param context 上下文
+     * @param source 输入源
+     * @return List<String> 返回的是FeedBack数据
+     */
+    public static List<String> parseVoiceCommand(Context context, final String source) {
+        commandList = new ArrayList<>();
+        resultsList = new ArrayList<>();
+        String[] commands = source.split("，");
+        for (String item : commands) {
+            parseVoiceItemCommand(context, item);
+        }
+        return resultsList;
+    }
 
     /**
      * 解析单条语句,返回一条指令
@@ -31,9 +48,12 @@ public class VoiceCommand {
      * @param source 输入源
      * @return List<String>
      */
-    public static List<String> parseVoiceCommand(Context context, final String source){
+    public static List<String> parseVoiceItemCommand(Context context, final String source){
+        /** 定时时间 */
+        time = StringUtils.getInstance().getNumberBeforePattern(source);
+
         commandList = new ArrayList<>();
-        resultsList = new ArrayList<>();
+        //resultsList = new ArrayList<>();
         parseAirCondition(context, source);
         parseBulb(context, source);
         parseFan(context, source);
@@ -44,9 +64,10 @@ public class VoiceCommand {
         parseTelevision(context, source);
         parseHeater(context, source);
 
-        int time = StringUtils.getInstance().getNumberBeforePattern(source);
         /** 将数据保存到数据库 **/
-        saveCommandList2DB(context, commandList, time);
+        if (commandList != null) {
+            saveCommandList2DB(context, commandList, time);
+        }
         return commandList;
     }
 
@@ -77,7 +98,7 @@ public class VoiceCommand {
         CommandEntity.kjdb = KJDB.create(context);
         for (String command : commandList){
             CommandEntity entity = new CommandEntity(command, System.currentTimeMillis(), time * 1000, false);
-            L.d("ThreadInfo", "1. saveCommandList2DB:" + entity.toString());
+            L.d("parseVoiceCommand", "1. saveCommandList2DB:" + entity.toString());
             CommandEntity.insert(entity);
         }
     }
@@ -93,7 +114,7 @@ public class VoiceCommand {
             if (source.contains(item))
             {
                 commandList.add(Command.FAN_ADD);
-                resultsList.add(",风扇已经打开了");
+                resultsList.add(",风扇" + (time == 0 ? "已经" : "马上") + "打开了");
                 break;
             }
         }
@@ -104,7 +125,7 @@ public class VoiceCommand {
             if (source.contains(item))
             {
                 commandList.add(Command.FAN_SWITCH);
-                resultsList.add(",风扇已经关闭了");
+                resultsList.add(",风扇" + (time == 0 ? "已经" : "马上") + "关闭了");
                 break;
             }
         }
@@ -116,7 +137,7 @@ public class VoiceCommand {
             if (source.contains(item))
             {
                 commandList.add(Command.FAN_ADD);
-                resultsList.add(",风扇已经调大了");
+                resultsList.add(",风扇" + (time == 0 ? "已经" : "马上") + "调大了");
                 break;
             }
         }
@@ -127,7 +148,7 @@ public class VoiceCommand {
             if (source.contains(item))
             {
                 commandList.add(Command.FAN_SHAKE);
-                resultsList.add(",风扇已经摇头了");
+                resultsList.add(",风扇" + (time == 0 ? "已经" : "马上") + "摇头了");
                 break;
             }
         }
@@ -138,7 +159,7 @@ public class VoiceCommand {
             if (source.contains(item))
             {
                 commandList.add(Command.FAN_ADD);
-                resultsList.add(",已经帮您把风扇调大了一档");
+                resultsList.add("," + (time == 0 ? "已经" : "马上") + "帮您把风扇调大了一档");
                 break;
             }
         }
@@ -150,7 +171,7 @@ public class VoiceCommand {
             {
                 commandList.add(Command.FAN_ADD);
                 commandList.add(Command.FAN_ADD);
-                resultsList.add(",已经帮您把风扇调大了两档");
+                resultsList.add("," + (time == 0 ? "已经" : "马上") + "帮您把风扇调大了两档");
                 break;
             }
         }
@@ -164,7 +185,7 @@ public class VoiceCommand {
                 commandList.add(Command.FAN_ADD);
                 commandList.add(Command.FAN_ADD);
                 commandList.add(Command.FAN_ADD);
-                resultsList.add(",已经帮您把风扇调大了三档");
+                resultsList.add("," + (time == 0 ? "已经" : "马上") + "帮您把风扇调大了三档");
                 break;
             }
         }
@@ -174,7 +195,7 @@ public class VoiceCommand {
         for (String item : times) {
             if (source.contains(item)) {
                 commandList.add(Command.FAN_TIME);
-                resultsList.add(",已经帮您将风扇定时");
+                resultsList.add("," + (time == 0 ? "已经" : "马上") + "帮您将风扇定时");
             }
         }
     }
@@ -190,7 +211,7 @@ public class VoiceCommand {
             if (source.contains(open_ac[i]))
             {
                 commandList.add(Command.AIRCONDITION_SWITCH);
-                resultsList.add(",空调已经打开了");
+                resultsList.add(",空调" + (time == 0 ? "已经" : "马上") + "打开了");
                 break;
             }
         }
@@ -202,7 +223,7 @@ public class VoiceCommand {
             if (source.contains(close_ac[i]))
             {
                 commandList.add(Command.AIRCONDITION_SWITCH);
-                resultsList.add(",空调已经关闭了");
+                resultsList.add(",空调" + (time == 0 ? "已经" : "马上") + "关闭了");
                 break;
             }
         }
@@ -214,7 +235,7 @@ public class VoiceCommand {
             if (source.contains(down_ac[i]))
             {
                 commandList.add(Command.AIRCONDITION_DOWN);
-                resultsList.add(",空调温度已经调小了");
+                resultsList.add(",空调温度" + (time == 0 ? "已经" : "马上") + "调小了");
                 break;
             }
         }
@@ -226,7 +247,7 @@ public class VoiceCommand {
             if (source.contains(up_ac[i]))
             {
                 commandList.add(Command.AIRCONDITION_UP);
-                resultsList.add(",空调温度已经调大了");
+                resultsList.add(",空调温度" + (time == 0 ? "已经" : "马上") + "调大了");
                 break;
             }
         }
@@ -295,7 +316,7 @@ public class VoiceCommand {
             if (source.contains(open_bulb[i]))
             {
                 commandList.add(Command.LIGHT_OPEN);
-                resultsList.add(",电灯已经打开了");
+                resultsList.add(",电灯" + (time == 0 ? "已经" : "马上") + "打开了");
                 break;
             }
         }
@@ -307,7 +328,7 @@ public class VoiceCommand {
             if (source.contains(close_bulb[i]))
             {
                 commandList.add(Command.LIGHT_OPEN);
-                resultsList.add(",电灯已经关闭了");
+                resultsList.add(",电灯" + (time == 0 ? "已经" : "马上") + "关闭了");
                 break;
             }
         }
@@ -324,7 +345,7 @@ public class VoiceCommand {
             if (source.contains(open_pj[i]))
             {
                 commandList.add(Command.PROJECTOR_OPEN);
-                resultsList.add(",投影仪已经打开了");
+                resultsList.add(",投影仪" + (time == 0 ? "已经" : "马上") + "打开了");
                 break;
             }
         }
@@ -336,7 +357,7 @@ public class VoiceCommand {
             if (source.contains(close_pj[i]))
             {
                 commandList.add(Command.PROJECTOR_OPEN);
-                resultsList.add(",投影仪已经关闭了");
+                resultsList.add(",投影仪" + (time == 0 ? "已经" : "马上") + "关闭了");
                 break;
             }
         }
@@ -375,7 +396,7 @@ public class VoiceCommand {
         for (String item : door_open) {
             if (source.contains(item)) {
                 commandList.add(Command.DOOR_SWITCH);
-                resultsList.add(",门已经打开");
+                resultsList.add(",门" + (time == 0 ? "已经" : "马上") + "打开");
                 break;
             }
         }
@@ -385,7 +406,7 @@ public class VoiceCommand {
         for (String item : door_close) {
             if (source.contains(item)) {
                 commandList.add(Command.DOOR_SWITCH);
-                resultsList.add(",门已经关闭");
+                resultsList.add(",门" + (time == 0 ? "已经" : "马上") + "关闭");
                 break;
             }
         }
@@ -400,7 +421,7 @@ public class VoiceCommand {
         for (String item : curtain_open) {
             if (source.contains(item)) {
                 commandList.add(Command.CURTAIN_SWITCH);
-                resultsList.add(",窗户已经打开");
+                resultsList.add(",窗户" + (time == 0 ? "已经" : "马上") + "打开");
                 break;
             }
         }
@@ -410,7 +431,7 @@ public class VoiceCommand {
         for (String item : curtain_close) {
             if (source.contains(item)) {
                 commandList.add(Command.CURTAIN_SWITCH);
-                resultsList.add(",窗户已经关闭");
+                resultsList.add(",窗户" + (time == 0 ? "已经" : "马上") + "关闭");
                 break;
             }
         }
@@ -427,7 +448,7 @@ public class VoiceCommand {
         for (String item : tv_open) {
             if (source.contains(item)) {
                 commandList.add(Command.TELEVISION_SWITCH);
-                resultsList.add(",电视机已经打开");
+                resultsList.add(",电视机" + (time == 0 ? "已经" : "马上") + "打开");
             }
         }
 
@@ -436,7 +457,7 @@ public class VoiceCommand {
         for (String item : tv_close) {
             if (source.contains(item)) {
                 commandList.add(Command.TELEVISION_SWITCH);
-                resultsList.add(",电视机已经关闭");
+                resultsList.add(",电视机" + (time == 0 ? "已经" : "马上") + "关闭");
             }
         }
     }
@@ -450,7 +471,7 @@ public class VoiceCommand {
         for (String item : heaterOpen) {
             if (source.contains(item)) {
                 commandList.add(Command.HEATER_SWITCH);
-                resultsList.add(",热水器已经开始工作了");
+                resultsList.add(",热水器" + (time == 0 ? "已经" : "马上") + "开始工作了");
             }
         }
 
