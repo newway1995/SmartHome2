@@ -30,4 +30,12 @@
         <item>调到</item>
         <item>换到</item>
     </string-array>
+
+    <string-array name="tv_program_list_jia">
+        <item>湖南卫视</item>
+        <item>北京卫视</item>
+        <item>吉林卫视</item>
+        <item>湖北卫视</item>
+        <item>中央一台</item>
+    </string-array>
 </resources>

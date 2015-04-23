@@ -76,4 +76,9 @@ public class Command {
      * 窗帘
      */
     public static final String CURTAIN_SWITCH = "CURTAIN_SWITCH";//开关
+
+    /**
+     * 热水器
+     */
+    public static final String HEATER_SWITCH = "HEATER_SWITCH";
 }

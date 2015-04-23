@@ -187,6 +187,20 @@
     </string-array>
 
 
+    <!-- 热水器-->
+    <string-array name="heater_open">
+        <item>开热水器</item>
+        <item>热水器开始工作</item>
+        <item>热水器打开</item>
+    </string-array>
+    <string-array name="heater_close">
+        <item>关热水器</item>
+        <item>关闭热水器</item>
+        <item>热水器停止</item>
+        <item>热水器关闭</item>
+    </string-array>
+
+
     <!-- 电器状态-->
     <string-array name="current_elec_status">
         <item>当前电器状态</item>

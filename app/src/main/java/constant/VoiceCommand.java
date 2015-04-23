@@ -42,6 +42,7 @@ public class VoiceCommand {
         parseCurtain(context, source);
         startPerform(context, source);
         parseTelevision(context, source);
+        parseHeater(context, source);
 
         int time = StringUtils.getInstance().getNumberBeforePattern(source);
         /** 将数据保存到数据库 **/
@@ -440,6 +441,29 @@ public class VoiceCommand {
         }
     }
 
+
+    /**
+     * 处理热水器的逻辑
+     */
+    public static void parseHeater(Context context, final String source) {
+        String[] heaterOpen = context.getResources().getStringArray(R.array.heater_open);
+        for (String item : heaterOpen) {
+            if (source.contains(item)) {
+                commandList.add(Command.HEATER_SWITCH);
+                resultsList.add(",热水器已经开始工作了");
+            }
+        }
+
+        String[] heaterClose = context.getResources().getStringArray(R.array.heater_close);
+        for (String item : heaterClose) {
+            if (source.contains(item)) {
+                commandList.add(Command.HEATER_SWITCH);
+                resultsList.add(",热水器马上停止工作");
+            }
+        }
+    }
+
+
     /**
      * 是否显示电器状态
      * @return boolean
@@ -496,6 +520,21 @@ public class VoiceCommand {
                     map.put("number", number+"");
                     return map;
                 }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 返回电视节目信息,这里需要造一个假数据
+     */
+    public static String getTVProgramInfo(Context context, final String str) {
+        String[] tvLists = context.getResources().getStringArray(R.array.tv_program_list);
+        for (String item : tvLists) {
+            if (str.contains("cctv1") || str.contains("CCTV1")) {
+                return "动物世界 : 2015-04-26 00:35\n生活早参考 : 02:28\n朝闻天下 : 06:00\n生活早参考 : 08:35\n新闻30分 : 12:00\n微笑妈妈 : 12:30\n新闻联播 : 18:59\n前情提要《别让我看见》 : 19:35\n晚间新闻 : 21:59\n撒贝宁时间 : 22:37\n";
+            } else if (str.contains("湖北卫视节目")) {
+                return "电视剧：独狼(23~29) : 00:45\n湖北新闻 : 07:00\n天生我财 : 07:56\n电视剧：婆媳的战国时代(35、40) : 12:00\n电视剧：红色(3~5) : 14:15\n新闻联播 : 18:59\n电视剧：爱的秘笈(9、15) : 19:35";
             }
         }
         return null;

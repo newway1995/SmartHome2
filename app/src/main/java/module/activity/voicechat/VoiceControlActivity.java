@@ -119,7 +119,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
                 /** 当前所有的指令集合 **/
                 commandList = VoiceCommand.parseVoiceCommand(context, str);
                 /** 定时时间 **/
-                int time = StringUtils.getInstance().getNumberBeforePattern(str);
+                //int time = StringUtils.getInstance().getNumberBeforePattern(str);
                 if (commandList != null && commandList.size() > 0) {
                     sendData(VoiceCommand.getVoiceFeedback(), true);
                     timingExecute.initThread();
@@ -157,6 +157,8 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         processTVProgramSelect(str);
         /** 设置电视节目键值对 */
         //processTVProgramSetting(str);
+        /** 用户查询电视节目列表,目前只支持湖北卫视和CCTV1 */
+        parseTVProgramSelect(str);
     }
 
     /** 是否为电视节目选择 */
@@ -188,6 +190,16 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             TVChannelEntity.insert(new TVChannelEntity(Integer.parseInt(map.get("number")), map.get("channelText"), map.get("channelRel")));
         } else {
             sendData("不好意思,小V无法明白您的意思...", true);
+        }
+    }
+
+    /**
+     * 湖北卫视和cctv1
+     */
+    private void parseTVProgramSelect(final String str) {
+        String result = VoiceCommand.getTVProgramInfo(context, str);
+        if (result != null) {
+            sendData(result, true);
         }
     }
 

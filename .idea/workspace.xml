@@ -40,21 +40,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fe73c2e-45fa-41d5-98e1-a3f3acf12a67" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/fan_timer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bulb_dark.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bulb_dark.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bulb_light.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bulb_light.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/constant/Command.java" afterPath="$PROJECT_DIR$/app/src/main/java/constant/Command.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/constant/ConstantStatus.java" afterPath="$PROJECT_DIR$/app/src/main/java/constant/ConstantStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/module/activity/controler/ControlFanActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/module/activity/controler/ControlFanActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/module/activity/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/module/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/module/view/adapter/RaspberryAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/module/view/adapter/RaspberryAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/module/activity/common/SettingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/module/activity/common/SettingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/module/activity/StartActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/module/activity/StartActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/constant/VoiceCommand.java" afterPath="$PROJECT_DIR$/app/src/main/java/constant/VoiceCommand.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/module/activity/voicechat/VoiceControlActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/module/activity/voicechat/VoiceControlActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/control_activity_fan.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/control_activity_fan.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/string_voice_setting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/string_voice_setting.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings_command.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings_command.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -112,65 +107,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ControlFanActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/controler/ControlFanActivity.java">
+      <file leaf-file-name="strings_command.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings_command.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="105" column="52" selection-start-line="105" selection-start-column="52" selection-end-line="105" selection-end-column="52" />
-              <folding>
-                <element signature="method#onOptionsItemSelected#0;class#ControlFanActivity#0" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#ControlFanActivity#0" expanded="false" />
-                <element signature="method#onStop#0;class#ControlFanActivity#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/common/SettingActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="177" column="22" selection-start-line="177" selection-start-column="22" selection-end-line="177" selection-end-column="22" />
+              <caret line="199" column="19" selection-start-line="199" selection-start-column="19" selection-end-line="199" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestClass.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/vgod/smarthome/TestClass.java">
+      <file leaf-file-name="string_voice_setting.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/string_voice_setting.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="23" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StartActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/StartActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RaspberryAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/module/view/adapter/RaspberryAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="341" column="9" selection-start-line="341" selection-start-column="9" selection-end-line="341" selection-end-column="9" />
+              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -179,8 +130,31 @@
       <file leaf-file-name="VoiceCommand.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/constant/VoiceCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63981044">
-              <caret line="537" column="37" selection-start-line="537" selection-start-column="37" selection-end-line="537" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.5292259">
+              <caret line="46" column="76" selection-start-line="46" selection-start-column="76" selection-end-line="46" selection-end-column="76" />
+              <folding>
+                <element signature="method#saveCommandList2DB#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#parseFan#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#parseAirCondition#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#parseBulb#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#parseProjector#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#parseDoor#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#parseCurtain#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#parseTelevision#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#parseHeater#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#isShowElecStatus#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#isShowCommandList#0;class#VoiceCommand#0" expanded="false" />
+                <element signature="method#startPerform#0;class#VoiceCommand#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VoiceControlActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/voicechat/VoiceControlActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="264" column="0" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -907,7 +881,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/module/activity/controler/ControlADActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_controller_bulb.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_tv_program_footer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_tv_program_header.xml" />
@@ -928,7 +901,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_fast_connect_wifi.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/module/activity/FastConnectWifiActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vgod/smarthome/TestClass.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/string_voice_setting.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/constant/Constant.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/utils/StringUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/module/database/TVChannelEntity.java" />
@@ -947,17 +919,19 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles_text.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/control_activity_heater.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/module/activity/controler/ControlHeaterActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/constant/Command.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/constant/ConstantStatus.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/module/activity/controler/ControlFanActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings_command.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/module/activity/voicechat/VoiceControlActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/module/activity/common/SettingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/control_activity_fan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/module/activity/StartActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/module/view/adapter/RaspberryAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/module/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings_command.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/constant/Command.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/string_voice_setting.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/constant/VoiceCommand.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/module/activity/voicechat/VoiceControlActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/constant/TVChannelConstant.java" />
       </list>
     </option>
   </component>
@@ -1070,24 +1044,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHome" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1909,7 +1865,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32829046" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942164" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22315437" sideWeight="0.4986945" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22315437" sideWeight="0.4986945" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18910742" sideWeight="0.49972022" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -1924,7 +1880,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39939487" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25733444" sideWeight="0.50130546" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26626325" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48562783" sideWeight="0.7300922" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48562783" sideWeight="0.7300922" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24916108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942164" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1956,11 +1912,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/login_default_avatar.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/user_activity_login.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2264,40 +2215,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/constant/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17377567">
-          <caret line="54" column="39" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings_command.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/voicechat/VoiceControlActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0130891">
-          <caret line="123" column="60" selection-start-line="123" selection-start-column="60" selection-end-line="123" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/string_voice_setting.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7356021">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/fan_moon.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -2314,9 +2231,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2685624">
+          <caret line="341" column="9" selection-start-line="341" selection-start-column="9" selection-end-line="341" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/view/adapter/RaspberryAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.164297">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/StartActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.012638231">
+          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vgod/smarthome/TestClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43917853">
+          <caret line="25" column="23" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/common/SettingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6113744">
+          <caret line="177" column="22" selection-start-line="177" selection-start-column="22" selection-end-line="177" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/controler/ControlFanActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.12164297">
           <caret line="105" column="52" selection-start-line="105" selection-start-column="52" selection-end-line="105" selection-end-column="52" />
           <folding>
             <element signature="method#onOptionsItemSelected#0;class#ControlFanActivity#0" expanded="false" />
@@ -2326,51 +2283,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/common/SettingActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/constant/Command.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="177" column="22" selection-start-line="177" selection-start-column="22" selection-end-line="177" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.72195894">
+          <caret line="82" column="61" selection-start-line="82" selection-start-column="61" selection-end-line="82" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vgod/smarthome/TestClass.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings_command.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="23" />
+          <caret line="199" column="19" selection-start-line="199" selection-start-column="19" selection-end-line="199" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/StartActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/string_voice_setting.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
+          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/view/adapter/RaspberryAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/constant/TVChannelConstant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.22906794">
+          <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/module/activity/voicechat/VoiceControlActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="341" column="9" selection-start-line="341" selection-start-column="9" selection-end-line="341" selection-end-column="9" />
+          <caret line="264" column="0" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/constant/VoiceCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63981044">
-          <caret line="537" column="37" selection-start-line="537" selection-start-column="37" selection-end-line="537" selection-end-column="37" />
-          <folding />
+        <state vertical-scroll-proportion="0.5292259">
+          <caret line="46" column="76" selection-start-line="46" selection-start-column="76" selection-end-line="46" selection-end-column="76" />
+          <folding>
+            <element signature="method#saveCommandList2DB#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#parseFan#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#parseAirCondition#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#parseBulb#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#parseProjector#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#parseDoor#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#parseCurtain#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#parseTelevision#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#parseHeater#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#isShowElecStatus#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#isShowCommandList#0;class#VoiceCommand#0" expanded="false" />
+            <element signature="method#startPerform#0;class#VoiceCommand#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
