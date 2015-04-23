@@ -7,6 +7,7 @@ import org.kymjs.aframe.ui.BindView;
 import constant.Constant;
 import module.activity.common.AboutActivity;
 import module.activity.common.ContactUsActivity;
+import module.activity.common.FastConnectWifiActivity;
 import module.activity.common.SelectControllerActivity;
 import module.activity.common.SettingActivity;
 import module.activity.common.WeatherInfoActivity;

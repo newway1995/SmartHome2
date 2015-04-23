@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/tv_background"
+    android:id="@+id/activity_heater_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <TextView
+        android:id="@+id/control_activity_text"
+        android:layout_margin="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/black_36"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="温度: "/>
+
+    <ImageView
+        android:id="@+id/heater_channel_ok"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/tv_switch"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/app_name"
+        android:layout_margin="20dp" />
+
+    <ImageView
+        android:id="@+id/heater_channel_up"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:background="@drawable/tv_up"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/app_name"
+        android:layout_above="@id/heater_channel_ok"
+        />
+
+    <ImageView
+        android:id="@+id/heater_channel_down"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:background="@drawable/tv_down"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/app_name"
+        android:layout_below="@id/heater_channel_ok"
+        />
+
+    <ImageView
+        android:id="@+id/heater_channel_left"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:background="@drawable/tv_left"
+        android:layout_toLeftOf="@id/heater_channel_ok"
+        android:layout_toStartOf="@id/heater_channel_ok"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/app_name" />
+
+    <ImageView
+        android:id="@+id/heater_channel_right"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:background="@drawable/tv_right"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/heater_channel_ok"
+        android:layout_toEndOf="@id/heater_channel_ok"
+        android:contentDescription="@string/app_name" />
+</RelativeLayout>

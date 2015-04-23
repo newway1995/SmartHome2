@@ -37,9 +37,26 @@ public class ConstantStatus {
     public static final String DOOR_SWITCH = "DOOR_SWITCH";
     //窗帘
     public static final String CURTAIN_SWITCH = "CURTAIN_SWITCH";
+    //热水器状态
+    public static final String HEATER_SWITCH = "HEATER_SWITCH";
+    public static final String HEATER_TEMP = "HEATER_TEMP";
     
     public static final String SWITCH_ON = "on";
     public static final String SWITCH_OFF = "off";
+
+    //热水器
+    public static void setHeaterSwitch(Context context, String str) {
+        PreferenceHelper.write(context, ELEC_APP_INFO, HEATER_SWITCH, str);
+    }
+    public static String getHeaterSwitch(Context context) {
+        return PreferenceHelper.readString(context, ELEC_APP_INFO, HEATER_SWITCH, SWITCH_OFF);
+    }
+    public static void setHeaterTemp(Context context,  int temp) {
+        PreferenceHelper.write(context, ELEC_APP_INFO, HEATER_TEMP, temp);
+    }
+    public static int getHeaterTemp(Context context) {
+        return PreferenceHelper.readInt(context, ELEC_APP_INFO, HEATER_TEMP, 0);
+    }
 
 
     //电灯

@@ -14,6 +14,7 @@ import module.activity.controler.ControlADActivity;
 import module.activity.controler.ControlCurtainActivity;
 import module.activity.controler.ControlDoorActivity;
 import module.activity.controler.ControlFanActivity;
+import module.activity.controler.ControlHeaterActivity;
 import module.activity.controler.ControlPJActivity;
 import module.activity.controler.ControlTVActivity;
 import module.activity.controler.ControllerBulbActivity;
@@ -45,6 +46,8 @@ public class SelectControllerActivity extends BaseActivity{
     private RelativeLayout selectCurtain;
     @BindView(id = R.id.select_controller_door, click = true)
     private RelativeLayout selectDoor;
+    @BindView(id = R.id.select_controller_heater, click = true)
+    private RelativeLayout selectHeater;
 
     @Override
     protected void initData() {
@@ -77,6 +80,11 @@ public class SelectControllerActivity extends BaseActivity{
                 break;
             case R.id.select_controller_door:
                 startActivity(new Intent(SelectControllerActivity.this, ControlDoorActivity.class));
+                break;
+            case R.id.select_controller_heater:
+                startActivity(new Intent(SelectControllerActivity.this, ControlHeaterActivity.class));
+                break;
+            default:
                 break;
         }
     }

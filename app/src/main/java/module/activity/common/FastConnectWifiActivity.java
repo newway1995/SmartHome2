@@ -1,4 +1,4 @@
-package module.activity;
+package module.activity.common;
 
 import android.content.Context;
 import android.net.wifi.ScanResult;
