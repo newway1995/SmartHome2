@@ -9,14 +9,12 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import org.kymjs.aframe.ui.BindView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import module.core.BaseActivity;
 import vgod.smarthome.R;
+
 
 /**
  * User: niuwei(nniuwei@163.com)

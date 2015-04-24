@@ -72,6 +72,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ResideMenuItem helpFrame;//帮助
     private ResideMenuItem aboutFrame;//关于
     private ResideMenuItem fastConnectWifi;//快速连接Wifi技术
+    private ResideMenuItem voiceControl;//小威语音助手
 
     @BindView(id = R.id.add)
     public static ImageButton add;
@@ -130,6 +131,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         mainFrame = new ResideMenuItem(this , R.drawable.icon_home1,"主界面");
         deviceFrame = new ResideMenuItem(this , R.drawable.icon_list , "设备列表");
+        voiceControl = new ResideMenuItem(this, R.drawable.icon_pwd, "语音助手");//小威
         settingFrame = new ResideMenuItem(this , R.drawable.icon_setting , "设置");
         helpFrame = new ResideMenuItem(this , R.drawable.icon_faq , "帮助");
         aboutFrame = new ResideMenuItem(this , R.drawable.icon_about , "关于");
@@ -171,9 +173,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 startActivity(new Intent(context, FastConnectWifiActivity.class));
             }
         });//快速连接Wifi
+        voiceControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, VoiceControlActivity.class));
+            }
+        });
 
         resideMenu.addMenuItem(mainFrame);
         resideMenu.addMenuItem(deviceFrame);
+        resideMenu.addMenuItem(voiceControl);
         resideMenu.addMenuItem(settingFrame);
         resideMenu.addMenuItem(helpFrame);
         resideMenu.addMenuItem(aboutFrame);
