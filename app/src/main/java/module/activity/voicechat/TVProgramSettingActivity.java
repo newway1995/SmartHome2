@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import module.core.BaseActivity;
-import module.view.adapter.TVProgramAdapter;
 import module.view.adapter.TVProgramSettingAdapter;
 import vgod.smarthome.R;
 

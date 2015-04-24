@@ -32,6 +32,7 @@ import module.database.TVChannelEntity;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
 import module.database.ChatMsgEntity;
+import utils.L;
 import utils.StringUtils;
 import vgod.smarthome.R;
 
@@ -65,18 +66,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     private List<ChatMsgEntity> mDataArrays = new ArrayList<>();
 
     /* =======================================测试数据===================================== */
-    private String[] msgArray = new String[]{"欢迎您使用小X语音助手O(∩_∩)O哈哈~",
-            "五分钟之后回家,帮我把空调调到24度,电视调到CCTV5频道,天快黑了,再帮我把电灯打开",
-            "收到,空调已经调到制冷模式24度,电视已经调到14台CCTV5频道,电灯已经打开,不客气哈",
-            "我要看湖南卫视",
-            "收到,电视已经调到21台湖南卫视频道",
-            "帮我把窗帘打开吧",
-            "收到,窗帘已经打开",
-            "我要睡觉了",
-            "收到,电视已经为您关闭,电灯已经为您关闭,空调已经设置到睡眠模式"};
-
-    
-    private final static int COUNT = 9;
 
     private Context context = this;
     private final String TAG = getClass().getSimpleName();
@@ -92,7 +81,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         AnnotateUtil.initBindView(this);
         initVoice();
         initData();
-        initListView();
     }
 
     @SuppressLint("NewApi")
@@ -212,12 +200,11 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
      * 初始化ListView数据
      */
     private void initListView(){
-        for(int i = 0; i < COUNT; i++) {
-            ChatMsgEntity entity = new ChatMsgEntity();
-            entity.setMsgType(i % 2 == 0);
-            entity.setText(msgArray[i]);
-            mDataArrays.add(entity);
-        }
+        ChatMsgEntity entity = new ChatMsgEntity();
+        entity.setMsgType(true);
+        entity.setText("欢迎您使用小X语音助手O(∩_∩)O哈哈~");
+        mDataArrays.add(entity);
+
         mAdapter = new ChatMsgAdapter(this, mDataArrays);
         chatListView.setAdapter(mAdapter);
         showListViewItem(mAdapter.getCount());
