@@ -154,7 +154,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         /** 是否显示当前CommandList **/
         processShowCommandList(str);
         /** 是否为查询电视节目 **/
-        goToTVProgramActivity(str);
+        //goToTVProgramActivity(str);
         /** 是否为电视节目选择 */
         processTVProgramSelect(str);
         /** 设置电视节目键值对 */
@@ -192,10 +192,8 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
 
     /** 设置电视节目键值对 */
     private void processTVProgramSetting(final String str) {
-        HashMap<String, String> map = VoiceCommand.parseTVProgramSetting(context, str);
-        TVChannelEntity.kjdb = KJDB.create(this);
-        if (map != null) {
-            TVChannelEntity.insert(new TVChannelEntity(Integer.parseInt(map.get("number")), map.get("channelText"), map.get("channelRel")));
+        if (VoiceCommand.parseTVProgramSetting(context, str)) {
+            startActivity(new Intent(VoiceControlActivity.this, TVProgramSettingActivity.class));
         }
     }
 

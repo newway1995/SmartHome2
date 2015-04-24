@@ -131,11 +131,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         mainFrame = new ResideMenuItem(this , R.drawable.icon_home1,"主界面");
         deviceFrame = new ResideMenuItem(this , R.drawable.icon_list , "设备列表");
-        voiceControl = new ResideMenuItem(this, R.drawable.icon_pwd, "语音助手");//小威
+        voiceControl = new ResideMenuItem(this, R.drawable.voice_control_icon, "语音助手");//小威
         settingFrame = new ResideMenuItem(this , R.drawable.icon_setting , "设置");
         helpFrame = new ResideMenuItem(this , R.drawable.icon_faq , "帮助");
         aboutFrame = new ResideMenuItem(this , R.drawable.icon_about , "关于");
-        fastConnectWifi = new ResideMenuItem(this, R.drawable.icon_about, "快速连接");
+        fastConnectWifi = new ResideMenuItem(this, R.drawable.fast_connect, "快速连接");
 
         mainFrame.setOnClickListener(new View.OnClickListener(){
             @Override

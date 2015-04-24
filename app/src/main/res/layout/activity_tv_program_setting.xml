@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light"
+    android:id="@+id/tv_program_setting_contentLayout">
+    <ListView
+        android:id="@+id/tv_program_setting_listView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:layout_margin="5dp"
+        android:divider="@drawable/doct_list_item_divider"
+        android:scrollbars="none"/>
+    <Button
+        android:id="@+id/tv_program_setting_confirm"
+        style="@style/width_fill_parent"
+        android:layout_margin="10dp"
+        android:background="@drawable/corners_white"
+        android:text="@string/lockpattern_confirm_button_text"
+        android:gravity="center"
+        android:textColor="@color/red_dark"
+        android:textSize="24sp"
+        android:layout_below="@id/activity_connect_wifi_password"
+        />
+</LinearLayout>

@@ -579,23 +579,10 @@ public class VoiceCommand {
      * 电视节目键值对设置<湖南卫视是13频道> .+是\\d{0,3}频道
      * @param context 上下文
      * @param source  输入源
-     * @return HashMap
+     * @return boolean
      */
-    public static HashMap<String, String> parseTVProgramSetting(Context context, final String source) {
-        String channelText = isContainArray(context, source, R.array.tv_program_list);
-        if (Constant.REGEX_PROGRAM_SETTING.matcher(source).matches() && channelText != null) {
-            HashMap<String, String> map = new HashMap<>();
-            /** 放置频道Text《湖南卫视》 */
-            map.put("channelText", channelText);
-            int number = StringUtils.getInstance().getChannelNumberFromString(source);
-            /** 放置频道Number 13 */
-            map.put("number", number+"");
-            /** 读取简写值 */
-            String channelRel = context.getResources().getStringArray(R.array.tv_program_rel_list)[getIndexInArray(context, source, R.array.tv_program_list)];
-            map.put("channelRel", channelRel);
-            return map;
-        }
-        return null;
+    public static boolean parseTVProgramSetting(Context context, final String source) {
+        return source.contains("电视节目设置");
     }
 
     /**

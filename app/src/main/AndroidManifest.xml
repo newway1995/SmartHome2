@@ -124,6 +124,9 @@
         <activity android:name="module.activity.voicechat.TVProgramActivity"
             android:label="电视节目单">
         </activity>
+        <activity android:name="module.activity.voicechat.TVProgramSettingActivity"
+            android:label="电视节目设置">
+        </activity>
 
         <!--common模块-->
         <activity android:name="module.activity.common.AboutActivity"            

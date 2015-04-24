@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_light">
+    <EditText
+        android:id="@+id/list_item_tv_program_setting_channel"
+        android:inputType="text"
+        android:layout_marginLeft="20dp"
+        android:padding="10dp"
+        android:background="@drawable/bg_edittext"
+        android:gravity="center_vertical"
+        android:textAppearance="@style/black_18"
+        android:hint="电视频道名称"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/list_item_tv_program_setting_number"
+        android:inputType="number"
+        android:background="@drawable/bg_edittext"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:gravity="center_vertical"
+        android:textAppearance="@style/black_18"
+        android:hint="数字"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
