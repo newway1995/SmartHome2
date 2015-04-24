@@ -71,6 +71,9 @@ public class VoiceCommand {
             if (time == 0 && lastTime != 0) {
                 saveCommandList2DB(context, commandList, lastTime);
             } else {
+                if (time >= 5) {//考虑到网络延迟,将减少两秒钟的时间
+                    time -=2;
+                }
                 saveCommandList2DB(context, commandList, time);
             }
         }
@@ -599,6 +602,7 @@ public class VoiceCommand {
      * 开始演示
      */
     public static void startPerform(Context context, final String source) {
+        //int time = StringUtils.getInstance().getNumberBeforePattern(source);
         String[] content = context.getResources().getStringArray(R.array.start_perform);
         for (String item : content) {
             /** 开始演示 */

@@ -5,9 +5,10 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import org.kymjs.aframe.ui.BindView;
 
@@ -29,7 +30,7 @@ public class FastConnectWifiActivity extends BaseActivity{
     @BindView(id = R.id.activity_connect_wifi_password)
     private EditText wifiPassword;
     @BindView(id = R.id.activity_connect_wifi_submit, click = true)
-    private ImageView wifiConnect;
+    private Button wifiConnect;
     @Override
     protected void initData() {
         super.initData();
@@ -69,7 +70,13 @@ public class FastConnectWifiActivity extends BaseActivity{
     private void loginWifi(String username, String password) {
         Debug("UserName = " + username);
         Debug("PassWord = " + password);
-        //传递 wifi 信息
+        //一秒钟之后提示连接成功
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                Toast("连接成功");
+                wifiPassword.setText("");
+            }
+        }, 1000);
     }
 
     /**

@@ -34,7 +34,7 @@ public class Constant {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
     public static final String EMPTY_STRING = "";//空字符串
-    public static final Pattern REGEX_PROGRAM_SETTING = Pattern.compile(".+为.*频道.*");
+    public static final Pattern REGEX_PROGRAM_SETTING = Pattern.compile(".+等于.*");
 
     public static final String IS_FIRST_OPEN_ME = "is_first_open_me";//是否为第一次打开
 

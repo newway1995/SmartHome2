@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/tv_background">
 
     <EditText
         android:id="@+id/activity_connect_wifi_password"
         android:hint="Wifi密码"
         android:inputType="textPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         />
@@ -15,16 +17,23 @@
     <EditText
         android:id="@+id/activity_connect_wifi_username"
         android:inputType="text"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_above="@id/activity_connect_wifi_password"
         android:layout_marginBottom="20dp"/>
 
-    <ImageView
+    <Button
         android:id="@+id/activity_connect_wifi_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/activity_connect_wifi_password"/>
+        style="@style/width_fill_parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/corners_white"
+        android:text="@string/lockpattern_confirm_button_text"
+        android:gravity="center"
+        android:textColor="@color/red_dark"
+        android:textSize="24sp"
+        android:layout_below="@id/activity_connect_wifi_password"
+        />
+
 </RelativeLayout>
