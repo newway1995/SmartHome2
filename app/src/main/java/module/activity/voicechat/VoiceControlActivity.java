@@ -167,8 +167,12 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     private void processTVProgramSelect(final String str) {
         HashMap<String, String> map = VoiceCommand.parseTVProgramSelect(context, str);
         if (map != null) {
-            sendData(map.get("channelText"), true);
-            sendData(map.get("number"), true);
+            if (map.get("error") != null) {
+                sendData("小威找不到您要的电视节目", true);
+            } else {
+                sendData(map.get("channelText"), true);
+                sendData(map.get("number"), true);
+            }
         }
     }
 

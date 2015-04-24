@@ -25,6 +25,8 @@ public class VoiceCommand {
     private static List<String> resultsList;
     /** 多久之后执行,因为需要在后面使用到 */
     private static int time = 0;
+    /** 保存前一次的时间 */
+    private static int lastTime = time;
 
     /**
      * 解析全部语句,返回所有指令
@@ -66,8 +68,14 @@ public class VoiceCommand {
 
         /** 将数据保存到数据库 **/
         if (commandList != null) {
-            saveCommandList2DB(context, commandList, time);
+            if (time == 0 && lastTime != 0) {
+                saveCommandList2DB(context, commandList, lastTime);
+            } else {
+                saveCommandList2DB(context, commandList, time);
+            }
         }
+        lastTime = time;//经过了修改
+
         return commandList;
     }
 
@@ -542,8 +550,11 @@ public class VoiceCommand {
                     return map;
                 }
             }
+            //不包含这种电视台
+            map.put("error", "error");
+            return map;
         }
-        return null;
+        return null;//不属于这种类型的语句
     }
 
     /**
@@ -592,12 +603,12 @@ public class VoiceCommand {
         for (String item : content) {
             /** 开始演示 */
             if (source.contains(item)) {
-                commandList.add(Command.LIGHT_OPEN);
-                resultsList.add(",电灯已经打开");
-                commandList.add(Command.FAN_SWITCH);
-                resultsList.add(",电风扇已经关闭");
                 commandList.add(Command.TELEVISION_SWITCH);
                 resultsList.add(",电视已经打开");
+                commandList.add(Command.FAN_SWITCH);
+                resultsList.add(",电风扇已经关闭");
+                commandList.add(Command.LIGHT_OPEN);
+                resultsList.add(",电灯已经打开");
                 break;
             }
         }
