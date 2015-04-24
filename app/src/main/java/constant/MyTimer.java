@@ -56,8 +56,8 @@ public class MyTimer {
      * 发送一个指令
      * @param command
      */
-    public void sendCommand(String command){
-        if (isTimer == true)//如果产生了定时器则不发送指令
+    public void sendCommand(final String command){
+        if (isTimer)//如果产生了定时器则不发送指令
         {
             commandList.add(command);
             return;
@@ -78,7 +78,7 @@ public class MyTimer {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-                Toast.makeText(context, "指令发送成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "指令[" + command + "]发送成功", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -153,7 +153,7 @@ public class MyTimer {
      * @param time
      */
     public void setTimerAndTimerMillisecond(boolean flag, int time){
-        if (flag == false){
+        if (!flag){
             isTimer = false;
             timerMilliscond = 0;
         }

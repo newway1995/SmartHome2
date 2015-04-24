@@ -158,7 +158,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         /** 是否为电视节目选择 */
         processTVProgramSelect(str);
         /** 设置电视节目键值对 */
-        //processTVProgramSetting(str);
+        processTVProgramSetting(str);
         /** 用户查询电视节目列表,目前只支持湖北卫视和CCTV1 */
         parseTVProgramSelect(str);
     }
@@ -170,8 +170,10 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             if (map.get("error") != null) {
                 sendData("小威找不到您要的电视节目", true);
             } else {
-                sendData(map.get("channelText"), true);
-                sendData(map.get("number"), true);
+                int number = Integer.parseInt(map.get("number"));
+                sendData("小威已经帮您换到了" + map.get("channelText") + number + "频道", true);
+                myTimer.setTimerAndTimerMillisecond(false, 0);
+                myTimer.sendCommand(Command.TELEVISION_CHANNEL + number);
             }
         }
     }
@@ -194,8 +196,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         TVChannelEntity.kjdb = KJDB.create(this);
         if (map != null) {
             TVChannelEntity.insert(new TVChannelEntity(Integer.parseInt(map.get("number")), map.get("channelText"), map.get("channelRel")));
-        } else {
-            sendData("不好意思,小V无法明白您的意思...", true);
         }
     }
 

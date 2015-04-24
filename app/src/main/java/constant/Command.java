@@ -33,6 +33,7 @@ public class Command {
     public static final String TELEVISION_DOWN_VOL = "TELEVISION_DOWN_VOL";
     public static final String TELEVISION_UP_CHANNEL = "TELEVISION_UP_CHANNEL";
     public static final String TELEVISION_DOWN_CHANNEL = "TELEVISION_DOWN_CHANNEL";
+    public static final String TELEVISION_CHANNEL = "TELEVISION_";
     public static final String TELEVISION_ONE = "TELEVISION_1";
     public static final String TELEVISION_TWO = "TELEVISION_2";
     public static final String TELEVISION_THREE = "TELEVISION_3";
