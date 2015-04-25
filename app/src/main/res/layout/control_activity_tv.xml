@@ -171,7 +171,7 @@
                 android:id="@+id/tv_show_program"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:background="@drawable/tv_switch"
+                android:background="@drawable/tv_switch_setting"
                 android:layout_centerInParent="true"
                 />
         </RelativeLayout>

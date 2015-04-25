@@ -35,8 +35,17 @@
         android:id="@+id/main_activity_import_menu"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-
     </module.core.ui.ImportMenuView>
+
+    <ImageView
+        android:id="@+id/activity_main_voice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/activity_main_voice"
+        android:contentDescription="@string/app_name"/>
 
     <ListView
         android:id="@+id/rasp_list"

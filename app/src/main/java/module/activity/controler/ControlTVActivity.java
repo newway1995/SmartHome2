@@ -286,6 +286,7 @@ public class ControlTVActivity extends BaseActivity{
                     String endTime = jsonObject.getString("end_time");
                     Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.login_default_avatar);
                     Intent intent = new Intent(context, TVProgramActivity.class);
+                    //弹出框
                     ViewUtils.getInstance().showNotification(context, pName, cName +
                             "  " + pName + "  " + startTime, largeIcon, intent, 12);
                 } catch (Exception e) {

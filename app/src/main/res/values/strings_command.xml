@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- 开灯-->
     <string-array name="open_bulb">
         <item>开灯</item>
+        <item>开启灯</item>
         <item>开电灯</item>
-        <item>把灯打开</item>
-        <item>把电灯打开</item>
-        <item>把灯泡打开</item>
+        <item>灯打开</item>
+        <item>灯开</item>
+        <item>灯泡打开</item>
+        <item>灯泡开</item>
         <item>芝麻开灯</item>
         <item>好黑</item>
         <item>看不见</item>
@@ -14,47 +17,56 @@
     <!-- 关灯-->
     <string-array name="close_bulb">
         <item>关灯</item>
-        <item>把灯关</item>
-        <item>把电灯关</item>
-        <item>把灯泡关</item>
+        <item>关了灯</item>
+        <item>熄灯</item>
+        <item>熄灭灯</item>
+        <item>熄灭电灯</item>
+        <item>熄了灯</item>
+        <item>熄了电灯</item>
+        <item>关闭灯</item>
+        <item>关闭电灯</item>
+        <item>灯关</item>
+        <item>灯泡关</item>
     </string-array>
 
 
     <!-- 开空调-->
     <string-array name="open_air_condition">
-        <item>把空调打开</item>
-        <item>打开空调</item>
+        <item>空调打开</item>
+        <item>空调开</item>
         <item>开空调</item>
+        <item>开启空调</item>
     </string-array>
     <!-- 关空调-->
     <string-array name="close_air_condition">
-        <item>把空调关</item>
+        <item>空调关</item>
+        <item>关空调</item>
         <item>关闭空调</item>
         <item>关了空调</item>
     </string-array>
     <!-- 调大-->
     <string-array name="down_air_condition">
-        <item>调大</item>
-        <item>增大</item>
-        <item>开大</item>
+        <item>空调调大</item>
+        <item>空调增大</item>
+        <item>空调开大</item>
     </string-array>
     <!-- 调小-->
     <string-array name="up_air_condition">
-        <item>调小</item>
-        <item>减小</item>
-        <item>开小</item>
+        <item>空调调小</item>
+        <item>空调减小</item>
+        <item>空调开小</item>
     </string-array>
     <!-- 空调制冷模式-->
     <string-array name="cold_mode">
-        <item>制冷</item>
+        <item>空调制冷</item>
     </string-array>
     <!-- 空调制热模式-->
     <string-array name="hot_mode">
-        <item>制热</item>
+        <item>空调制热</item>
     </string-array>
     <!-- 空调除湿模式-->
     <string-array name="drop_mode">
-        <item>除湿</item>
+        <item>空调除湿</item>
     </string-array>
     <!-- 空调度数-->
     <string-array name="air_condition_degree">
@@ -80,11 +92,19 @@
     <!--电视机指令-->
     <string-array name="tv_open">
         <item>开电视</item>
+        <item>开了电视</item>
+        <item>开启电视</item>
         <item>电视打开</item>
+        <item>电视开</item>
+        <item>我要看电视</item>
+        <item>我想看电视</item>
         <item>电视机打开</item>
+        <item>电视机开</item>
     </string-array>
     <string-array name="tv_close">
         <item>关闭电视</item>
+        <item>关了电视</item>
+        <item>关电视</item>
         <item>电视关</item>
         <item>电视机关</item>
     </string-array>
@@ -94,34 +114,54 @@
     <!-- 打开风扇-->
     <string-array name="open_fan">
         <item>开风扇</item>
+        <item>开电扇</item>
+        <item>开电风扇</item>
+        <item>开了风扇</item>
+        <item>开了电风扇</item>
+        <item>开了电扇</item>
+        <item>开启风扇</item>
+        <item>开启电风扇</item>
+        <item>开启电扇</item>
+        <item>风扇开</item>
         <item>风扇打开</item>
         <item>天气好热</item>
+        <item>天气热</item>
         <item>天气真热</item>
         <item>天气真是热</item>
     </string-array>
     <!-- 关闭风扇-->
     <string-array name="close_fan">
         <item>关闭风扇</item>
+        <item>关闭电风扇</item>
+        <item>关闭电扇</item>
+        <item>关了电风扇</item>
         <item>关了风扇</item>
+        <item>关了电扇</item>
+        <item>关电风扇</item>
         <item>关风扇</item>
+        <item>关电扇</item>
         <item>风扇关</item>
+        <item>电扇关</item>
     </string-array>
     <!-- 调大风扇-->
     <string-array name="add_fan">
-        <item>调大风扇</item>
-        <item>加大风扇</item>
+        <item>大风扇</item>
+        <item>风扇大</item>
         <item>风扇开大</item>
+        <item>风扇调大</item>
+        <item>风扇增大</item>
     </string-array>
     <!-- 调小风扇-->
     <string-array name="minus_fan">
-        <item>调小风扇</item>
-        <item>减小风扇</item>
+        <item>小风扇</item>
         <item>风扇调小</item>
         <item>风扇开小</item>
+        <item>风扇减小</item>
     </string-array>
     <!-- 风扇定时-->
     <string-array name="fan_time">
         <item>风扇定时</item>
+        <item>定时风扇</item>
     </string-array>
     <!-- 摇头-->
     <string-array name="shake_fan">
@@ -142,8 +182,6 @@
         <item>风扇调到3档</item>
         <item>风扇开到3档</item>
     </string-array>
-
-
 
 
 
@@ -168,9 +206,12 @@
         <item>拉远</item>
     </string-array>
 
+
+
     <!-- 门禁和窗帘-->
     <string-array name="door_open">
         <item>开门</item>
+        <item>开启门</item>
         <item>门打开</item>
     </string-array>
     <string-array name="door_close">
@@ -180,6 +221,7 @@
     </string-array>
     <string-array name="curtain_open">
         <item>开窗帘</item>
+        <item>开启窗帘</item>
         <item>窗帘打开</item>
     </string-array>
     <string-array name="curtain_close">

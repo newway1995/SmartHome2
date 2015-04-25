@@ -20,6 +20,8 @@ import org.kymjs.aframe.utils.SystemTool;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+
 import constant.Command;
 import constant.ConstantStatus;
 import constant.MyTimer;
@@ -65,7 +67,15 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     /* 需要显示的数据 */
     private List<ChatMsgEntity> mDataArrays = new ArrayList<>();
 
-    /* =======================================测试数据===================================== */
+    private String[] voiceCommandReturn = new String[]{
+            "听不懂",
+            "好好说话",
+            "什么?",
+            "请说普通话",
+            "What?",
+            "再说一遍吧",
+            "没听清楚"
+    };
 
     private Context context = this;
     private final String TAG = getClass().getSimpleName();
@@ -114,11 +124,8 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
                     sendData(VoiceCommand.getVoiceFeedback(), true);
                     timingExecute.initThread();
                     timingExecute.sendData();
-                } else if (StringUtils.getInstance().hasCCTV(str)) {
-                    sendData("小威帮您找到了CCTV节目表哦~", true);
-                    myTimer.setTimer(true);
-                    myTimer.setTimerMilliscond(5000);
-                    myTimer.sendCommand(Command.TELEVISION_UP_VOL);
+                } else if (commandList == null || commandList.size() == 0) {
+                    sendData(voiceCommandReturn[new Random().nextInt(voiceCommandReturn.length)], true);
                 }
             }
         });
@@ -137,6 +144,8 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
      * 封装一个函数解决非指令发送的问题
      */
     private void processVoiceSetting(final String str) {
+        /** 小威再见 */
+        closeVoice(str);
         /** 是否显示电器连接状态 **/
         processShowElecStatus(str);
         /** 是否显示当前CommandList **/
@@ -202,7 +211,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     private void initListView(){
         ChatMsgEntity entity = new ChatMsgEntity();
         entity.setMsgType(true);
-        entity.setText("欢迎您使用小X语音助手O(∩_∩)O哈哈~");
+        entity.setText("欢迎您使用小威语音助手O(∩_∩)O哈哈~");
         mDataArrays.add(entity);
 
         mAdapter = new ChatMsgAdapter(this, mDataArrays);
@@ -263,6 +272,16 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             Intent intent = new Intent(context, TVProgramActivity.class);
             intent.putExtra("code", TVChannelConstant.WhichChannel(string));
             startActivity(intent);
+        }
+    }
+
+    /**
+     * 小威再见
+     * @param source 输入源
+     */
+    private void closeVoice(final String source) {
+        if (source.contains("再见")) {
+            finish();
         }
     }
 

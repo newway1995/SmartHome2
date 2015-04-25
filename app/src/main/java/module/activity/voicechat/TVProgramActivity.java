@@ -26,7 +26,10 @@ import org.kymjs.aframe.ui.BindView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import android.os.Handler;
 
+import constant.Command;
+import constant.MyTimer;
 import module.core.BaseActivity;
 import module.view.adapter.TVProgramAdapter;
 import utils.L;
@@ -115,11 +118,13 @@ public class TVProgramActivity extends BaseActivity{
     private View footer;
     private TVProgramAdapter mAdapter;
     private WrapperExpandableListAdapter wrapperAdapter;
+    private MyTimer myTimer;
 
     @Override
     protected void initData() {
         super.initData();
         kjHttp = new KJHttp();
+        myTimer = new MyTimer(context);//发送指令
         tvProgram = new ArrayList<>();
         tvChannels = new ArrayList<>();
         getDataFromNet();
@@ -127,9 +132,6 @@ public class TVProgramActivity extends BaseActivity{
         wrapperAdapter = new WrapperExpandableListAdapter(mAdapter);
         mlistView.setAdapter(wrapperAdapter);
 
-        for(int i = 0; i < wrapperAdapter.getGroupCount(); i++) {
-            //mlistView.expandGroup(i);
-        }
 
         mlistView.setOnScrollFloatingGroupListener(new FloatingGroupExpandableListView.OnScrollFloatingGroupListener() {
 
@@ -173,6 +175,26 @@ public class TVProgramActivity extends BaseActivity{
 
             }
         });
+
+        controlTVOpen();
+    }
+
+    /**
+     * 模拟电视节打开
+     */
+    private void controlTVOpen() {
+        if (getIntent() == null) {
+            return;
+        }
+        myTimer.setTimer(false);
+        myTimer.sendCommand(Command.TELEVISION_SWITCH);//开电视机
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                myTimer.sendCommand(Command.TELEVISION_FIVE);//开电视机
+            }
+        }, 5000);
+        Toast("即将为您打开电视机");
     }
 
     @Override

@@ -66,8 +66,9 @@ public class FastConnectWifiActivity extends BaseActivity{
      * @param password Wifi 密码
      */
     private void loginWifi(String username, String password) {
-        Debug("UserName = " + username);
-        Debug("PassWord = " + password);
+        if (username == null || username.contains("") || password == null || password.contains("")) {
+            return ;
+        }
         //一秒钟之后提示连接成功
         new Handler().postDelayed(new Runnable() {
             public void run() {

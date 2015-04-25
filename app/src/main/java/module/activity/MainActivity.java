@@ -65,6 +65,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private RadioButton deviceRadio; //设备
     @BindView(id = R.id.nav_actionbar_segment_scene , click = true)
     private RadioButton sceneRadio;//场景
+    @BindView(id = R.id.activity_main_voice, click = true)
+    private ImageView activity_main_voice;
 
     private ResideMenuItem mainFrame;//主界面
     private ResideMenuItem deviceFrame;//设备列表
@@ -97,7 +99,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private Context context = this;
     private MainModel mainModel = new MainModel();
     /** 语音唤醒 **/
-    private WakeUpControl mWakeUpControl;
+    //private WakeUpControl mWakeUpControl;
 
 
     @Override
@@ -108,7 +110,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         AnnotateUtil.initBindView(this);
         initView();
         initData();
-        initWakeUp();
+        //initWakeUp();
     }
 
     private boolean isReset = false;//是否重置到nav_actionbar_segment_device
@@ -220,7 +222,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     /**
      * 初始化唤醒
      */
-    private void initWakeUp(){
+    /*private void initWakeUp(){
         if (!Constant.getWakeUp(context))
             return;
         mWakeUpControl = new WakeUpControl(this);
@@ -230,19 +232,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 super.stringProcess(str);
                 startActivity(new Intent(MainActivity.this, VoiceControlActivity.class));
                 mWakeUpControl.stop();
-
             }
         });
         mWakeUpControl.startSpeak();
-    }
+    }*/
 
     @Override
     protected void onResume() {
         super.onResume();
         if (!Constant.getWakeUp(context))
             return;
-        initWakeUp();
-        mWakeUpControl.startSpeak();
+        //initWakeUp();
+        //mWakeUpControl.startSpeak();
     }
 
 
@@ -256,6 +257,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.nav_actionbar_more:
                 startActivity(new Intent(context, WeatherInfoActivity.class));
                 overridePendingTransition(R.anim.activity_open_in, R.anim.activity_open_exist);
+                break;
+            case R.id.activity_main_voice:
+                startActivity(new Intent(MainActivity.this, VoiceControlActivity.class));
                 break;
         }
     }
