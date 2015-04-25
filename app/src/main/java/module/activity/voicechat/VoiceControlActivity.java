@@ -12,8 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.iflytek.sunflower.FlowerCollector;
-
-import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.ui.AnnotateUtil;
 import org.kymjs.aframe.ui.BindView;
 import org.kymjs.aframe.utils.SystemTool;
@@ -21,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-
 import constant.Command;
 import constant.ConstantStatus;
 import constant.MyTimer;
@@ -30,12 +27,9 @@ import constant.TimingExecute;
 import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
-import module.database.TVChannelEntity;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
 import module.database.ChatMsgEntity;
-import utils.L;
-import utils.StringUtils;
 import vgod.smarthome.R;
 
 /**
@@ -82,6 +76,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     //定时器
     private MyTimer myTimer;
     private TimingExecute timingExecute;
+    private boolean isReturnData = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +107,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
             public void stringProcess(String str) {
                 super.stringProcess(str);
                 sendData(str, false);
+                isReturnData = true;//默认需要返回数据
                 //测试
                 //VoiceCommand.parseVoiceCommand(context, str);
                 /** 测试设置 */
@@ -124,8 +120,9 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
                     sendData(VoiceCommand.getVoiceFeedback(), true);
                     timingExecute.initThread();
                     timingExecute.sendData();
-                } else if (commandList == null || commandList.size() == 0) {
+                } else if ((commandList == null || commandList.size() == 0) && isReturnData) {
                     sendData(voiceCommandReturn[new Random().nextInt(voiceCommandReturn.length)], true);
+                    isReturnData = true;
                 }
             }
         });
@@ -171,6 +168,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
                 sendData("小威已经帮您换到了" + map.get("channelText") + number + "频道", true);
                 myTimer.setTimerAndTimerMillisecond(false, 0);
                 myTimer.sendCommand(Command.TELEVISION_CHANNEL + number);
+                isReturnData = false;
             }
         }
     }
@@ -281,6 +279,7 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
      */
     private void closeVoice(final String source) {
         if (source.contains("再见")) {
+            isReturnData = false;
             finish();
         }
     }

@@ -71,7 +71,7 @@ public class VoiceCommand {
             if (time == 0 && lastTime != 0) {
                 saveCommandList2DB(context, commandList, lastTime);
             } else {
-                if (time >= 3) {//考虑到网络延迟,将减少两秒钟的时间
+                if (time > 3) {//考虑到网络延迟,将减少两秒钟的时间
                     time -= 1;
                 }
                 saveCommandList2DB(context, commandList, time);
