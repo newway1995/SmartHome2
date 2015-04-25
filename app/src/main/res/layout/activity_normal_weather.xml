@@ -53,6 +53,6 @@
         android:layout_gravity="center_horizontal|bottom"
         android:drawablePadding="10dp"
         android:layout_marginTop="50dp"
-        android:text="今天12:08发布"/>
+        android:text="今天10:08发布"/>
 
 </LinearLayout>
