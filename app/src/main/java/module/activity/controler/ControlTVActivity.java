@@ -267,33 +267,12 @@ public class ControlTVActivity extends BaseActivity{
      * 获取推送数据
      */
     private void getPushData() {
-        kjHttp = new KJHttp();
-        KJStringParams params = new KJStringParams();
-        params.put("device", "PHONE");
-        params.put("action", "GET_PUSH");
-        params.put("rasp_ids", "123456");
-        kjHttp.post(context, Constant.HTTP_SINA_API, params, new StringCallBack() {
-            @Override
-            public void onSuccess(String s) {
-                Debug(s);
-                try {
-                    JSONObject pushObj = new JSONObject(s);
-                    JSONArray pushArray = pushObj.getJSONArray("push");
-                    JSONObject jsonObject = pushArray.getJSONObject(0);
-                    String cName = jsonObject.getString("cName");
-                    String pName = jsonObject.getString("pName");
-                    String startTime = jsonObject.getString("start_time");
-                    String endTime = jsonObject.getString("end_time");
-                    Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.login_default_avatar);
-                    Intent intent = new Intent(context, TVProgramActivity.class);
-                    //弹出框
-                    ViewUtils.getInstance().showNotification(context, pName, cName +
-                            "  " + pName + "  " + startTime, largeIcon, intent, 12);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.login_default_avatar);
+        Intent intent = new Intent(context, TVProgramActivity.class);
+        //弹出框
+        ViewUtils.getInstance().showNotification(context,
+                "CCTV1", "动画片" +
+                "  " + "动画片" + "  " + "动画片", largeIcon, intent, 12);
     }
 
     @Override

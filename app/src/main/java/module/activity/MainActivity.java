@@ -243,6 +243,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if (!Constant.getWakeUp(context))
             return;
         //initWakeUp();
+
         //mWakeUpControl.startSpeak();
     }
 
