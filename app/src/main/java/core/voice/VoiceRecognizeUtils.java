@@ -46,13 +46,11 @@ public class VoiceRecognizeUtils {
     private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
     //引擎类型 云端
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
-    // 语音+安装助手类
-    private ApkInstaller mInstaller;
     private SharedPreferences mSharedPreferences;
 
     /**
      * 构造函数
-     * @param context
+     * @param context Context
      */
     public VoiceRecognizeUtils(Context context) {
         this.context = context;
@@ -75,7 +73,6 @@ public class VoiceRecognizeUtils {
 
     /**
      * 参数设置
-     * @return
      */
     public void setParam() {
         // 清空参数
@@ -187,8 +184,6 @@ public class VoiceRecognizeUtils {
 
     /**
      * 解析语音转化的文字结果
-     * @param results
-     * @return
      */
     private String parseResult(RecognizerResult results){
         String text = VoiceJsonParser.parseIatResult(results.getResultString());
@@ -205,7 +200,7 @@ public class VoiceRecognizeUtils {
 
         mIatResults.put(sn, text);
 
-        StringBuffer resultBuffer = new StringBuffer();
+        StringBuilder resultBuffer = new StringBuilder();
         for (String key : mIatResults.keySet()) {
             resultBuffer.append(mIatResults.get(key));
         }
@@ -216,7 +211,7 @@ public class VoiceRecognizeUtils {
      * 针对调用Activity的点击事件
      */
     public void startSpeak(){
-        int ret = 0; // 函数调用返回值
+        int ret; // 函数调用返回值
 
         mIatResults.clear();
         boolean isShowDialog = mSharedPreferences.getBoolean(
@@ -233,6 +228,15 @@ public class VoiceRecognizeUtils {
             } else {
                 Toast.makeText(context,"请开始说话…", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    /**
+     * 停止说话
+     */
+    public void stopSpeak() {
+        if (mIat.isListening()) {
+            mIat.stopListening();
         }
     }
 

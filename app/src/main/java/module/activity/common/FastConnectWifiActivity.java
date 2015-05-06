@@ -13,6 +13,7 @@ import org.kymjs.aframe.ui.BindView;
 import java.util.ArrayList;
 import java.util.List;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
 
@@ -22,7 +23,7 @@ import vgod.smarthome.R;
  * Time: 09:46
  * 快速连接 Wifi 界面
  */
-public class FastConnectWifiActivity extends BaseActivity{
+public class FastConnectWifiActivity extends SwipeBackActivity {
     @BindView(id = R.id.activity_connect_wifi_username)
     private EditText wifiName;
     @BindView(id = R.id.activity_connect_wifi_password)

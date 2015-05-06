@@ -19,6 +19,7 @@ import module.activity.controler.ControlPJActivity;
 import module.activity.controler.ControlTVActivity;
 import module.activity.controler.ControllerBulbActivity;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**
@@ -27,7 +28,7 @@ import vgod.smarthome.R;
  * Time: 23:34
  * 选择遥控器界面
  */
-public class SelectControllerActivity extends BaseActivity{
+public class SelectControllerActivity extends SwipeBackActivity {
 
     @BindView(id = R.id.activity_normal_select_controller_id)
     private LinearLayout contentLayout;

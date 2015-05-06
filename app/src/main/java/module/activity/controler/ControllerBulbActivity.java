@@ -23,6 +23,7 @@ import constant.Command;
 import constant.Constant;
 import constant.ConstantStatus;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import utils.L;
 import vgod.smarthome.R;
 
@@ -32,7 +33,7 @@ import vgod.smarthome.R;
  * Time: 00:24
  * FIXME
  */
-public class ControllerBulbActivity extends BaseActivity{
+public class ControllerBulbActivity extends SwipeBackActivity {
     @BindView(id = R.id.activity_controller_bulb)
     private RelativeLayout contentLayout;
 

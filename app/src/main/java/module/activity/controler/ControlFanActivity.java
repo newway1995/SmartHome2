@@ -11,6 +11,7 @@ import constant.Command;
 import constant.ConstantStatus;
 import constant.MyTimer;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import module.view.animation.GifView;
 import vgod.smarthome.R;
 
@@ -20,7 +21,7 @@ import vgod.smarthome.R;
  * Time: 17:22
  * FIXME
  */
-public class ControlFanActivity extends BaseActivity{
+public class ControlFanActivity extends SwipeBackActivity {
 
     @BindView(id = R.id.control_activity_fan_id)
     private RelativeLayout contentLayout;

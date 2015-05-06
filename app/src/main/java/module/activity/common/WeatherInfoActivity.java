@@ -18,6 +18,7 @@ import constant.Command;
 import constant.Constant;
 import core.json.WeatherInfo;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import utils.L;
 import vgod.smarthome.R;
 
@@ -27,7 +28,7 @@ import vgod.smarthome.R;
  * Time: 21:41
  * 天气状况
  */
-public class WeatherInfoActivity extends BaseActivity{
+public class WeatherInfoActivity extends SwipeBackActivity{
 
     @BindView(id = R.id.activity_normal_weather_id)
     private LinearLayout contentLayout;
@@ -176,8 +177,8 @@ public class WeatherInfoActivity extends BaseActivity{
 
     /**
      * 解析PM25
-     * @param pm25
-     * @return
+     * @param pm25 String
+     * @return String
      */
     private String parsePM25(String pm25){
         int pm = Integer.parseInt(pm25);
@@ -196,8 +197,8 @@ public class WeatherInfoActivity extends BaseActivity{
 
     /**
      * 解析date 成温度
-     * @param date
-     * @return
+     * @param date String
+     * @return String
      */
     private String parseDateToTemp(String date){
         int length = date.length();

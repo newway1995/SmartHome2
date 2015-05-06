@@ -1,18 +1,18 @@
 package module.activity.voicechat;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.iflytek.sunflower.FlowerCollector;
-import org.kymjs.aframe.ui.AnnotateUtil;
 import org.kymjs.aframe.ui.BindView;
 import org.kymjs.aframe.utils.SystemTool;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ import constant.TimingExecute;
 import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
+import module.core.SwipeBackActivity;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
 import module.database.ChatMsgEntity;
@@ -38,16 +39,13 @@ import vgod.smarthome.R;
  * Time: 00:27
  * 语音控制界面
  */
-public class VoiceControlActivity extends Activity implements View.OnClickListener{
-
-    @BindView(id = R.id.voice_control_relativelayout)
-    private LinearLayout contentLayout;
+public class VoiceControlActivity extends SwipeBackActivity{
 
     @BindView(id = R.id.voice_control_listview)
     private ListView chatListView;//listview
 
-    @BindView(id = R.id.voice_control_btn_record, click = true)
-    private TextView mBtnRcd;//按住说话,默认为隐藏
+    @BindView(id = R.id.voice_control_btn_record)
+    private ImageView mBtnRcd;//按住说话,默认为隐藏
 
 
     /**
@@ -79,18 +77,40 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
     private boolean isReturnData = true;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+    public void setRootView() {
+        super.setRootView();
         setContentView(R.layout.activity_voice_control);
-        AnnotateUtil.initBindView(this);
-        initVoice();
-        initData();
     }
+
+    @Override
+    protected void initWidget() {
+        super.initWidget();
+        //点击事件的监听
+        mBtnRcd.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    voiceRecognizeUtils.startSpeak();
+                    mBtnRcd.setBackgroundResource(R.drawable.yuyin_pressed);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    voiceRecognizeUtils.stopSpeak();
+                    mBtnRcd.setBackgroundResource(R.drawable.yuyin);
+                }
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public void widgetClick(View v) {
+        super.widgetClick(v);
+    }
+
 
     @SuppressLint("NewApi")
     protected void initData() {
         initVoice();
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         initListView();
         myTimer = new MyTimer(context);
     }
@@ -217,15 +237,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
         showListViewItem(mAdapter.getCount());
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.voice_control_btn_record://点击录音
-                voiceRecognizeUtils.startSpeak();
-                break;
-        }
-    }
-
 
     /**
      * 发送一条数据
@@ -322,7 +333,6 @@ public class VoiceControlActivity extends Activity implements View.OnClickListen
      * 清理内存
      */
     private void cleanMemory(){
-        contentLayout = null;
         chatListView = null;//listview
         mBtnRcd = null;//按住说话,默认为隐藏
     }

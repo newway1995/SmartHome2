@@ -11,7 +11,6 @@ import constant.Command;
 import constant.Constant;
 import core.detect.FaceCompare;
 import core.detect.NetResultHandler;
-import module.activity.StartActivity;
 import module.activity.gesturepwd.SettingGesturePasswordActivity;
 import utils.CacheHandler;
 import utils.L;

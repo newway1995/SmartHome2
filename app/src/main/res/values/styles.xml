@@ -22,7 +22,7 @@
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item>
         <item name="android:actionMenuTextColor">@color/actionbar_text</item>
-        <item name="android:windowAnimationStyle">@style/SwipeAnimationActivity</item>
+        <!--<item name="android:windowAnimationStyle">@style/SwipeAnimationActivity</item>-->
     </style>
 
     <!-- ActionBar styles -->
@@ -222,4 +222,14 @@
         <item name="android:backgroundDimEnabled">true</item><!--模糊-->
     </style>
 
+
+    <!-- SwipeBackTheme Style -->
+    <style name="SwipeBackActivityTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionMenuTextColor">#ffffff</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item>
+    </style>
 </resources>

@@ -12,7 +12,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
-import module.activity.MainActivity;
+import module.activity.main.MainActivity;
 import module.core.ui.RippleLayout.RippleFinishListener;
 
 import module.inter.NormalProcessor;

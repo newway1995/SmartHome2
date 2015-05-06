@@ -11,6 +11,7 @@ import android.widget.Toast;
 import org.kymjs.aframe.ui.BindView;
 
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**
@@ -19,7 +20,7 @@ import vgod.smarthome.R;
  * Time: 01:41
  * FIXME
  */
-public class ContactUsActivity extends BaseActivity{
+public class ContactUsActivity extends SwipeBackActivity{
 
     @BindView(id = R.id.activity_normal_contact_us)
     private LinearLayout contentLayout;

@@ -8,6 +8,7 @@ import org.kymjs.aframe.ui.BindView;
 import constant.ConstantStatus;
 import constant.MyTimer;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**
@@ -16,7 +17,7 @@ import vgod.smarthome.R;
  * Time: 10:36
  * 热水器
  */
-public class ControlHeaterActivity extends BaseActivity{
+public class ControlHeaterActivity extends SwipeBackActivity {
 
     @BindView(id = R.id.activity_heater_layout)
     private RelativeLayout contentLayout;

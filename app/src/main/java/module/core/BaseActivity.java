@@ -148,7 +148,7 @@ public abstract class BaseActivity extends Activity implements OnClickListener, 
      * 初始化ActionBar
      * */
     public void setActionBarView(boolean isBack){
-    	getActionBar().setDisplayHomeAsUpEnabled(isBack);    	
+    	getActionBar().setDisplayHomeAsUpEnabled(isBack);
     	mActionBarBack = isBack;
     }
 

@@ -31,6 +31,7 @@ import constant.Constant;
 import core.detect.FaceCompare;
 import core.detect.NetResultHandler;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import utils.FileUtils;
 import utils.ImageUtils;
 import utils.L;
@@ -43,7 +44,7 @@ import vgod.smarthome.R;
  * Time: 01:26
  * FIXME
  */
-public class SettingActivity extends BaseActivity{
+public class SettingActivity extends SwipeBackActivity {
     @BindView(id = R.id.activity_normal_setting_id)
     private LinearLayout contentLayout;
 

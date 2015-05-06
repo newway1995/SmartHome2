@@ -46,7 +46,7 @@
         android:label="@string/app_name"
         android:theme="@style/CustomActionBarTheme" >
         <activity
-            android:name="module.activity.StartActivity"
+            android:name="module.activity.main.StartActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,7 +56,7 @@
         </activity>
 
         <!--主界面-->
-        <activity android:name="module.activity.MainActivity"
+        <activity android:name="module.activity.main.MainActivity"
             android:label="S-XBox"
             />
 
@@ -95,57 +95,74 @@
         <!-- 控制模块 -->
         <activity
             android:name="module.activity.controler.ControlTVActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControlADActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControlFanActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControllerBulbActivity"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControlPJActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControlCurtainActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControlDoorActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControlHeaterActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.security.SecurityCameraActivity"
             android:label="@string/title_activity_security_camera" >
         </activity>
         <activity android:name="module.activity.voicechat.TVProgramActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="电视节目单">
         </activity>
         <activity android:name="module.activity.voicechat.TVProgramSettingActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="电视节目设置">
         </activity>
 
         <!--common模块-->
-        <activity android:name="module.activity.common.AboutActivity"            
+        <activity android:name="module.activity.common.AboutActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="关于我们"/>
         <activity android:name="module.activity.common.ContactUsActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="联系我们"
             />
         <activity android:name="module.activity.common.SettingActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="设置"
             />
         <activity android:name="module.activity.common.FastConnectWifiActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="快速连接Wifi"/>
+        <!-- 天气测试-->
         <activity android:name="module.activity.common.WeatherInfoActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="天气"/>
 
         <activity android:name="module.activity.common.SelectControllerActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="选择遥控器"/>
         <activity
             android:name="module.activity.voicechat.VoiceControlActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="语音控制"/>
         <activity android:name="module.activity.voicechat.ShowCommandListActivity"
             android:label="定时指令"/>

@@ -29,6 +29,7 @@ import constant.Constant;
 import core.detect.FaceCompare;
 import core.detect.NetResultHandler;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import utils.JsonUtils;
 import vgod.smarthome.R;
 
@@ -38,7 +39,7 @@ import vgod.smarthome.R;
  * Time: 00:09
  * 用户设置头像
  */
-public class SettingPortrait extends BaseActivity{
+public class SettingPortrait extends SwipeBackActivity {
     private String[] items = new String[] { "选择本地图片", "拍照" };
     /* 头像名称 */
     private static final String IMAGE_FILE_NAME = "faceImage.jpg";

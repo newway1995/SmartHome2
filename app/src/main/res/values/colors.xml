@@ -13,7 +13,7 @@
     <color name="green">#32CD32</color>
     <color name="green_dark">#54B128</color>
     <color name="green_light">#12C414</color>
-    <color name="radio_button_selected_color">#ff33b5e5</color>
+    <color name="radio_button_selected_color">@color/red_dark</color>
     <color name="radio_button_unselected_color">@android:color/transparent</color>
     <color name="gesture_background">#ff303237</color>
     <color name="color_hei_8">#00000000</color>
@@ -24,4 +24,5 @@
     <color name="rippelColor2">#ff2f9b34</color>
     <color name="rippelColor3">#ff46b451</color>
 
+    <color name="transparent">#00000000</color>
 </resources>

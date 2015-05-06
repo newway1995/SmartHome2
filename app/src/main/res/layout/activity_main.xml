@@ -37,6 +37,7 @@
         android:layout_height="fill_parent">
     </module.core.ui.ImportMenuView>
 
+    <!-- 测试按钮-->
     <ImageView
         android:id="@+id/activity_main_voice"
         android:layout_width="wrap_content"

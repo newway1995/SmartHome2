@@ -2,7 +2,7 @@ package module.activity.gesturepwd;
 
 import java.util.List;
 
-import module.activity.MainActivity;
+import module.activity.main.MainActivity;
 import module.view.LockPatternView;
 import module.view.LockPatternView.Cell;
 

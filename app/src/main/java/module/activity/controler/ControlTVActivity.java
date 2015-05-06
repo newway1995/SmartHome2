@@ -12,6 +12,7 @@ import constant.Command;
 import constant.Constant;
 import constant.MyTimer;
 import module.activity.voicechat.TVProgramActivity;
+import module.core.SwipeBackActivity;
 import module.core.ui.ColorGenerator;
 import module.core.ui.TextDrawable;
 import module.database.TVChannelEntity;
@@ -40,7 +41,7 @@ import module.core.BaseActivity;
  * @time:上午10:01:29 2014-12-16
  * @useage:电视机控制界面
  */
-public class ControlTVActivity extends BaseActivity{
+public class ControlTVActivity extends SwipeBackActivity {
 
     @BindView(id = R.id.control_activity_tv_id)
     private LinearLayout contentLayout;

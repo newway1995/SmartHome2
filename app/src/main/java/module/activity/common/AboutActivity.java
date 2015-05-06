@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import org.kymjs.aframe.ui.BindView;
 
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**
@@ -15,7 +16,7 @@ import vgod.smarthome.R;
  * Time: 01:24
  * FIXME
  */
-public class AboutActivity extends BaseActivity{
+public class AboutActivity extends SwipeBackActivity{
     @BindView(id = R.id.activity_normal_about)
     private LinearLayout contentLayout;
 

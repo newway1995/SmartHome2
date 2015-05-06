@@ -15,6 +15,7 @@ import constant.Command;
 import constant.ConstantStatus;
 import constant.MyTimer;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**
@@ -23,7 +24,7 @@ import vgod.smarthome.R;
  * Time: 22:53
  * 控制投影仪
  */
-public class ControlPJActivity extends BaseActivity{
+public class ControlPJActivity extends SwipeBackActivity {
 
     @BindView(id = R.id.control_activity_pj)
     private LinearLayout contentLayout;

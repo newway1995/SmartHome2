@@ -12,6 +12,7 @@ import constant.Command;
 import constant.ConstantStatus;
 import constant.MyTimer;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**
@@ -20,7 +21,7 @@ import vgod.smarthome.R;
  * Time: 20:35
  * 控制窗帘
  */
-public class ControlCurtainActivity extends BaseActivity{
+public class ControlCurtainActivity extends SwipeBackActivity {
     @BindView(id = R.id.activity_curtain_layout)
     private RelativeLayout contentLayout;
     @BindView(id = R.id.activity_curtain_switch, click = true)
