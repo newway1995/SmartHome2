@@ -97,7 +97,7 @@
     <string name="add_controller">+遥控器</string>
 
     <!--普通界面-->
-    <string name="our_team">\t[挂号网]是背景航空航天大学软件学院系统分析设计小组——团灭发动机共同开发完成,软件包括客户端和网页端,android客户端在实现了完整的功能的基础上尽量在提升用户的使用体验.挂号网APP专为患者量身打造,用户版包括专家咨询、智能分诊、即时挂号、院外候诊、处方查询.\n\t您的支持是我们最大的幸运\n\n牛威:android\n黄星:Web端\n穆梦琪:前端\n孙芙媛:前端\n黄龙:android\n宋瑞:android\n刘家辉:数据库\n邰云剑:Web端\n李天禹:数据库</string>
+    <string name="our_team">\t[SmartHome]是北京航空航天大学软件学院学生开发的一款产品</string>
     <string name="about_us">关于我们</string>
     <string name="advice_to_us">意见反馈</string>
     <string name="check_update">检查更新</string>

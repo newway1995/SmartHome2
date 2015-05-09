@@ -102,7 +102,13 @@ public class SecurityCameraActivity extends BaseActivity {
             // TODO Auto-generated method stub
             switch(v.getId()){
                 case R.id.btn_shutter:
-                    takePicture();
+                    //takePicture();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent(SecurityCameraActivity.this, MainActivity.class));
+                        }
+                    }, 1000);
                     break;
                 case R.id.btn_switch:
                     //switchCamera();

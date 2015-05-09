@@ -6,7 +6,6 @@ import android.widget.LinearLayout;
 
 import org.kymjs.aframe.ui.BindView;
 
-import module.core.BaseActivity;
 import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
@@ -55,4 +54,6 @@ public class AboutActivity extends SwipeBackActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
