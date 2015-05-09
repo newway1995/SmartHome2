@@ -2,6 +2,7 @@ package module.activity.user;
 
 import org.kymjs.aframe.ui.BindView;
 
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 
 import android.view.MenuItem;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import module.core.BaseActivity;
 
 /**
  * @author niuwei
@@ -19,7 +19,7 @@ import module.core.BaseActivity;
  * @time:下午6:23:17 2014-12-15
  * @useage:忘记密码
  */
-public class ForgetPasswordActivity extends BaseActivity{
+public class ForgetPasswordActivity extends SwipeBackActivity{
 
     @BindView(id = R.id.user_forget_password_id)
     private LinearLayout contentLayout;

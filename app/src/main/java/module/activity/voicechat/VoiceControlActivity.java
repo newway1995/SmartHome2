@@ -3,14 +3,11 @@ package module.activity.voicechat;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.iflytek.sunflower.FlowerCollector;
 import org.kymjs.aframe.ui.BindView;
@@ -27,6 +24,7 @@ import constant.TimingExecute;
 import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
+import module.activity.energy.EnergyFanActivity;
 import module.core.SwipeBackActivity;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
@@ -80,6 +78,7 @@ public class VoiceControlActivity extends SwipeBackActivity{
     public void setRootView() {
         super.setRootView();
         setContentView(R.layout.activity_voice_control);
+        setActionBarView(true);
     }
 
     @Override
@@ -110,7 +109,6 @@ public class VoiceControlActivity extends SwipeBackActivity{
     @SuppressLint("NewApi")
     protected void initData() {
         initVoice();
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         initListView();
         myTimer = new MyTimer(context);
     }
@@ -130,6 +128,10 @@ public class VoiceControlActivity extends SwipeBackActivity{
                 isReturnData = true;//默认需要返回数据
                 //测试
                 //VoiceCommand.parseVoiceCommand(context, str);
+                /** 测试能耗 */
+                if (testEnergy(str)) {
+                    return;
+                }
                 /** 测试设置 */
                 processVoiceSetting(str);
                 /** 当前所有的指令集合 **/
@@ -148,6 +150,17 @@ public class VoiceControlActivity extends SwipeBackActivity{
         });
 
         voiceSpeakUtils = new VoiceSpeakUtils(this);
+    }
+
+    /**
+     * 测试能耗
+     */
+    private boolean testEnergy(final String str) {
+        if (str.contains("风扇") || str.contains("电风扇") || str.contains("电扇")) {
+            startActivity(new Intent(VoiceControlActivity.this, EnergyFanActivity.class));
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -260,6 +273,11 @@ public class VoiceControlActivity extends SwipeBackActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -294,6 +312,8 @@ public class VoiceControlActivity extends SwipeBackActivity{
             finish();
         }
     }
+
+
 
     @Override
     protected void onDestroy() {

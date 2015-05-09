@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 
 import constant.Constant;
 import module.core.BaseActivity;
+import module.core.SwipeBackActivity;
 import utils.CacheHandler;
 import utils.FileUtils;
 import utils.ImageUtils;
@@ -36,7 +37,7 @@ import vgod.smarthome.R;
  * Time: 13:49
  * 管理手势密码
  */
-public class ManageGesturePasswordActivity extends BaseActivity{
+public class ManageGesturePasswordActivity extends SwipeBackActivity{
 
     @BindView(id = R.id.gesturepwd_open_pwd , click = true)
     private ImageView openPwdView;
@@ -216,7 +217,7 @@ public class ManageGesturePasswordActivity extends BaseActivity{
     /**
      * 裁剪图片方法实现
      *
-     * @param uri
+     * @param uri Uri
      */
     public void startPhotoZoom(Uri uri) {
 
@@ -227,7 +228,7 @@ public class ManageGesturePasswordActivity extends BaseActivity{
     /**
      * 保存裁剪之后的图片数据
      *
-     * @param data
+     * @param data Intent
      */
     private void getImageToView(Intent data) {
         Bundle extras = data.getExtras();
@@ -267,7 +268,7 @@ public class ManageGesturePasswordActivity extends BaseActivity{
 
     /**
      * 获取图片
-     * @return
+     * @return Bitmap
      * @throws FileNotFoundException
      */
     private Bitmap getBitmap() throws FileNotFoundException{

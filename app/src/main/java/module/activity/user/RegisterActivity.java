@@ -2,6 +2,7 @@ package module.activity.user;
 
 import constant.Command;
 import constant.Constant;
+import module.core.SwipeBackActivity;
 import vgod.smarthome.R;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +15,6 @@ import org.kymjs.aframe.http.KJStringParams;
 import org.kymjs.aframe.http.StringCallBack;
 import org.kymjs.aframe.ui.BindView;
 
-import module.core.BaseActivity;
 
 /**
  * @author niuwei
@@ -24,7 +24,7 @@ import module.core.BaseActivity;
  * @time:下午6:22:48 2014-12-15
  * @useage:注册界面
  */
-public class RegisterActivity extends BaseActivity{
+public class RegisterActivity extends SwipeBackActivity{
     @BindView(id = R.id.user_activity_register_id)
     private LinearLayout contentLayout;
 

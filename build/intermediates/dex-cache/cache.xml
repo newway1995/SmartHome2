@@ -16,13 +16,6 @@
         <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/Sunflower-0b350d14e829d17e25387ff5878218c33bd4c41d.jar" />
     </item>
     <item
-        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-manipulation/3.1.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="5660e4bf78904137e90e62a5d4cc2e987258f02c">
-        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/classes-63325fde94d3cdd8ee9c574c7b1a074fcf866c57.jar" />
-    </item>
-    <item
         jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/libs/usc.jar"
         jumboMode="false"
         revision="21.1.1"
@@ -37,18 +30,11 @@
         <dex dex="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/pre-dexed/debug/classes-dacd7e344d35bf0b49da783f1090d9fc6aac40e0.jar" />
     </item>
     <item
-        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core-slh/3.1.0/classes.jar"
+        jar="/Users/niuwei/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v2.1.0/ec46f9251e1e0ee60e1b6beae8b16f2e0fdee474/MPAndroidChart-v2.1.0.jar"
         jumboMode="false"
         revision="21.1.1"
-        sha1="49223278ec2ede1d05d00868c5ce3e077b4016f8">
-        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/classes-c47369146a0981989a323742cc35d275e96bbfbe.jar" />
-    </item>
-    <item
-        jar="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core/3.1.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="acf66033b1418ccf9e15c8e77750981e4809c4ea">
-        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/classes-f5b97f6bbaea456a485cf1bede8e324e2f5ba88b.jar" />
+        sha1="ec46f9251e1e0ee60e1b6beae8b16f2e0fdee474">
+        <dex dex="/Users/niuwei/Documents/Android/AndroidStudio/SmartHome2/app/build/intermediates/pre-dexed/debug/MPAndroidChart-v2.1.0-5d4c151686d2e0cb40843077cf6e5e365e2a69bf.jar" />
     </item>
     <item
         jar="/Users/niuwei/Documents/Android/Eclipse_WorkSpace/2014/Learning/SmartHome2/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"

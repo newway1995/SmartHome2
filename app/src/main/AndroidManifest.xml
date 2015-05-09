@@ -65,31 +65,32 @@
             android:name="module.activity.gesturepwd.SettingGesturePasswordActivity"
             android:label="@string/setting_gesture_pwd"/>
         <!--设置用户的头像，统计详细信息-->
-        <activity android:name="module.activity.user.SettingPortrait"            
+        <activity android:name="module.activity.user.SettingPortrait"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="填写信息"/>
         <!-- 解锁界面 -->
         <activity android:name="module.activity.gesturepwd.UnLockGesturePasswordActivity" />
         <!--管理手势密码-->
         <activity
             android:name="module.activity.gesturepwd.ManageGesturePasswordActivity"
-            
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/back"/>
 
         <!-- 用户 -->
         <!-- 登录界面 -->
         <activity
             android:name="module.activity.user.LoginActivity"
-            
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/login" />
         <!-- 注册界面 -->
         <activity
             android:name="module.activity.user.RegisterActivity"
-            
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/register" />
         <!-- 忘记密码界面 -->
         <activity
             android:name="module.activity.user.ForgetPasswordActivity"
-            
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/forget_password" />
 
         <!-- 控制模块 -->
@@ -107,6 +108,7 @@
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControllerBulbActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
             android:name="module.activity.controler.ControlPJActivity"
@@ -141,6 +143,7 @@
         <activity android:name="module.activity.common.AboutActivity"
             android:theme="@style/SwipeBackActivityTheme"
             android:label="关于我们"/>
+
         <activity android:name="module.activity.common.ContactUsActivity"
             android:theme="@style/SwipeBackActivityTheme"
             android:label="联系我们"
@@ -165,8 +168,13 @@
             android:theme="@style/SwipeBackActivityTheme"
             android:label="语音控制"/>
         <activity android:name="module.activity.voicechat.ShowCommandListActivity"
+            android:theme="@style/SwipeBackActivityTheme"
             android:label="定时指令"/>
 
+        <!-- Energy Control-->
+        <activity android:name="module.activity.energy.EnergyFanActivity"
+            android:theme="@style/SwipeBackActivityTheme"
+            android:label="电风扇能耗"/>
 
         <!-- 移动统计分析 -->
         <meta-data

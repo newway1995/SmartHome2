@@ -110,6 +110,9 @@
 
     <string name="voice_assistant">小溪</string>
 
+    <string name="energy_current_30_days">显示最近三十天能耗</string>
+    <string name="energy_current_today">显示今天能耗</string>
+    <string name="energy_current_last_12_month">显示最近十二个月能耗</string>
 
     <!-- 语言 -->
     <string-array name="language_entries">

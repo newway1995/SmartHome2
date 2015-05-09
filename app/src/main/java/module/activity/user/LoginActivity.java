@@ -12,6 +12,7 @@ import constant.Constant;
 import core.detect.FaceCompare;
 import core.detect.NetResultHandler;
 import module.activity.gesturepwd.SettingGesturePasswordActivity;
+import module.core.SwipeBackActivity;
 import utils.CacheHandler;
 import utils.L;
 import vgod.smarthome.R;
@@ -23,7 +24,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import module.core.BaseActivity;
 
 /**
  * @author niuwei
@@ -34,7 +34,7 @@ import module.core.BaseActivity;
  * @useage:登录界面
  * 
  */
-public class LoginActivity extends BaseActivity{
+public class LoginActivity extends SwipeBackActivity{
     @BindView(id = R.id.user_activity_login_id)
     private LinearLayout contentLayout;
 

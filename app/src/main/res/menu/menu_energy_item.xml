@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/energy_item_currentMonth"
+        android:title="@string/energy_current_30_days"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/energy_item_today"
+        android:title="@string/energy_current_today"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/energy_item_last_12_month"
+        android:title="@string/energy_current_last_12_month"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+</menu>
