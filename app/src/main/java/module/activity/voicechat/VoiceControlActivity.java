@@ -25,6 +25,7 @@ import constant.VoiceCommand;
 import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
 import module.activity.energy.EnergyFanActivity;
+import module.activity.energy.EnergyTVActivity;
 import module.core.SwipeBackActivity;
 import module.inter.StringProcessor;
 import module.view.adapter.ChatMsgAdapter;
@@ -158,6 +159,9 @@ public class VoiceControlActivity extends SwipeBackActivity{
     private boolean testEnergy(final String str) {
         if (str.contains("风扇") || str.contains("电风扇") || str.contains("电扇")) {
             startActivity(new Intent(VoiceControlActivity.this, EnergyFanActivity.class));
+            return true;
+        } else if(str.contains("电视") || str.contains("电视机")) {
+            startActivity(new Intent(VoiceControlActivity.this, EnergyTVActivity.class));
             return true;
         }
         return false;

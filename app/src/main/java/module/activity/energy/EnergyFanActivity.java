@@ -8,13 +8,17 @@ import android.view.View;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -45,16 +49,21 @@ public class EnergyFanActivity extends SwipeBackActivity implements OnChartValue
     private BarChart barChart;
     /** piChart视图*/
     private PieChart pieChart;
+    /** LineChart */
+    private LineChart lineChart;
 
     /** X轴数据 */
     private ArrayList<String> xValues;
     /** Y轴数据 */
     private ArrayList<BarEntry> yValues;
+    private ArrayList<Entry> lineYValues;
 
     @Override
     protected void initWidget() {
         super.initWidget();
         barChart = (BarChart)findViewById(R.id.energy_activity_fan_barChart);
+        pieChart = (PieChart)findViewById(R.id.energy_activity_fan_piChart);
+        lineChart = (LineChart)findViewById(R.id.energy_activity_fan_lineChart);
         initBarChart();
     }
 
@@ -70,46 +79,94 @@ public class EnergyFanActivity extends SwipeBackActivity implements OnChartValue
     private void initBarChart() {
         if (pieChart != null && pieChart.getVisibility() != View.GONE) {
             pieChart.setVisibility(View.GONE);
+        } else if (barChart != null && barChart.getVisibility() != View.GONE) {
+            barChart.setVisibility(View.GONE);
         }
 
-        barChart.setDescription("过去一个月风扇电量消耗");
-        barChart.setMaxVisibleValueCount(60);
-        barChart.setPinchZoom(true);
-        barChart.setDrawBarShadow(false);
-        barChart.setDrawGridBackground(false);
-        barChart.setTouchEnabled(true);
-        barChart.setHighlightEnabled(true);
+        lineChart.setDescription("过去一个月风扇电量消耗");
+        //lineChart.setNoDataTextDescription("You need to provide data for the chart.");
+        lineChart.setHighlightEnabled(true);
+        // enable touch gestures
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragDecelerationFrictionCoef(0.95f);
+        // enable scaling and dragging
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+        lineChart.setDrawGridBackground(false);
+        lineChart.setHighlightPerDragEnabled(true);
+        // if disabled, scaling can be done on x- and y-axis separately
+        lineChart.setPinchZoom(false);
 
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setSpaceBetweenLabels(0);
+        // set an alternative background color
+        lineChart.setBackgroundColor(Color.LTGRAY);
+
+        lineChart.animateX(2500);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+
+        // get the legend (only possible after setting data)
+        Legend l = lineChart.getLegend();
+
+        // modify the legend ...
+        // l.setPosition(LegendPosition.LEFT_OF_CHART);
+        l.setForm(Legend.LegendForm.LINE);
+        l.setTypeface(tf);
+        l.setTextSize(11f);
+        l.setTextColor(Color.WHITE);
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setTypeface(tf);
+        xAxis.setTextSize(12f);
+        xAxis.setTextColor(Color.WHITE);
         xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setSpaceBetweenLabels(1);
 
-        barChart.getAxisLeft().setDrawGridLines(false);
-        barChart.animateY(2500);
-        barChart.animateX(1500);
-        barChart.getLegend().setEnabled(false);
+        YAxis leftAxis = lineChart.getAxisLeft();
+        leftAxis.setTypeface(tf);
+        leftAxis.setTextColor(ColorTemplate.getHoloBlue());
+        leftAxis.setAxisMaxValue(200f);
+        leftAxis.setDrawGridLines(true);
+
+        YAxis rightAxis = lineChart.getAxisRight();
+        rightAxis.setTypeface(tf);
+        rightAxis.setTextColor(Color.RED);
+        rightAxis.setAxisMaxValue(900);
+        rightAxis.setStartAtZero(false);
+        rightAxis.setAxisMinValue(-200);
+        rightAxis.setDrawGridLines(false);
 
         xValues = TimeUtils.getCurrentMonthDay();//X 轴数据
-        yValues = new ArrayList<>();
+        lineYValues = new ArrayList<>();
         for (int i = 0; i < xValues.size(); i++) {
             float val = (float) (Math.random() * 100) + 100 / 3;
-            yValues.add(new BarEntry((int) val, i));
+            lineYValues.add(new Entry((int) val, i));
         }
 
         /** Current 30 days data */
-        BarDataSet currentMonthData = new BarDataSet(yValues, "Current 30 days");
-        currentMonthData.setColors(ColorTemplate.VORDIPLOM_COLORS);
-        currentMonthData.setDrawValues(true);
+        LineDataSet currentMonthData = new LineDataSet(lineYValues, "Current 30 days");
+        currentMonthData.setAxisDependency(YAxis.AxisDependency.RIGHT);
+        currentMonthData.setColor(Color.RED);
+        currentMonthData.setCircleColor(Color.WHITE);
+        currentMonthData.setLineWidth(2f);
+        currentMonthData.setCircleSize(3f);
+        currentMonthData.setFillAlpha(65);
+        currentMonthData.setFillColor(Color.RED);
+        currentMonthData.setDrawCircleHole(false);
+        currentMonthData.setHighLightColor(Color.rgb(244, 117, 117));
+
 
         /** All DataSet */
-        ArrayList<BarDataSet> dataSets = new ArrayList<>();
+        ArrayList<LineDataSet> dataSets = new ArrayList<>();
         dataSets.add(currentMonthData);
 
         /** Need Show Data */
-        BarData data = new BarData(xValues, dataSets);
-        barChart.setData(data);
-        barChart.invalidate();
+        LineData data = new LineData(xValues, dataSets);
+        data.setValueTextColor(Color.WHITE);
+        data.setValueTextSize(9f);
+        lineChart.setData(data);
+        lineChart.invalidate();
     }
 
     /**
@@ -146,7 +203,7 @@ public class EnergyFanActivity extends SwipeBackActivity implements OnChartValue
                 initBarChart();
                 break;
             case R.id.energy_item_today:
-                showToDay();
+                showToday();
                 break;
             case R.id.energy_item_last_12_month:
                 showLast12Month();
@@ -155,11 +212,12 @@ public class EnergyFanActivity extends SwipeBackActivity implements OnChartValue
         return super.onOptionsItemSelected(item);
     }
 
-    private void showToDay() {
+    private void showToday() {
         if (barChart != null && barChart.getVisibility() != View.GONE) {
             barChart.setVisibility(View.GONE);
+        } else if (lineChart != null && lineChart.getVisibility() != View.GONE) {
+            lineChart.setVisibility(View.GONE);
         }
-        pieChart = (PieChart)findViewById(R.id.energy_activity_fan_piChart);
         pieChart.setVisibility(View.VISIBLE);
         pieChart.setDescription("");
         pieChart.setDragDecelerationFrictionCoef(0.95f);
@@ -237,14 +295,18 @@ public class EnergyFanActivity extends SwipeBackActivity implements OnChartValue
         pieChart.invalidate();
     }
 
+    /**
+     * 现实最近十二个月
+     */
     private void showLast12Month() {
-        if (barChart.getVisibility() != View.VISIBLE) {
-            barChart.setVisibility(View.VISIBLE);
+        if (lineChart.getVisibility() != View.GONE) {
+            lineChart.setVisibility(View.GONE);
         }
         if (pieChart != null && pieChart.getVisibility() != View.GONE) {
             pieChart.setVisibility(View.GONE);
         }
 
+        barChart.setVisibility(View.VISIBLE);
         barChart.setDescription("过去12个月风扇电量消耗");
         xValues = TimeUtils.getLastMonthName();//X 轴数据
         yValues = new ArrayList<>();

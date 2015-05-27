@@ -8,11 +8,17 @@
         android:id="@+id/energy_activity_fan_barChart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/energy_activity_fan_piChart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/energy_activity_fan_lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"/>
 </RelativeLayout>

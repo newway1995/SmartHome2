@@ -175,6 +175,9 @@
         <activity android:name="module.activity.energy.EnergyFanActivity"
             android:theme="@style/SwipeBackActivityTheme"
             android:label="电风扇能耗"/>
+        <activity android:name="module.activity.energy.EnergyTVActivity"
+            android:theme="@style/SwipeBackActivityTheme"
+            android:label="电视机能耗"/>
 
         <!-- 移动统计分析 -->
         <meta-data
