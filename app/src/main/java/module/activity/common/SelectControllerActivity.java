@@ -5,9 +5,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.kymjs.aframe.ui.BindView;
 
+import constant.ConstantStatus;
 import module.activity.controler.ControlADActivity;
 import module.activity.controler.ControlCurtainActivity;
 import module.activity.controler.ControlDoorActivity;
@@ -29,7 +31,7 @@ public class SelectControllerActivity extends SwipeBackActivity {
 
     @BindView(id = R.id.activity_normal_select_controller_id)
     private LinearLayout contentLayout;
-
+    //点击View
     @BindView(id = R.id.select_controller_ad, click = true)
     private RelativeLayout selectAD;
     @BindView(id = R.id.select_controller_tv, click = true)
@@ -47,10 +49,51 @@ public class SelectControllerActivity extends SwipeBackActivity {
     @BindView(id = R.id.select_controller_heater, click = true)
     private RelativeLayout selectHeater;
 
+    //状态显示View
+    @BindView(id = R.id.select_controller_ad_statu)
+    private TextView adStatus;
+    @BindView(id = R.id.select_controller_tv_statu)
+    private TextView tvStatus;
+    @BindView(id = R.id.select_controller_pj_statu)
+    private TextView pjStatus;
+    @BindView(id = R.id.select_controller_fan_statu)
+    private TextView fanStatus;
+    @BindView(id = R.id.select_controller_bulb_statu)
+    private TextView bulbStatus;
+    @BindView(id = R.id.select_controller_curtain_statu)
+    private TextView curtainStatus;
+    @BindView(id = R.id.select_controller_door_statu)
+    private TextView doorStatus;
+    @BindView(id = R.id.select_controller_heater_statu)
+    private TextView heaterStatus;
+
     @Override
     protected void initData() {
         super.initData();
         contentLayout.setOnTouchListener(this);
+    }
+
+    @Override
+    protected void initWidget() {
+        super.initWidget();
+        showStatus(adStatus, ConstantStatus.getAirSwitch(context));
+        showStatus(heaterStatus, ConstantStatus.getHeaterSwitch(context));
+        showStatus(pjStatus, ConstantStatus.getPjSwitch(context));
+        showStatus(tvStatus, ConstantStatus.getTVSwitch(context));
+        showStatus(bulbStatus, ConstantStatus.getBulbSwitch(context));
+        showStatus(fanStatus, ConstantStatus.getFanSwitch(context));
+        showStatus(doorStatus, ConstantStatus.getDoorSwitch(context));
+        showStatus(curtainStatus, ConstantStatus.getCurtainSwitch(context));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initWidget();
+    }
+
+    private void showStatus(TextView textView, String flag) {
+        textView.setText(flag.equals(ConstantStatus.SWITCH_ON) ? "开":"关");
     }
 
     @Override

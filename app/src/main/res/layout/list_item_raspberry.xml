@@ -14,22 +14,53 @@
         android:id="@+id/list_item_rasp_nickname"
         android:layout_toRightOf="@id/list_item_rasp_img"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:text="Nickname"
-        android:textAppearance="@style/black_light_20"
+        android:textAppearance="@style/black_light_16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/list_item_rasp_function"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/list_item_rasp_img"
         android:layout_below="@id/list_item_rasp_nickname"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="20dp"
-        android:textAppearance="@style/gray_18"
+        android:id="@+id/list_item_rasp_temp_layout"
+        android:layout_marginLeft="20dp" >
+        <TextView
+            android:textAppearance="@style/gray_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温度: "/>
+
+        <TextView
+            android:id="@+id/list_item_rasp_temp"
+            android:textAppearance="@style/gray_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="17℃"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:text="Function"
-        android:visibility="gone"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/list_item_rasp_img"
+        android:layout_below="@id/list_item_rasp_temp_layout"
+        android:id="@+id/list_item_rasp_humi_layout"
+        android:layout_marginLeft="20dp" >
+        <TextView
+            android:textAppearance="@style/gray_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="湿度: "/>
+
+        <TextView
+            android:id="@+id/list_item_rasp_humi"
+            android:textAppearance="@style/gray_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="27%"/>
+    </LinearLayout>
+
 
 </RelativeLayout>

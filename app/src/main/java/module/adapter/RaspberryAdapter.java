@@ -65,7 +65,7 @@ public class RaspberryAdapter extends BaseAdapter{
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_item_raspberry, null);
         TextView nicknameText = (TextView)convertView.findViewById(R.id.list_item_rasp_nickname);
-        TextView functionText = (TextView)convertView.findViewById(R.id.list_item_rasp_function);
+        //TextView functionText = (TextView)convertView.findViewById(R.id.list_item_rasp_function);
         ImageView imageView = (ImageView)convertView.findViewById(R.id.list_item_rasp_img);
 
         mDrawableBuilder = TextDrawable.builder()
@@ -75,7 +75,7 @@ public class RaspberryAdapter extends BaseAdapter{
                                         .roundRect(10);
         imageView.setImageDrawable(mDrawableBuilder.build("R", mColorGenerator.getRandomColor()));
         nicknameText.setText(list.get(position).get("nickname"));
-        functionText.setText(list.get(position).get("function"));
+        //functionText.setText(list.get(position).get("function"));
         return convertView;
     }
 }

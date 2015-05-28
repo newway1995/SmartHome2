@@ -16,6 +16,13 @@
             android:textAppearance="@style/black_18"
             android:text="空调"
             />
+        <TextView
+            android:id="@+id/select_controller_ad_statu"
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:layout_centerInParent="true"
+            android:text="关"
+            />
         <ImageView
             style="@style/none_fill_parent"
             android:layout_gravity="right"
@@ -34,6 +41,13 @@
             style="@style/none_fill_parent"
             android:textAppearance="@style/black_18"
             android:text="热水器"
+            />
+        <TextView
+            android:id="@+id/select_controller_heater_statu"
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:layout_centerInParent="true"
+            android:text="关"
             />
         <ImageView
             style="@style/none_fill_parent"
@@ -55,6 +69,13 @@
             android:textAppearance="@style/black_18"
             android:text="投影仪"
             />
+        <TextView
+            android:id="@+id/select_controller_pj_statu"
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:layout_centerInParent="true"
+            android:text="关"
+            />
         <ImageView
             style="@style/none_fill_parent"
             android:layout_gravity="right"
@@ -75,6 +96,13 @@
             android:textAppearance="@style/black_18"
             android:text="电视机"
             />
+        <TextView
+            android:id="@+id/select_controller_tv_statu"
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:layout_centerInParent="true"
+            android:text="关"
+            />
         <ImageView
             style="@style/none_fill_parent"
             android:layout_gravity="right"
@@ -93,6 +121,13 @@
             style="@style/none_fill_parent"
             android:textAppearance="@style/black_18"
             android:text="电灯"
+            />
+        <TextView
+            android:id="@+id/select_controller_bulb_statu"
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:layout_centerInParent="true"
+            android:text="关"
             />
         <ImageView
             style="@style/none_fill_parent"
@@ -114,6 +149,13 @@
             android:textAppearance="@style/black_18"
             android:text="电风扇"
             />
+        <TextView
+            android:id="@+id/select_controller_fan_statu"
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:layout_centerInParent="true"
+            android:text="关"
+            />
         <ImageView
             style="@style/none_fill_parent"
             android:layout_gravity="right"
@@ -133,6 +175,13 @@
             android:textAppearance="@style/black_18"
             android:text="门禁设备"
             />
+        <TextView
+            android:id="@+id/select_controller_door_statu"
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:layout_centerInParent="true"
+            android:text="关"
+            />
         <ImageView
             style="@style/none_fill_parent"
             android:layout_gravity="right"
@@ -151,6 +200,13 @@
             style="@style/none_fill_parent"
             android:textAppearance="@style/black_18"
             android:text="窗帘"
+            />
+        <TextView
+            android:id="@+id/select_controller_curtain_statu"
+            style="@style/none_fill_parent"
+            android:textAppearance="@style/black_18"
+            android:layout_centerInParent="true"
+            android:text="关"
             />
         <ImageView
             style="@style/none_fill_parent"

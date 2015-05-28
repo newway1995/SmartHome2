@@ -110,6 +110,11 @@
         <item name="android:textColor">@color/black_light</item>
         <item name="android:textSize">18sp</item>
     </style>
+    <!-- 浅黑色16 -->
+    <style name="black_light_16">
+        <item name="android:textColor">@color/black_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
     <!-- 浅黑色14 -->
     <style name="black_light_14">
         <item name="android:textColor">@color/black_light</item>
