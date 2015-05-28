@@ -8,14 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import org.kymjs.aframe.http.KJHttp;
 import org.kymjs.aframe.ui.BindView;
 
 import constant.Command;
 import constant.ConstantStatus;
 import constant.MyTimer;
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**

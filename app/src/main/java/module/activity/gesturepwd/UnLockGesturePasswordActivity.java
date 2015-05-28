@@ -3,8 +3,8 @@ package module.activity.gesturepwd;
 import java.util.List;
 
 import module.activity.main.MainActivity;
-import module.view.LockPatternView;
-import module.view.LockPatternView.Cell;
+import framework.ui.lock.LockPatternView;
+import framework.ui.lock.LockPatternView.Cell;
 
 import constant.MyApp;
 

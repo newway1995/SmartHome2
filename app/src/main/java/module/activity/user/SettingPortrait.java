@@ -28,8 +28,7 @@ import java.io.File;
 import constant.Constant;
 import core.detect.FaceCompare;
 import core.detect.NetResultHandler;
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import utils.JsonUtils;
 import vgod.smarthome.R;
 

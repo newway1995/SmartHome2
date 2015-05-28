@@ -107,7 +107,7 @@
             android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity
-            android:name="module.activity.controler.ControllerBulbActivity"
+            android:name="module.activity.controler.ControlBulbActivity"
             android:theme="@style/SwipeBackActivityTheme"
             android:label="@string/controller" />
         <activity

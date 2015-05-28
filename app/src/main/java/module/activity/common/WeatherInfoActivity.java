@@ -4,7 +4,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,9 +15,7 @@ import org.kymjs.aframe.utils.PreferenceHelper;
 
 import constant.Command;
 import constant.Constant;
-import core.json.WeatherInfo;
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import utils.L;
 import vgod.smarthome.R;
 

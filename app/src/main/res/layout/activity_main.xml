@@ -9,7 +9,7 @@
         android:id="@+id/devicelist_bg"
         layout="@layout/view_actionbar_base"/>
 
-    <module.core.ui.RippleLayout
+    <framework.ui.common.RippleLayout
         android:id="@+id/more2"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -28,14 +28,14 @@
             android:contentDescription="@null"
             android:scaleType="center"
             android:src="@drawable/ic_add"/>
-    </module.core.ui.RippleLayout>
+    </framework.ui.common.RippleLayout>
 
-    <module.core.ui.ImportMenuView
+    <framework.ui.common.ImportMenuView
         android:layout_gravity="bottom|center"
         android:id="@+id/main_activity_import_menu"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-    </module.core.ui.ImportMenuView>
+    </framework.ui.common.ImportMenuView>
 
     <!-- 测试按钮-->
     <ImageView

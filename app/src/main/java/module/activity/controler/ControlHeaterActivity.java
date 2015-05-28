@@ -7,8 +7,7 @@ import android.widget.TextView;
 import org.kymjs.aframe.ui.BindView;
 import constant.ConstantStatus;
 import constant.MyTimer;
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**

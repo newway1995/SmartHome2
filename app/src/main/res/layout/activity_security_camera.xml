@@ -8,12 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <module.core.security.CameraSurfaceView
+        <module.camera.CameraSurfaceView
             android:id="@+id/camera_surfaceview"
             android:layout_width="0dip"
             android:layout_height="0dip" />
 
-        <module.core.security.FaceView
+        <module.camera.FaceView
             android:id="@+id/face_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

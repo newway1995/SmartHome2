@@ -11,7 +11,7 @@
         android:layout_height="fill_parent"
         android:background="#cc000000"/>
 
-    <module.core.ui.RippleLayout
+    <framework.ui.common.RippleLayout
         android:id="@+id/rl_close"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -31,7 +31,7 @@
             android:layout_centerInParent="true"
             android:scaleType="center"
             android:src="@drawable/ic_add" />
-    </module.core.ui.RippleLayout>
+    </framework.ui.common.RippleLayout>
 
     <LinearLayout
         android:id="@+id/import_container"
@@ -44,7 +44,7 @@
         android:orientation="vertical"
         android:paddingBottom="-20.0dip">
 
-        <module.core.ui.RippleLayout
+        <framework.ui.common.RippleLayout
             android:id="@+id/first_ball"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,9 +76,9 @@
                     android:text="@string/add_controller"
                     android:textColor="@android:color/white" />
             </LinearLayout>
-        </module.core.ui.RippleLayout>
+        </framework.ui.common.RippleLayout>
 
-        <module.core.ui.RippleLayout
+        <framework.ui.common.RippleLayout
             android:id="@+id/rl_pc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +110,6 @@
                     android:text="@string/add_raspberry"
                     android:textColor="@android:color/white"/>
             </LinearLayout>
-        </module.core.ui.RippleLayout>
+        </framework.ui.common.RippleLayout>
     </LinearLayout>
 </merge>

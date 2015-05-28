@@ -30,8 +30,8 @@ import android.os.Handler;
 
 import constant.Command;
 import constant.MyTimer;
-import module.core.BaseActivity;
-import module.view.adapter.TVProgramAdapter;
+import framework.base.BaseActivity;
+import module.adapter.TVProgramAdapter;
 import utils.L;
 import vgod.smarthome.R;
 

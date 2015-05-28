@@ -3,7 +3,6 @@ package module.activity.main;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -22,7 +21,6 @@ import java.util.List;
 
 import constant.Command;
 import constant.Constant;
-import module.activity.common.SelectControllerActivity;
 import module.database.EntityDao;
 import module.database.RaspberryEntity;
 import module.inter.NormalProcessor;

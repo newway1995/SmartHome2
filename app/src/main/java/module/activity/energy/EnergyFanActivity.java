@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import constant.EnergyConstant;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import module.database.EnergyFanEntity;
 import utils.TimeUtils;
 import vgod.smarthome.R;

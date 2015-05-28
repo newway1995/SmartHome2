@@ -10,9 +10,8 @@ import org.kymjs.aframe.ui.BindView;
 import constant.Command;
 import constant.ConstantStatus;
 import constant.MyTimer;
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
-import module.view.animation.GifView;
+import framework.base.SwipeBackActivity;
+import framework.ui.animation.GifView;
 import vgod.smarthome.R;
 
 /**

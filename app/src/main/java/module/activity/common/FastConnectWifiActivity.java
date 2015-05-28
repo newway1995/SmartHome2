@@ -12,8 +12,8 @@ import android.widget.EditText;
 import org.kymjs.aframe.ui.BindView;
 import java.util.ArrayList;
 import java.util.List;
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
+
+import framework.base.SwipeBackActivity;
 import vgod.smarthome.R;
 
 

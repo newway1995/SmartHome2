@@ -12,7 +12,7 @@ import constant.Constant;
 import core.detect.FaceCompare;
 import core.detect.NetResultHandler;
 import module.activity.gesturepwd.SettingGesturePasswordActivity;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import utils.CacheHandler;
 import utils.L;
 import vgod.smarthome.R;

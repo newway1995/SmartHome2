@@ -8,9 +8,9 @@ import org.kymjs.aframe.ui.BindView;
 
 import java.util.List;
 
-import module.core.BaseActivity;
+import framework.base.BaseActivity;
 import module.database.CommandEntity;
-import module.view.adapter.CommandAdapter;
+import module.adapter.CommandAdapter;
 import vgod.smarthome.R;
 
 /**

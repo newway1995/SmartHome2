@@ -10,8 +10,8 @@ import org.kymjs.aframe.ui.BindView;
 import java.util.ArrayList;
 import java.util.List;
 
-import module.core.BaseActivity;
-import module.view.adapter.TVProgramSettingAdapter;
+import framework.base.BaseActivity;
+import module.adapter.TVProgramSettingAdapter;
 import vgod.smarthome.R;
 
 /**

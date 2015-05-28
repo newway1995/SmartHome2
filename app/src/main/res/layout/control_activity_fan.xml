@@ -5,7 +5,7 @@
     android:background="@drawable/tv_background"
     android:id="@+id/control_activity_fan_id">
 
-    <module.view.animation.GifView
+    <framework.ui.animation.GifView
         android:id="@+id/gif_fan"
         android:layout_width="600px"
         android:layout_height="600px"

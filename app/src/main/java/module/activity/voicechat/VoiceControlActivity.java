@@ -26,9 +26,9 @@ import core.voice.VoiceRecognizeUtils;
 import core.voice.VoiceSpeakUtils;
 import module.activity.energy.EnergyFanActivity;
 import module.activity.energy.EnergyTVActivity;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import module.inter.StringProcessor;
-import module.view.adapter.ChatMsgAdapter;
+import module.adapter.ChatMsgAdapter;
 import module.database.ChatMsgEntity;
 import vgod.smarthome.R;
 

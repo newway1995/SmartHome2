@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import module.view.LockPatternView;
+import framework.ui.lock.LockPatternView;
 
 
 import android.content.Context;

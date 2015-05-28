@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import org.kymjs.aframe.ui.BindView;
 
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**

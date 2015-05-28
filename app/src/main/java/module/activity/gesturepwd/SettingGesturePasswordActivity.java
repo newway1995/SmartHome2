@@ -3,9 +3,9 @@ package module.activity.gesturepwd;
 import java.util.ArrayList;
 import java.util.List;
 
-import module.view.LockPatternView;
-import module.view.LockPatternView.Cell;
-import module.view.LockPatternView.DisplayMode;
+import framework.ui.lock.LockPatternView;
+import framework.ui.lock.LockPatternView.Cell;
+import framework.ui.lock.LockPatternView.DisplayMode;
 
 import constant.MyApp;
 

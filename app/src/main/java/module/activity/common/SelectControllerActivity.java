@@ -1,8 +1,6 @@
 package module.activity.common;
 
 import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,9 +15,8 @@ import module.activity.controler.ControlFanActivity;
 import module.activity.controler.ControlHeaterActivity;
 import module.activity.controler.ControlPJActivity;
 import module.activity.controler.ControlTVActivity;
-import module.activity.controler.ControllerBulbActivity;
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
+import module.activity.controler.ControlBulbActivity;
+import framework.base.SwipeBackActivity;
 import vgod.smarthome.R;
 
 /**
@@ -74,7 +71,7 @@ public class SelectControllerActivity extends SwipeBackActivity {
                 startActivity(new Intent(SelectControllerActivity.this, ControlFanActivity.class));
                 break;
             case R.id.select_controller_bulb:
-                startActivity(new Intent(SelectControllerActivity.this, ControllerBulbActivity.class));
+                startActivity(new Intent(SelectControllerActivity.this, ControlBulbActivity.class));
                 break;
             case R.id.select_controller_curtain:
                 startActivity(new Intent(SelectControllerActivity.this, ControlCurtainActivity.class));

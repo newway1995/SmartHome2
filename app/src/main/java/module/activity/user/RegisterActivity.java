@@ -2,7 +2,7 @@ package module.activity.user;
 
 import constant.Command;
 import constant.Constant;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import vgod.smarthome.R;
 import android.view.View;
 import android.widget.EditText;

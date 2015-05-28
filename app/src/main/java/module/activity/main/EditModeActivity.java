@@ -2,7 +2,7 @@ package module.activity.main;
 
 import android.view.View;
 
-import module.core.BaseActivity;
+import framework.base.BaseActivity;
 import vgod.smarthome.R;
 
 /**

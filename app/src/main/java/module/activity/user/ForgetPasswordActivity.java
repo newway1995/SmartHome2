@@ -2,7 +2,7 @@ package module.activity.user;
 
 import org.kymjs.aframe.ui.BindView;
 
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import vgod.smarthome.R;
 
 import android.view.MenuItem;

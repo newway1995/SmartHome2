@@ -1,20 +1,16 @@
 package module.activity.controler;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.kymjs.aframe.database.KJDB;
 import org.kymjs.aframe.http.KJHttp;
-import org.kymjs.aframe.http.KJStringParams;
-import org.kymjs.aframe.http.StringCallBack;
 import org.kymjs.aframe.ui.BindView;
 
 import constant.Command;
 import constant.Constant;
 import constant.MyTimer;
 import module.activity.voicechat.TVProgramActivity;
-import module.core.SwipeBackActivity;
-import module.core.ui.ColorGenerator;
-import module.core.ui.TextDrawable;
+import framework.base.SwipeBackActivity;
+import framework.ui.material.ColorGenerator;
+import framework.ui.material.TextDrawable;
 import module.database.TVChannelEntity;
 import utils.L;
 import utils.ViewUtils;
@@ -31,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import module.core.BaseActivity;
 
 /**
  * @author niuwei

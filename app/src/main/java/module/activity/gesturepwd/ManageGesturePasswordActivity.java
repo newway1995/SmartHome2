@@ -19,12 +19,10 @@ import android.widget.Toast;
 import org.kymjs.aframe.ui.BindView;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import constant.Constant;
-import module.core.BaseActivity;
-import module.core.SwipeBackActivity;
+import framework.base.SwipeBackActivity;
 import utils.CacheHandler;
 import utils.FileUtils;
 import utils.ImageUtils;

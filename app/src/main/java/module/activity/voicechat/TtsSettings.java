@@ -6,7 +6,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.view.Window;
-import module.view.SettingTextWatcher;
+import framework.ui.common.SettingTextWatcher;
 import vgod.smarthome.R;
 
 
