@@ -87,6 +87,11 @@
     <!--首页-->
     <string name="device">设备</string>
     <string name="scene">场景</string>
+
+    <!-- 图-->
+    <string name="barChart">BarChart</string>
+    <string name="lineChart">LineChart</string>
+    <string name="pieChart">PieChart</string>
     
     <!-- 测试 -->
     <string name="current_time">20:25</string>
