@@ -42,7 +42,7 @@
         android:inputType="text"
         android:text="nniuwei@163.com"
         android:padding="@dimen/edittext_padding"
-        android:background="@drawable/edittext_shape_top_m"
+        android:background="@drawable/edittext_shape_bottom"
         android:drawableRight="@drawable/email_hint" />
 
     <TextView

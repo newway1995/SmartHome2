@@ -11,10 +11,12 @@ import constant.Command;
 import constant.Constant;
 import core.detect.FaceCompare;
 import core.detect.NetResultHandler;
+import framework.base.BaseActivity;
 import module.activity.gesturepwd.SettingGesturePasswordActivity;
 import framework.base.SwipeBackActivity;
 import utils.CacheHandler;
 import utils.L;
+import utils.ViewUtils;
 import vgod.smarthome.R;
 
 import android.app.AlertDialog;
@@ -43,7 +45,7 @@ import android.widget.Toast;
  * @useage:登录界面
  * 
  */
-public class LoginActivity extends SwipeBackActivity{
+public class LoginActivity extends BaseActivity{
     @BindView(id = R.id.user_activity_login_id)
     private LinearLayout contentLayout;
 
@@ -98,7 +100,7 @@ public class LoginActivity extends SwipeBackActivity{
 	public void setRootView() {
 		super.setRootView();
 		setContentView(R.layout.user_activity_login);
-		setActionBarView(true);
+		setActionBarView(false);
 	}
 
 
@@ -122,7 +124,7 @@ public class LoginActivity extends SwipeBackActivity{
      * @param password Password
      */
     private void login(final String username, final String password){
-        final Dialog dialog = createLoadingDialog();
+        final Dialog dialog = ViewUtils.getInstance().createLoadingDialog(context);
         dialog.show();
 
         KJStringParams params = new KJStringParams();
@@ -138,6 +140,7 @@ public class LoginActivity extends SwipeBackActivity{
                     L.d("Login", "JsonObject = " + jsonObject.toString());
                     if (!jsonObject.getString("success").equals("1")) {
                         Toast(jsonObject.getString("message"));
+                        dialog.dismiss();
                         return;
                     }
                     //如果是首次使用软件
@@ -184,28 +187,4 @@ public class LoginActivity extends SwipeBackActivity{
         });
     }
 
-
-    /**
-     * 得到自定义的progressDialog
-     * @return Dialog
-     */
-    private Dialog createLoadingDialog() {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
-        LinearLayout layout = (LinearLayout) v.findViewById(R.id.loading_view);// 加载布局
-        // main.xml中的ImageView
-        ImageView spaceshipImage = (ImageView) v.findViewById(R.id.loading_img);
-        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(
-                context, R.anim.loading_animation);
-        spaceshipImage.startAnimation(hyperspaceJumpAnimation);
-
-        Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);// 创建自定义样式dialog
-
-        loadingDialog.setCancelable(true);// 不可以用“返回键”取消
-        loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
-        return loadingDialog;
-    }
-	
 }

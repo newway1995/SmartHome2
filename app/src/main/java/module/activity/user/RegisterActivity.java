@@ -3,7 +3,10 @@ package module.activity.user;
 import constant.Command;
 import constant.Constant;
 import framework.base.SwipeBackActivity;
+import utils.ViewUtils;
 import vgod.smarthome.R;
+
+import android.app.Dialog;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -77,11 +80,14 @@ public class RegisterActivity extends SwipeBackActivity{
 
     /**
      * 注册
-     * @param username
-     * @param password
-     * @param email
+     * @param username username
+     * @param password password
+     * @param email email
      */
     private void register(String username, String password, String email){
+        final Dialog dialog = ViewUtils.getInstance().createLoadingDialog(context);
+        dialog.show();
+
         KJStringParams params = new KJStringParams();
         params.put(Command.COMMAND_DEVICE, Command.PHONE);
         params.put("action", "REGISTER");
@@ -91,12 +97,14 @@ public class RegisterActivity extends SwipeBackActivity{
             @Override
             public void onSuccess(String s) {
                 Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                dialog.cancel();
             }
 
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
                 Toast.makeText(RegisterActivity.this, "注册失败,请检查网络设置", Toast.LENGTH_SHORT).show();
+                dialog.cancel();
             }
         });
     }

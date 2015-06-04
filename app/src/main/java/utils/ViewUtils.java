@@ -53,7 +53,7 @@ public class ViewUtils {
 
     /**
      * 得到自定义的progressDialog
-     * @param context
+     * @param context Context
      * @return
      */
     public Dialog createLoadingDialog(Context context) {
