@@ -31,6 +31,7 @@ import constant.Constant;
 import core.detect.FaceCompare;
 import core.detect.NetResultHandler;
 import framework.base.SwipeBackActivity;
+import module.activity.gesturepwd.ManageGesturePasswordActivity;
 import utils.FileUtils;
 import utils.ImageUtils;
 import utils.L;
@@ -49,6 +50,8 @@ public class SettingActivity extends SwipeBackActivity {
 
     @BindView(id = R.id.setting_about, click = true)
     private RelativeLayout setting_about;
+    @BindView(id = R.id.setting_manage_gesture, click = true)
+    private RelativeLayout setting_manage_gesture;
     @BindView(id = R.id.setting_advice, click = true)
     private RelativeLayout setting_advice;
     @BindView(id = R.id.setting_check_update, click = true)
@@ -184,6 +187,10 @@ public class SettingActivity extends SwipeBackActivity {
 //            设置是否唤醒
             case R.id.setting_wakeup:
                 switchWakeUp(!Constant.getWakeUp(context));
+                break;
+//            管理手势密码
+            case R.id.setting_manage_gesture:
+                startActivity(new Intent(SettingActivity.this, ManageGesturePasswordActivity.class));
                 break;
 
         }

@@ -3,6 +3,7 @@
     android:id="@+id/user_activity_register_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tv_background"
     android:orientation="vertical">
 
     <EditText
@@ -11,12 +12,12 @@
         android:hint="@string/password_setting"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:inputType="textPassword"
         android:focusableInTouchMode="true"
         android:focusable="true"
         android:padding="@dimen/edittext_padding"
-        android:background="@drawable/edittext_shape_top"
+        android:background="@drawable/edittext_shape_top_m"
         android:drawableRight="@drawable/password_hint" />
 
     <EditText
@@ -25,9 +26,10 @@
         android:hint="@string/username"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:inputType="text"
         android:padding="@dimen/edittext_padding"
-        android:background="@drawable/edittext_shape_mid"
+        android:background="@drawable/edittext_shape_top_m"
         android:drawableRight="@drawable/nickname_hint" />
 
     <EditText
@@ -36,10 +38,11 @@
         android:hint="@string/email"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:inputType="text"
         android:text="nniuwei@163.com"
         android:padding="@dimen/edittext_padding"
-        android:background="@drawable/edittext_shape_bottom"
+        android:background="@drawable/edittext_shape_top_m"
         android:drawableRight="@drawable/email_hint" />
 
     <TextView

@@ -3,11 +3,11 @@
     android:id="@+id/loading_view"   
     android:layout_width="wrap_content"   
     android:layout_height="wrap_content"  
-    android:minHeight="76dp"  
+    android:minHeight="76dp"
     android:minWidth="76dp"
     android:gravity="center"  
     android:padding="5dp"
-    android:background="@color/gray_light"
+    android:background="#00ffffff"
     android:orientation="vertical" >
     
 	<RelativeLayout 

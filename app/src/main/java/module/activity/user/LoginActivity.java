@@ -122,6 +122,9 @@ public class LoginActivity extends SwipeBackActivity{
      * @param password Password
      */
     private void login(final String username, final String password){
+        final Dialog dialog = createLoadingDialog();
+        dialog.show();
+
         KJStringParams params = new KJStringParams();
         params.put(Command.COMMAND_DEVICE, Command.PHONE);
         params.put("action", "LOGIN");
@@ -133,8 +136,10 @@ public class LoginActivity extends SwipeBackActivity{
                 try {
                     JSONObject jsonObject = new JSONObject(s);
                     L.d("Login", "JsonObject = " + jsonObject.toString());
-                    if (!jsonObject.getString("success").equals("1"))
+                    if (!jsonObject.getString("success").equals("1")) {
+                        Toast(jsonObject.getString("message"));
                         return;
+                    }
                     //如果是首次使用软件
                     if (CacheHandler.readCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME).equals("")) {
                         CacheHandler.writeCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, Constant.TRUE);
@@ -165,6 +170,7 @@ public class LoginActivity extends SwipeBackActivity{
                 }
                 Constant.setPassword(LoginActivity.this, password);
                 Constant.setUsername(LoginActivity.this, username);
+                dialog.cancel();
             }
 
             @Override
@@ -173,6 +179,7 @@ public class LoginActivity extends SwipeBackActivity{
                 L.d("Login Error = " + strMsg);
                 t.printStackTrace();
                 Toast.makeText(LoginActivity.this, "登录失败,请检查网络设置", Toast.LENGTH_SHORT).show();
+                dialog.cancel();
             }
         });
     }
