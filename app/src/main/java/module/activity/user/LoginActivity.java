@@ -17,11 +17,20 @@ import utils.CacheHandler;
 import utils.L;
 import vgod.smarthome.R;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,7 +73,7 @@ public class LoginActivity extends SwipeBackActivity{
 
     private void testData(){
         L.d("SharedPreference","IS_FIRST_OPEN_ME = " + PreferenceHelper.readString(context, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, "default"));
-        L.d("SharedPreference","UnlockByWhat = " + Constant.getUnlockByWhat(context));
+        L.d("SharedPreference", "UnlockByWhat = " + Constant.getUnlockByWhat(context));
     }
 
     @Override
@@ -109,8 +118,8 @@ public class LoginActivity extends SwipeBackActivity{
 
     /**
      * 登录
-     * @param username
-     * @param password
+     * @param username UserName
+     * @param password Password
      */
     private void login(final String username, final String password){
         KJStringParams params = new KJStringParams();
@@ -121,33 +130,33 @@ public class LoginActivity extends SwipeBackActivity{
         kjHttp.post(Command.COMMAND_HTTP_URL, params, new StringCallBack() {
             @Override
             public void onSuccess(String s) {
-                try{
+                try {
                     JSONObject jsonObject = new JSONObject(s);
                     L.d("Login", "JsonObject = " + jsonObject.toString());
                     if (!jsonObject.getString("success").equals("1"))
-                        return ;
+                        return;
                     //如果是首次使用软件
-                    if (CacheHandler.readCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME).equals("")){
+                    if (CacheHandler.readCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME).equals("")) {
                         CacheHandler.writeCache(LoginActivity.this, Constant.USER_INFO, Constant.IS_FIRST_OPEN_ME, Constant.TRUE);
                         testData();
                         skipActivity(LoginActivity.this, SettingGesturePasswordActivity.class);
                         LoginActivity.this.finish();
                     }
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                 //第一次登陆
-                if (Constant.getPersonName(LoginActivity.this) == null || !Constant.getPersonName(LoginActivity.this).equals(username)){
+                if (Constant.getPersonName(LoginActivity.this) == null || !Constant.getPersonName(LoginActivity.this).equals(username)) {
                     Constant.setPersonName(LoginActivity.this, username);
                     //在手机里面保存返回的数据
-                    faceCompare.createPerson(username,new NetResultHandler() {
+                    faceCompare.createPerson(username, new NetResultHandler() {
                         @Override
                         public void resultHandler(JSONObject rst) {
                             String person_id = null;
-                            try{
+                            try {
                                 person_id = rst.getString("person_id");
-                            }catch(Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             Constant.setPersonId(LoginActivity.this, person_id);
@@ -161,11 +170,35 @@ public class LoginActivity extends SwipeBackActivity{
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
-                L.d("Login Error = " + strMsg );
+                L.d("Login Error = " + strMsg);
                 t.printStackTrace();
-                Toast.makeText(LoginActivity.this, "登录失败,请检查网络设置",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "登录失败,请检查网络设置", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    /**
+     * 得到自定义的progressDialog
+     * @return Dialog
+     */
+    private Dialog createLoadingDialog() {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
+        LinearLayout layout = (LinearLayout) v.findViewById(R.id.loading_view);// 加载布局
+        // main.xml中的ImageView
+        ImageView spaceshipImage = (ImageView) v.findViewById(R.id.loading_img);
+        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(
+                context, R.anim.loading_animation);
+        spaceshipImage.startAnimation(hyperspaceJumpAnimation);
+
+        Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);// 创建自定义样式dialog
+
+        loadingDialog.setCancelable(true);// 不可以用“返回键”取消
+        loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
+        return loadingDialog;
     }
 	
 }

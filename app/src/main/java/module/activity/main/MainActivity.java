@@ -22,6 +22,7 @@ import module.database.EntityDao;
 import module.inter.NormalProcessor;
 import module.inter.StringProcessor;
 import module.adapter.RaspberryAdapter;
+import utils.L;
 import vgod.smarthome.R;
 
 import android.content.Context;
@@ -327,7 +328,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      * 在添加遥控器的时候需要提示树莓派列表
      */
     private void showRaspberryListDialog(){
-        mainModel.showRaspberryListDialog(context, kjHttp, entityDao, new NormalProcessor(){
+        mainModel.showRaspberryListDialog(context, kjHttp, entityDao, new NormalProcessor() {
             @Override
             public void onProcess() {
                 super.onProcess();
@@ -340,12 +341,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      * 从SQLite当中获取树莓派列表
      */
     private void getRaspberryFromDB(){
-        raspList = mainModel.getRaspberryFromDB(context);
-        if (raspList != null && raspList.size() != 0) {
-            raspberryAdapter = new RaspberryAdapter(this, raspList);
-            raspListView.setAdapter(raspberryAdapter);
-            raspListView.postInvalidate();
-        }
+        //下拉去最新的树莓派列表,然后更新到数据库当中, 最后更新
+        mainModel.getRaspListFromNet(context, kjHttp, entityDao, new NormalProcessor(){
+            @Override
+            public void onProcess() {
+                super.onProcess();
+                //更新数据
+                raspList = mainModel.getRaspberryFromDB(context);
+                if (raspList != null && raspList.size() != 0) {
+                    raspberryAdapter = new RaspberryAdapter(context, raspList);
+                    raspListView.setAdapter(raspberryAdapter);
+                    raspListView.postInvalidate();
+                    L.d("MainActivity", "更新列表");
+                }
+            }
+        });
     }
 
     /**

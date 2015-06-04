@@ -109,8 +109,8 @@ public class MainModel {
         ArrayList<HashMap<String, String>> raspList = new ArrayList<>();
         EntityDao entityDao = new EntityDao(context);
         List<RaspberryEntity> list = entityDao.getRaspberry();
-        L.d("MainActivity", "getRaspberryFromDB = " + list.size());
-        if (list == null || list.size() == 0)
+        L.d("getRaspberryFromDB", "getRaspberryFromDB = " + list.size());
+        if (list.size() == 0)
             return null;
         for (int i = 0; i < list.size(); i++){
             RaspberryEntity raspberryEntity = list.get(i);
@@ -122,6 +122,47 @@ public class MainModel {
             raspList.add(map);
         }
         return raspList;
+    }
+
+    /**
+     * 从网络上获取树莓派的列表
+     */
+    public void getRaspListFromNet(final Context context, KJHttp kjHttp, final EntityDao entityDao,final NormalProcessor processor) {
+        KJStringParams params = new KJStringParams();
+        params.put(Command.COMMAND_DEVICE, Command.PHONE);
+        params.put("action", "GET_RASP");
+        params.put("user_name", Constant.getUsername(context));
+        L.d("Username = " + Constant.getUsername(context));
+        kjHttp.post(context, Constant.HTTP_SINA_API, params, new StringCallBack() {
+            @Override
+            public void onSuccess(final String s) {
+                try {
+                    L.d("getRaspListFromNet", "JSONObject = " + s);
+                    JSONObject jObj = new JSONObject(s);
+                    //如果返回的数据不正确则退出
+                    if (!jObj.getString("success").equals("1"))
+                        return;
+                    JSONArray jArrry = jObj.getJSONArray("data");
+                    for (int i = 0; i < jArrry.length(); i++) {
+                        JSONObject jsonObject = jArrry.getJSONObject(i);
+                        String rasp_ids = jsonObject.getString("rasp_ids");
+                        String nick_name = jsonObject.getString("nick_name");
+
+                        /* 添加到数据库当中 */
+                        try {
+                            entityDao.saveRaspberry(rasp_ids, "password", nick_name, "function");
+                        } catch (Exception e) {
+                            L.e("数据库存储异常...");
+                            e.printStackTrace();
+                        }
+                    }
+                    L.e("数据库所有树莓派列表" + entityDao.getRaspberry().size());
+                    processor.onProcess();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**

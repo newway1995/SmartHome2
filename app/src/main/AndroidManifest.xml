@@ -80,7 +80,7 @@
         <!-- 登录界面 -->
         <activity
             android:name="module.activity.user.LoginActivity"
-            android:theme="@style/SwipeBackActivityTheme"
+            android:theme="@style/CustomActionBarTheme"
             android:label="@string/login" />
         <!-- 注册界面 -->
         <activity
