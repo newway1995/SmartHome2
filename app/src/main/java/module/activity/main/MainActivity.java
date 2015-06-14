@@ -5,8 +5,6 @@ import org.kymjs.aframe.ui.AnnotateUtil;
 import org.kymjs.aframe.ui.BindView;
 
 import constant.Constant;
-import module.activity.common.AboutActivity;
-import module.activity.common.ContactUsActivity;
 import module.activity.common.FastConnectWifiActivity;
 import module.activity.common.SelectControllerActivity;
 import module.activity.common.SettingActivity;
@@ -38,7 +36,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,9 +49,6 @@ import java.util.HashMap;
  * useage:Main
  */
 public class MainActivity extends FragmentActivity implements View.OnClickListener , RadioGroup.OnCheckedChangeListener{
-    @BindView(id = R.id.main_contentView)
-    private RelativeLayout contentLayout;
-
     @BindView(id = R.id.nav_actionbar_segment , click = true)
     private SegmentedGroup segmentedGroup;//segment
     @BindView(id = R.id.nav_actionbar_menu , click = true)
@@ -104,7 +98,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         AnnotateUtil.initBindView(this);
         initView();
         initData();
-        initWakeUp();
+        //initWakeUp();
     }
 
     private boolean isReset = false;//是否重置到nav_actionbar_segment_device
@@ -129,8 +123,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         ResideMenuItem deviceFrame = new ResideMenuItem(this , R.drawable.icon_list , "设备列表");
         ResideMenuItem voiceControl = new ResideMenuItem(this, R.drawable.voice_control_icon, "语音助手");//小威
         ResideMenuItem settingFrame = new ResideMenuItem(this , R.drawable.icon_setting , "设置");
-        ResideMenuItem helpFrame = new ResideMenuItem(this , R.drawable.icon_faq , "帮助");
-        ResideMenuItem aboutFrame = new ResideMenuItem(this , R.drawable.icon_about , "关于");
         ResideMenuItem fastConnectWifi = new ResideMenuItem(this, R.drawable.fast_connect, "快速连接");
 
         mainFrame.setOnClickListener(new View.OnClickListener(){
@@ -151,18 +143,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 startActivity(new Intent(context, SettingActivity.class));
             }
         });//设置
-        helpFrame.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(context, ContactUsActivity.class));
-            }
-        });//帮助
-        aboutFrame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, AboutActivity.class));
-            }
-        });//关于
         fastConnectWifi.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -180,8 +160,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         resideMenu.addMenuItem(deviceFrame);
         resideMenu.addMenuItem(voiceControl);
         resideMenu.addMenuItem(settingFrame);
-        resideMenu.addMenuItem(helpFrame);
-        resideMenu.addMenuItem(aboutFrame);
         resideMenu.addMenuItem(fastConnectWifi);
 
         segmentedGroup.check(R.id.nav_actionbar_segment_device);
@@ -236,8 +214,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onResume();
         if (!Constant.getWakeUp(context))
             return;
-        initWakeUp();
-        mWakeUpControl.startSpeak();
+        //initWakeUp();
+        //mWakeUpControl.startSpeak();
     }
 
 
@@ -253,7 +231,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 overridePendingTransition(R.anim.activity_open_in, R.anim.activity_open_exist);
                 break;
             case R.id.activity_main_voice:
-                startActivity(new Intent(MainActivity.this, VoiceControlActivity.class));
+                //startActivity(new Intent(MainActivity.this, VoiceControlActivity.class));
                 break;
         }
     }

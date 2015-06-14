@@ -157,10 +157,10 @@ public class VoiceControlActivity extends SwipeBackActivity{
      * 测试能耗
      */
     private boolean testEnergy(final String str) {
-        if (str.contains("风扇") || str.contains("电风扇") || str.contains("电扇")) {
+        if (str.contains("风扇能") || str.contains("电风扇能") || str.contains("电扇能")) {
             startActivity(new Intent(VoiceControlActivity.this, EnergyFanActivity.class));
             return true;
-        } else if(str.contains("电视") || str.contains("电视机")) {
+        } else if(str.contains("电视能") || str.contains("电视机能")) {
             startActivity(new Intent(VoiceControlActivity.this, EnergyTVActivity.class));
             return true;
         }
@@ -298,8 +298,7 @@ public class VoiceControlActivity extends SwipeBackActivity{
      * 跳转到显示电视节目表
      */
     private void goToTVProgramActivity(String string){
-        if (TVChannelConstant.WhichChannel(string) != null)
-        {
+        if (TVChannelConstant.WhichChannel(string) != null) {
             Intent intent = new Intent(context, TVProgramActivity.class);
             intent.putExtra("code", TVChannelConstant.WhichChannel(string));
             startActivity(intent);

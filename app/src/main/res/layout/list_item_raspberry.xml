@@ -14,7 +14,7 @@
         android:id="@+id/list_item_rasp_nickname"
         android:layout_toRightOf="@id/list_item_rasp_img"
         android:layout_marginTop="12dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         android:text="Nickname"
         android:textAppearance="@style/black_light_16"
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:layout_toRightOf="@id/list_item_rasp_img"
         android:layout_below="@id/list_item_rasp_nickname"
         android:id="@+id/list_item_rasp_temp_layout"
-        android:layout_marginLeft="20dp" >
+        android:layout_marginLeft="15dp" >
         <TextView
             android:textAppearance="@style/gray_12"
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         android:layout_toRightOf="@id/list_item_rasp_img"
         android:layout_below="@id/list_item_rasp_temp_layout"
         android:id="@+id/list_item_rasp_humi_layout"
-        android:layout_marginLeft="20dp" >
+        android:layout_marginLeft="15dp" >
         <TextView
             android:textAppearance="@style/gray_12"
             android:layout_width="wrap_content"
