@@ -9,5 +9,6 @@ package constant;
  */
 public class EnergyConstant {
     /** 电风扇数据集合 */
-    public static String[] FAN_TODAY_X = new String[]{"0:00 - 06:00", "06:00 - 12:00", "12:00 - 18:00", "18:00 - 24:00"};
+    //public static String[] FAN_TODAY_X = new String[]{"0:00 - 06:00", "06:00 - 12:00", "12:00 - 18:00", "18:00 - 24:00"};
+    public static String[] FAN_TODAY_X = new String[]{"电风扇", "电视机", "空调", "热水器"};
 }

@@ -87,9 +87,13 @@ public class PieChartFragment extends Fragment{
 
         ArrayList<Entry> yVals1 = new ArrayList<>();
 
-        for (int i = 0; i < count + 1; i++) {
-            yVals1.add(new Entry((float) (Math.random() * range) + range / 5, i));
-        }
+        //for (int i = 0; i < count + 1; i++) {
+            //yVals1.add(new Entry(0.0f, i));
+        //}
+        yVals1.add(new Entry(1.0f, 0));
+        yVals1.add(new Entry(53.6f, 1));
+        yVals1.add(new Entry(44.4f, 2));
+        yVals1.add(new Entry(1.0f, 3));
 
         ArrayList<String> xVals = new ArrayList<>();
 

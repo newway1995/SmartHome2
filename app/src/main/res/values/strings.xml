@@ -92,7 +92,11 @@
     <string name="barChart">BarChart</string>
     <string name="lineChart">LineChart</string>
     <string name="pieChart">PieChart</string>
-    
+    <!-- 时间-->
+    <string name="year">一年</string>
+    <string name="month">一个月</string>
+    <string name="oneDay">一天</string>
+
     <!-- 测试 -->
     <string name="current_time">20:25</string>
     <string name="title_activity_security_camera">人脸识别</string>
