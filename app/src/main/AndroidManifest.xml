@@ -178,6 +178,15 @@
         <activity android:name="module.activity.energy.EnergyTVActivity"
             android:theme="@style/SwipeBackActivityTheme"
             android:label="电视机能耗"/>
+        <activity android:name="module.activity.energy.ElecRecommendActivity"
+            android:theme="@style/SwipeBackActivityTheme"
+            android:label="电器推荐"/>
+        <activity android:name="module.activity.energy.ElecContrastActivity"
+            android:theme="@style/SwipeBackActivityTheme"
+            android:label="能耗对比"/>
+        <activity android:name="module.activity.energy.TVDetailActivity"
+            android:theme="@style/SwipeBackActivityTheme"
+            android:label="电视节目推荐"/>
 
         <!-- 移动统计分析 -->
         <meta-data

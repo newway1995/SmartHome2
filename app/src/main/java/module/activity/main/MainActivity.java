@@ -9,6 +9,7 @@ import module.activity.common.FastConnectWifiActivity;
 import module.activity.common.SelectControllerActivity;
 import module.activity.common.SettingActivity;
 import module.activity.common.WeatherInfoActivity;
+import module.activity.energy.ElecContrastActivity;
 import module.activity.voicechat.VoiceControlActivity;
 import module.activity.voicechat.WakeUpControl;
 import framework.ui.common.ImportMenuView;
@@ -140,7 +141,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         settingFrame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(context, SettingActivity.class));
+                //startActivity(new Intent(context, SettingActivity.class));
+                startActivity(new Intent(context, ElecContrastActivity.class));
             }
         });//设置
         fastConnectWifi.setOnClickListener(new View.OnClickListener(){

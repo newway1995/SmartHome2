@@ -3,6 +3,8 @@ package module.activity.energy;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 
@@ -82,6 +84,19 @@ public class EnergyFanActivity extends SwipeBackActivity implements RadioGroup.O
         ft.commit();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_energy_elec, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_energy_elec) {
+            showActivity(EnergyFanActivity.this, ElecContrastActivity.class);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onStop() {

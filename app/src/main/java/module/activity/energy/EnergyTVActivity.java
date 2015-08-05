@@ -259,6 +259,11 @@ public class EnergyTVActivity extends SwipeBackActivity implements OnChartValueS
             case R.id.energy_item_last_12_month:
                 showLast12Month();
                 break;
+            case R.id.menu_energy_elec:
+                showActivity(EnergyTVActivity.this, ElecContrastActivity.class);
+                break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -269,6 +274,7 @@ public class EnergyTVActivity extends SwipeBackActivity implements OnChartValueS
         setContentView(R.layout.energy_activity_tv);
         setActionBarView(true);
     }
+
 
     @Override
     public void widgetClick(View v) {

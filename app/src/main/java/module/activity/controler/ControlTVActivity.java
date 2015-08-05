@@ -7,6 +7,7 @@ import org.kymjs.aframe.ui.BindView;
 import constant.Command;
 import constant.Constant;
 import constant.MyTimer;
+import module.activity.energy.TVDetailActivity;
 import module.activity.voicechat.TVProgramActivity;
 import framework.base.SwipeBackActivity;
 import framework.ui.material.ColorGenerator;
@@ -264,11 +265,11 @@ public class ControlTVActivity extends SwipeBackActivity {
      */
     private void getPushData() {
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.login_default_avatar);
-        Intent intent = new Intent(context, TVProgramActivity.class);
+        Intent intent = new Intent(context, TVDetailActivity.class);
         //弹出框
         ViewUtils.getInstance().showNotification(context,
-                "CCTV1", "动画片" +
-                "  " + "动画片" + "  " + "动画片", largeIcon, intent, 12);
+                "CCTV5", "体育纪实" +
+                "  " + "保罗联手大梦华丽逆袭" + "  " + "克里斯保罗", largeIcon, intent, 12);
     }
 
     @Override
